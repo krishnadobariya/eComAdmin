@@ -1,0 +1,73 @@
+.add-btn{
+    background: linear-gradient(90deg, rgba(7,8,12,1) 1%, rgba(9,79,121,1) 46%, rgba(60,138,159,1) 98%);
+    border: none;
+    width: 100%;
+    margin-top: 2%;
+    color: white;
+}
+.add-btn:hover{
+    color: white!important;
+}
+.add-title{
+    color: rgba(9,79,121,1);
+    font-family: 'PT Serif', serif;
+    font-weight: 600;
+}
+.category-select select {
+    *background: white;
+}
+
+
+/* product style */
+
+
+.view-btn{
+    border-radius: 50%;
+    padding: 8px 8px;
+    color: rgb(19, 3, 3);
+    background-color:rgb(235, 234, 247);
+    margin-right: 5px;
+  
+  
+}
+.delete-btn{
+    border-radius: 50%;
+    padding: 8px 8px;
+    color:rgb(1, 16, 1);
+    background-color:rgb(240, 215, 214);
+    margin-right: 5px;
+  
+}
+.update-btn{
+    border-radius: 50%;
+    padding: 8px 8px;
+    color:rgb(1, 16, 1);
+    background-color:rgb(214, 240, 220);
+    margin-right: 5px;
+  
+}
+.pdf-btn{
+    border-radius: 50%;
+    color:rgb(1, 16, 1);
+    padding: 8px 8px;
+    background-color:rgb(204, 150, 150);
+    margin-right: 5px;
+  
+}
+.add-link{
+  
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+}
+.add-link a{
+    background: linear-gradient(90deg, rgba(7,8,12,1) 1%, rgba(9,79,121,1) 46%, rgba(60,138,159,1) 98%);
+    border: none;
+    margin-right: 20px;
+    padding: 5px 20px;
+    color: white;
+
+}
+input{
+    margin-left: 0!important;
+}

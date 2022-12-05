@@ -1,0 +1,41 @@
+
+
+.nav-icon{
+    color: white;
+}
+.nav-sidebar .nav-link p{
+    color: white;
+}
+.nav-pills .menu-open .active{
+    background-color: rgba(227, 244, 248, 0.205)!important;
+   
+}
+.nav-pills .nav-link.active{
+    background-color: rgba(227, 244, 248, 0.205)!important;
+}
+.nav-pills .menu-open a{
+    background-color: transparent!important;
+    border-radius: 10px;
+}
+.nav-pills .active:focus ,.nav-pills .active:focus .nav-icon{
+    color: #fff!important;
+
+} 
+.nav-pills .active:focus ,.nav-pills .active:focus .nav-icon{
+    color: #fff!important;
+
+} 
+.close-icon{
+    display: none;
+    margin-top: 15px;
+    color: #fff;
+}
+.layout-fixed .brand-link{
+    width: 200px;
+}
+
+@media screen and (max-width:992px) {
+    .close-icon{
+        display: block;
+    }
+}

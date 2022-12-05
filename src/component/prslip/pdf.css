@@ -1,0 +1,98 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid black;
+    text-align: center;
+    padding: 8px;
+    height: 40px;
+  }
+  
+
+  .header{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .under-div{
+align-items: flex-end;
+  }
+
+input{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    margin-left: 10px;
+    width: 200px;
+
+}
+
+input:focus{
+    outline: none;
+}
+
+label{
+    text-align: end;
+}   
+
+.main-div{
+    padding: 100px 100px 0 100px!important;
+}
+.under-main-div{
+    border: 1px solid black;
+    padding: 10px;
+}
+.table-design{
+    margin-top: 10px;
+}
+
+.footer .left-side label{
+    width: 200px;
+}
+.footer{
+     margin-top: 20px;
+    display: flex;
+}
+
+.right-side{
+    margin-left: 50px;
+}
+
+.right-side label{
+    margin-left: 10px;
+}
+.right-side input{
+    width: 250px;
+}
+
+.second-div{
+    margin-top: 40px;
+}
+
+.second-div-tabel{
+    width: 800px;
+}
+
+.second-div-tabel tr th{
+    width: 200px;
+    text-align: center;
+}
+
+.second-div-tabel tr td{
+    height: 60px;
+    text-align: center;
+}
+
+.pdf{
+    background-color: red;
+    border: 1px solid red;
+    padding: 5px 20px;
+    color: aliceblue;
+    margin-top: 20px;
+    font-weight: bold;
+    margin-left:100px;
+    margin-bottom: 50px;
+}
