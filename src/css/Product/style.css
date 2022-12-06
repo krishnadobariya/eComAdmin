@@ -59,6 +59,7 @@
     display: flex;
     justify-content: end;
     align-items: flex-end;
+  
 }
 .add-link a{
     background: linear-gradient(90deg, rgba(7,8,12,1) 1%, rgba(9,79,121,1) 46%, rgba(60,138,159,1) 98%);
@@ -66,8 +67,19 @@
     margin-right: 20px;
     padding: 5px 20px;
     color: white;
+    text-decoration: none;
+
+}
+.add-link a:hover{
+    color: white;
 
 }
 input{
     margin-left: 0!important;
 }
+select:focus > option:checked { 
+    background: rgba(95, 88, 88, 0.137) !important;
+ }
+option:hover{ 
+    background: rgba(95, 88, 88, 0.137) !important;
+ }

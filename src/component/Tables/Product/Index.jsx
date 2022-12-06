@@ -23,7 +23,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr,upadtepro }) => {
+const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upadtepro }) => {
 
 
   const [search, setSearch] = useState("");
@@ -44,13 +44,15 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr,upad
 
 
   const data = res.data ? res.data.data ? res.data.data.data : [] : []
-  // useEffect(() => {
-  //   const result = data.filter(val => {
-  //     return val.Name.toLowerCase().match(search.toLowerCase());
-  //   });
-  //   setfilter(result);
-  // }, [search]);
 
+  useEffect(() => {
+    if (data) {
+      const result = data.filter(val => {
+        return val.Name.toLowerCase().match(search.toLowerCase());
+      });
+      setfilter(result);
+    }
+  }, [search]);
 
   // ---------delete---------
 
@@ -63,13 +65,13 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr,upad
 
   const handleOpen = (id) => {
     dispatch(ProductViewByIdUpadte(id));
+    setModalShow(true)
   }
 
 
   useEffect(() => {
     const data2 = resUpadte.data ? resUpadte.data.data ? resUpadte.data.data.data : [] : []
     SetProduct(data2)
-    resUpadte.data.status == 200 && setModalShow(true)
 
   }, [resUpadte])
 
@@ -91,7 +93,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr,upad
   const handleUpdate = (e) => {
     e.preventDefault();
     dispatch(UpdateProduct(Product, Product._id));
-    // window.location = "/viewproduct";
+    window.location = "/viewproduct";
 
   };
 
@@ -109,29 +111,38 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr,upad
     const data = upadtepro.data ? upadtepro.data.data : []
 
     if (data) {
-        if (data.code == 200) {
-            toast.success(data.message, {
-                position: toast.POSITION.TOP_CENTER,
-                timeOut: 1000,
+      if (data.code == 200) {
+        toast.success(data.message, {
+          position: toast.POSITION.TOP_CENTER,
+          timeOut: 1000,
 
-            });
-        }
-        else if (data.code == 500) {
-            toast.success(data.message, {
-                position: toast.POSITION.TOP_CENTER,
-                timeOut: 1000,
-            });
+        });
+        setTimeout(() => {
+          window.location = "/viewproduct"
+        }, 1000);
+      }
+      else if (data.code == 500) {
+        toast.success(data.message, {
+          position: toast.POSITION.TOP_CENTER,
+          timeOut: 1000,
+        });
+        setTimeout(() => {
+          window.location = "/viewproduct"
+        }, 1000);
 
-        }
-        else if (data.code == 403) {
-            toast.success(data.message, {
-                position: toast.POSITION.TOP_CENTER,
-                timeOut: 1000,
-            });
+      }
+      else if (data.code == 403) {
+        toast.success(data.message, {
+          position: toast.POSITION.TOP_CENTER,
+          timeOut: 1000,
+        });
+        setTimeout(() => {
+          window.location = "/viewproduct"
+        }, 1000);
 
-        }
+      }
     }
-}, [upadtepro])
+  }, [upadtepro])
 
 
   // -----------------view
@@ -139,12 +150,13 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr,upad
   const handleviewOpen = (id) => {
 
     dispatch(ProductViewById(id));
+    setModalShow2(true)
   }
 
   useEffect(() => {
     const data2 = resById.data ? resById.data.data ? resById.data.data.data : [] : []
     SetViewProduct(data2)
-    resById.data.status == 200 && setModalShow2(true)
+
   }, [resById])
 
   // view end---------------
@@ -152,12 +164,13 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr,upad
   const handleviewbyqr = (id) => {
 
     dispatch(ProductViewByIdForQr(id));
+    setModalShow3(true)
   }
 
   useEffect(() => {
     const data2 = Qr.data ? Qr.data.data ? Qr.data.data.data : [] : []
     SetViewProduct(data2)
-    Qr.data.status == 200 && setModalShow3(true)
+
   }, [Qr])
 
 
@@ -237,9 +250,9 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr,upad
   return (
 
     <>
-      <div className="main-header">
+      <div  style={{width:"100%"}}>
         <div className='container-fluid'>
-          <ToastContainer/>
+          <ToastContainer />
           <div className='row py-3'>
             <div className='col-md-12 px-0'>
               <div className='add-link'><Link to="/product" >ADD</Link></div>
@@ -271,128 +284,120 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr,upad
 
             </div>
             <div>
-              {
-                modalShow == true ?
-                  <>
-                    {Product.Name == null ?
-                      <Modal
-                        show={modalShow2}
-                        onHide={() => setModalShow2(false)}
-                        size="lg"
-                        aria-labelledby="contained-modal-title-vcenter"
-                        centered
-                      >
 
-                        <Modal.Body>
-                          <div>Loading......</div>
-                        </Modal.Body>
+              <>
+                {Product.Name == null ?
+                  <Modal
+                    show={modalShow2}
+                    onHide={() => setModalShow2(false)}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                  >
 
-                      </Modal> : <Modal
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                        size="lg"
-                        aria-labelledby="contained-modal-title-vcenter"
-                        centered
-                      >
-                        <Modal.Body>
-                          {
-                            Product ?
-                              <form className='add-form'>
-                                <div className="form-group">
-                                  <label>Product Name</label>
-                                  <input type="text" className="form-control"
-                                    name="Name"
-                                    value={Product.Name}
-                                    onChange={handleInput} />
-                                </div>
-                                <div className="form-row">
-                                  <div className="form-group col-md-4">
-                                    <label>Category</label>
-                                    <select name="Category" className="form-control" id="" onChange={handleInput} value={Product.Category}  >
-                                      <option>choose category</option>
-                                      {
-                                        View ?
-                                          View.map((val, id) => {
-                                            return (
-                                              <option value={val.cat_name} key={id}>{val.cat_name}</option>
-                                            )
-                                          }) : <option >Loding...</option>
-                                      }
-                                    </select>
-                                  </div>
-                                  <div className="form-group col-md-4">
-                                    <label>SubCategory</label>
-                                    <select name="Sub_Category" className="form-control" id="" onChange={handleInput} value={Product.Sub_Category}  >
-                                      <option>choose subcategory</option>
-                                      {
-                                        viewSub ?
-                                          viewSub.map((val, id) => {
-                                            return (
-                                              <option value={val.subCat_name} key={id}>{val.subCat_name}</option>
-                                            )
-                                          }) : <option >Loding...</option>
-                                      }
-                                    </select>
-                                  </div>
-                                  <div className="form-group col-md-4">
-                                    <label>Type</label>
-                                    <select name="Type" className="form-control" id="" onChange={handleInput} value={Product.Type}  >
-                                      <option>choose type</option>
-                                      {
-                                        typeview ?
-                                          typeview.map((val, id) => {
-                                            return (
-                                              <option value={val.name} key={id}>{val.name}</option>
-                                            )
-                                          }) : <option >Loding...</option>
-                                      }
-                                    </select>
-                                  </div>
-                                </div>
-                                <div className="form-row">
-                                  <div className="form-group col-md-6">
-                                    <label>QTY</label>
-                                    <input type="text" className="form-control"
-                                      name="QTY"
-                                      value={Product.QTY}
-                                      onChange={handleInput} />
-                                  </div>
-                                  <div className="form-group col-md-6">
-                                    <label>Price</label>
-                                    <input type="text" className="form-control"
-                                      name="Price"
-                                      value={Product.Price}
-                                      onChange={handleInput} />
-                                  </div>
-                                </div>
-                                <div className="form-group">
-                                  <label>Unit</label>
-                                  <input type="text" className="form-control"
-                                    name="Unit"
-                                    value={Product.Unit}
-                                    onChange={handleInput} />
-                                </div>
-                                <div className="form-group">
-                                <label>Remark</label>
-                                  <input type="text" className="form-control" name="Remark"
-                                    value={Product.Remark}
-                                    onChange={handleInput} />
-                                </div>
+                    <Modal.Body>
+                      <div>Loading......</div>
+                    </Modal.Body>
 
+                  </Modal> : <Modal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                  >
+                    <Modal.Body>
+                      {
+                        Product ?
+                          <form className='add-form'>
+                            <div className="form-group">
+                              <label>Product Name</label>
+                              <input type="text" className="form-control"
+                                name="Name"
+                                value={Product.Name}
+                                onChange={handleInput} />
+                            </div>
+                            <div className="form-row">
+                              <div className="form-group col-md-4">
+                                <label>Category</label>
+                                <select name="Category" className="form-control" id="" onChange={handleInput} value={Product.Category}  >
+                                  <option>choose category</option>
+                                  {
+                                    View ?
+                                      View.map((val, id) => {
+                                        return (
+                                          <option value={val.cat_name} key={id}>{val.cat_name}</option>
+                                        )
+                                      }) : <option >Loding...</option>
+                                  }
+                                </select>
+                              </div>
+                              <div className="form-group col-md-4">
+                                <label>SubCategory</label>
+                                <select name="Sub_Category" className="form-control" id="" onChange={handleInput} value={Product.Sub_Category}  >
+                                  <option>choose subcategory</option>
+                                  {
+                                    viewSub ?
+                                      viewSub.map((val, id) => {
+                                        return (
+                                          <option value={val.subCat_name} key={id}>{val.subCat_name}</option>
+                                        )
+                                      }) : <option >Loding...</option>
+                                  }
+                                </select>
+                              </div>
+                              <div className="form-group col-md-4">
+                                <label>Type</label>
+                                <select name="Type" className="form-control" id="" onChange={handleInput} value={Product.Type}  >
+                                  <option>choose type</option>
+                                  {
+                                    typeview ?
+                                      typeview.map((val, id) => {
+                                        return (
+                                          <option value={val.name} key={id}>{val.name}</option>
+                                        )
+                                      }) : <option >Loding...</option>
+                                  }
+                                </select>
+                              </div>
+                            </div>
+                            <div className="form-row">
+                              <div className="form-group col-md-6">
+                                <label>QTY</label>
+                                <input type="text" className="form-control"
+                                  name="QTY"
+                                  value={Product.QTY}
+                                  onChange={handleInput} />
+                              </div>
+                              <div className="form-group col-md-6">
+                                <label>Price</label>
+                                <input type="text" className="form-control"
+                                  name="Price"
+                                  value={Product.Price}
+                                  onChange={handleInput} />
+                              </div>
+                            </div>
+                            <div className="form-group">
+                              <label>Unit</label>
+                              <input type="text" className="form-control"
+                                name="Unit"
+                                value={Product.Unit}
+                                onChange={handleInput} />
+                            </div>
+                            <div className="form-group">
+                              <label>Remark</label>
+                              <input type="text" className="form-control" name="Remark"
+                                value={Product.Remark}
+                                onChange={handleInput} />
+                            </div>
+                            <button type="submit" className="btn add-btn" onClick={handleUpdate}>ADD</button>
+                          </form> : <h1>loadding...</h1>
+                      }
+                    </Modal.Body>
 
-
-
-                                <button type="submit" className="btn add-btn" onClick={handleUpdate}>ADD</button>
-                              </form> : <h1>loadding...</h1>
-                          }
-                        </Modal.Body>
-
-                      </Modal>
-                    }
-                  </>
-                  : null
-              }
-
+                  </Modal>
+                }
+              </>
 
 
 
@@ -447,7 +452,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr,upad
                       <div className='d-flex'>
                         <span className='px-3'>QTY :</span><span> {ViewProduct.QTY}</span>
                       </div>
-                     
+
                       <hr></hr>
                       <div className='d-flex'>
                         <span className='px-3'>Unit :</span><span> {ViewProduct.Unit}</span>
@@ -512,7 +517,7 @@ const mapStateToProps = (state) => ({
   viewsub: state.AllSubCategoryView,
   type: state.TypeView,
   Qr: state.ProductViewByIdForQr,
-  upadtepro:state.UpdateProduct
+  upadtepro: state.UpdateProduct
 
 
 });

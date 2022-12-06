@@ -5,9 +5,8 @@ import Index from '../../../component/Tables/Category/Index'
 
 const CategoryTable = () => {
   return (
-    <div>
-      <Sidebar/>
-      <Header/>
+    <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
+    <Sidebar/>
       <Index/>
       
     </div>

@@ -19,7 +19,7 @@ function Count({ dispatch, res }) {
 
 
   return (
-    <div className="content-wrapper">
+    <div style={{width:"100%"}}>
       <div className="content-header">
         <div className="container-fluid">
           <div className="row mb-2 ">

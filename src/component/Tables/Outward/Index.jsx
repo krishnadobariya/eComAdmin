@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
-import { ViewAllOutward, DeleteOutward, OutwardViewById, OutwardViewByIdUpdate } from "../../../store/Action/FetchData"
+import { ViewAllOutward, DeleteOutward, OutwardViewById, OutwardViewByIdUpdate, ViewAllDepartment, AllProductView } from "../../../store/Action/FetchData"
 import { UpdateOutward } from '../../../store/Action/UpdateData'
 import DataTable from 'react-data-table-component'
 import Modal from 'react-bootstrap/Modal';
@@ -12,7 +12,7 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Index = ({ dispatch, res, resdel, viewById, viewUpadte, updateout }) => {
+const Index = ({ dispatch, res, resdel, viewById, viewUpadte, updateout, department, product }) => {
 
 
     const [search, setSearch] = useState("");
@@ -26,18 +26,26 @@ const Index = ({ dispatch, res, resdel, viewById, viewUpadte, updateout }) => {
 
     useEffect(() => {
         dispatch(ViewAllOutward());
-
+        dispatch(ViewAllDepartment());
+        dispatch(AllProductView());
     }, []);
+    const depart = department.data ? department.data.data ? department.data.data.data : [] : []
+
+    console.log("hello  ", depart)
+    const proName = product.data ? product.data.data ? product.data.data.data : [] : []
+    useEffect(() => {
+        if (data) {
+            const result = data.filter(val => {
+                return val.department.toLowerCase().match(search.toLowerCase());
+            });
+            setfilter(result);
+        }
+    }, [search]);
+
 
 
     const data = res.data ? res.data.data ? res.data.data.data : [] : []
 
-    useEffect(() => {
-        const result = data.filter(val => {
-            return val.department.toLowerCase().match(search.toLowerCase());
-        });
-        setfilter(result);
-    }, [search]);
 
 
 
@@ -53,11 +61,12 @@ const Index = ({ dispatch, res, resdel, viewById, viewUpadte, updateout }) => {
 
     const handleviewOpen = (id) => {
         dispatch(OutwardViewById(id));
+        setModalShow2(true)
     }
     useEffect(() => {
         const data2 = viewById.data ? viewById.data.data ? viewById.data.data.data : [] : []
         setOutward(data2)
-        viewById.data.status == 200 && setModalShow2(true)
+
     }, [viewById])
 
 
@@ -65,12 +74,13 @@ const Index = ({ dispatch, res, resdel, viewById, viewUpadte, updateout }) => {
 
     const handleOpen = (id) => {
         dispatch(OutwardViewByIdUpdate(id));
+        setModalShow(true)
 
     }
     useEffect(() => {
         const data2 = viewUpadte.data ? viewUpadte.data.data ? viewUpadte.data.data.data : [] : []
         setUpdateOutward(data2)
-        viewUpadte.data.status == 200 && setModalShow(true)
+
     }, [viewUpadte])
 
 
@@ -82,17 +92,49 @@ const Index = ({ dispatch, res, resdel, viewById, viewUpadte, updateout }) => {
 
     const handleUpdate = (e) => {
 
-
         e.preventDefault();
         dispatch(UpdateOutward(updateOutward, updateOutward._id));
         // window.location = "/outwardtable";
     };
 
 
-    useEffect(() => {
-        
 
+    useEffect(() => {
+        console.log(".......", updateout)
+        const data = updateout.data ? updateout.data.data : []
+
+        if (data) {
+            if (data.code == 200) {
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+
+                });
+                setTimeout(() => {
+                    window.location = "/outwardtable"
+                }, 1000);
+            }
+            else if (data.code == 500) {
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+                });
+                setTimeout(() => {
+                    window.location = "/outwardtable"
+                }, 1000);
+            }
+            else if (data.code == 403) {
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+                });
+                setTimeout(() => {
+                    window.location = "/outwardtable"
+                }, 1000);
+            }
+        }
     }, [updateout])
+
 
 
 
@@ -133,7 +175,7 @@ const Index = ({ dispatch, res, resdel, viewById, viewUpadte, updateout }) => {
     return (
 
         <>
-            <div className="main-header">
+            <div style={{ width: "100%" }}>
                 <ToastContainer />
                 <div className='container-fluid'>
                     <div className='row py-3'>
@@ -195,19 +237,35 @@ const Index = ({ dispatch, res, resdel, viewById, viewUpadte, updateout }) => {
                                                 <form className='add-form'>
                                                     <div class="form-group">
                                                         <label>department Name</label>
-                                                        <input type="text"
-                                                            class="form-control"
-                                                            name="department"
-                                                            value={updateOutward.department}
-                                                            onChange={handleInput} />
+
+                                                        <select name="department" className="form-control" id="" onChange={handleInput} value={updateOutward.department}  >
+                                                            <option>choose Department</option>
+                                                            {
+
+                                                                
+                                                                depart ?
+                                                                    depart.map((val, id) => {
+                                                                        return (
+                                                                            <option value={val.name} className="back">{val.name}</option>
+                                                                        )
+                                                                    }) : <option >Loding...</option>
+                                                            }
+                                                        </select>
                                                     </div>
                                                     <div class="form-group">
                                                         <label>product_name</label>
-                                                        <input type="text"
-                                                            class="form-control"
-                                                            name="product_name"
-                                                            value={updateOutward.product_name}
-                                                            onChange={handleInput} />
+
+                                                        <select name="product_name" className="form-control" id="" onChange={handleInput} value={updateOutward.product_name} >
+                                                            <option>choose Outward</option>
+                                                            {
+                                                                proName ?
+                                                                    proName.map((val, id) => {
+                                                                        return (
+                                                                            <option value={val.Name} key={id}>{val.Name}</option>
+                                                                        )
+                                                                    }) : <option >Loding...</option>
+                                                            }
+                                                        </select>
                                                     </div>
                                                     <div class="form-group">
                                                         <label>quaintity</label>
@@ -294,7 +352,10 @@ const mapStateToProps = (state) => ({
     resdel: state.DeleteOutward,
     viewById: state.OutwardViewById,
     viewUpadte: state.OutwardViewByIdUpdate,
-    updateout: state.updateOutward
+    updateout: state.UpdateOutward,
+    department: state.ViewAllDepartment,
+    product: state.AllProductView
+
 
 });
 

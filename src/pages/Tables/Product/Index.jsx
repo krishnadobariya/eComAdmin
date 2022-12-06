@@ -5,10 +5,9 @@ import Sidebar from '../../../component/layout/Sidebar'
 
 const ProductTable = () => {
   return (
-    <div>
-    <Sidebar/>
-    <Header/>
-      <Index/>
+    <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
+      <Sidebar />
+      <Index />
     </div>
   )
 }

@@ -90,7 +90,7 @@ const Index = ({ dispatch, res }) => {
             <ToastContainer />
             <MDBRow>
 
-                <MDBCol col='6' className="my-5 ">
+                <div  className="col-md-6 my-5 ">
                     <div className="d-flex flex-column  ms-5">
 
                         <div className="text-center">
@@ -128,9 +128,9 @@ const Index = ({ dispatch, res }) => {
 
                     </div>
 
-                </MDBCol>
+                </div>
 
-                <MDBCol col='6' className="my-5">
+                <div  className="col-md-6 my-5">
                     <div className="d-flex flex-column  justify-content-center gradient-custom-2 h-100 mb-4">
 
                         <div className="text-white px-3 py-4 p-md-5 mx-md-4">
@@ -143,7 +143,7 @@ const Index = ({ dispatch, res }) => {
 
                     </div>
 
-                </MDBCol>
+                </div>
 
             </MDBRow>
 

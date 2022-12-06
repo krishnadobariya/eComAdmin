@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Index = ({ dispatch, res, resById, resUpdateById,update }) => {
+const Index = ({ dispatch, res, resById, resUpdateById, update }) => {
 
 
     const [search, setSearch] = useState("");
@@ -26,7 +26,14 @@ const Index = ({ dispatch, res, resById, resUpdateById,update }) => {
     useEffect(() => {
         dispatch(ViewAllCategory());
     }, []);
-   
+    useEffect(() => {
+        if (data) {
+          const result = data.filter(val => {
+            return val.cat_name.toLowerCase().match(search.toLowerCase());
+          });
+          setfilter(result);
+        }
+      }, [search]);
 
     const data = res.data ? res.data.data ? res.data.data.data : [] : []
     console.log("data.......", data)
@@ -42,14 +49,13 @@ const Index = ({ dispatch, res, resById, resUpdateById,update }) => {
 
     const handleOpen = (id) => {
         dispatch(CategoryViewByIdForUpadte(id));
-     
+        setModalShow(true)
     }
 
     useEffect(() => {
-        console.log("dataaaaaaaa",resUpdateById)
         const data2 = resUpdateById.data ? resUpdateById.data.data ? resUpdateById.data.data.data : [] : []
         SetCategory(data2)
-        resUpdateById.data.status == 200 && setModalShow(true)
+     
     }, [resUpdateById])
 
 
@@ -64,48 +70,52 @@ const Index = ({ dispatch, res, resById, resUpdateById,update }) => {
         // window.location = "/viewcategory";
     };
 
-
     useEffect(() => {
-        console.log(".......",update)
+        console.log(".......", update)
         const data = update.data ? update.data.data : []
-   
+
         if (data) {
-          if (data.code == 200){
-            toast.success(data.message, {
-              position: toast.POSITION.TOP_CENTER,
-              timeOut: 1000,
-              
-            });
-          }
-          else if(data.code==500)
-          {
-            toast.success(data.message, {
-              position: toast.POSITION.TOP_CENTER,
-              timeOut: 1000,
-            });
-     
-          }
-          else if(data.code==403)
-          {
-            toast.success(data.message, {
-              position: toast.POSITION.TOP_CENTER,
-              timeOut: 1000,
-            });
-     
-          }
+            if (data.code == 200) {
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+
+                });
+                setTimeout(() => {
+                    window.location = "/viewcategory"
+                }, 1000);
+            }
+            else if (data.code == 500) {
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+                });
+                setTimeout(() => {
+                    window.location = "/viewcategory"
+                }, 1000);
+            }
+            else if (data.code == 403) {
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+                });
+                setTimeout(() => {
+                    window.location = "/viewcategory"
+                }, 1000);
+            }
         }
-      },[update])
+    }, [update])
     // -----------view
 
     const handleviewOpen = (id) => {
         dispatch(CategoryViewById(id));
+        setModalShow2(true)
 
     }
 
     useEffect(() => {
         const data2 = resById.data ? resById.data.data ? resById.data.data.data : [] : []
         SetViewCategory(data2)
-        resById.data.status == 200 && setModalShow2(true)
     }, [resById])
 
 
@@ -137,10 +147,10 @@ const Index = ({ dispatch, res, resById, resUpdateById,update }) => {
     return (
 
         <>
-            <div className="main-header">
+            <div  style={{width:"100%"}}>
                 <div className='container-fluid'>
                     <div className='row py-3'>
-                    <ToastContainer/>
+                        <ToastContainer />
                         <div className='col-md-12 px-0'>
                             <div className='add-link'><Link to="/category" >ADD</Link></div>
                             {
@@ -171,93 +181,60 @@ const Index = ({ dispatch, res, resById, resUpdateById,update }) => {
 
                         </div>
                         <div>
-                            {
-                                modalShow == true ?
-                                    <>
-                                        {Category.cat_name == null ?
-                                            <Modal
-                                                show={modalShow}
-                                                onHide={() => setModalShow(false)}
-                                                size="lg"
-                                                aria-labelledby="contained-modal-title-vcenter"
-                                                centered
-                                            >
 
-                                                <Modal.Body>
-                                                    <div>Loading......</div>
-                                                </Modal.Body>
-
-                                            </Modal> : <Modal
-                                                show={modalShow}
-                                                onHide={() => setModalShow(false)}
-                                                size="lg"
-                                                aria-labelledby="contained-modal-title-vcenter"
-                                                centered>
-                                                <Modal.Body>
-                                                    <form className='add-form'>
-                                                        <div class="form-group">
-                                                            <label>Category Name</label>
-                                                            <input type="text"
-                                                                class="form-control"
-                                                                name="cat_name"
-                                                                value={Category.cat_name}
-                                                                onChange={handleInput} />
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Discription</label>
-                                                            <input type="text"
-                                                                class="form-control"
-                                                                name="cat_description"
-                                                                value={Category.cat_description}
-                                                                onChange={handleInput} />
-                                                        </div>
-                                                        <button type="submit" class="btn add-btn" onClick={handleUpdate}>Update</button>
-                                                    </form>
-                                                </Modal.Body>
-                                            </Modal>
-                                        }
-                                    </>
-                                    : null
-                            }
-
-
-                            {modalShow2 == true ?
-                                <>
-                                    {viewCategory.cat_name == null ? <Modal
-                                        show={modalShow2}
-                                        onHide={() => setModalShow2(false)}
-                                        size="lg"
-                                        aria-labelledby="contained-modal-title-vcenter"
-                                        centered
-                                    >
-
-                                        <Modal.Body>
-                                            <div>Loading......</div>
-                                        </Modal.Body>
-
-                                    </Modal> : <Modal
-                                        show={modalShow2}
-                                        onHide={() => setModalShow2(false)}
-                                        size="lg"
-                                        aria-labelledby="contained-modal-title-vcenter"
-                                        centered
-                                    >
-                                        <Modal.Header>
-                                            <Modal.Title id="contained-modal-title-vcenter">
-                                                Category
-                                            </Modal.Title>
-                                        </Modal.Header>
-                                        <Modal.Body>
-                                            <div className='d-flex'>
-                                                <span className='px-3'>Category Name :</span><span> {viewCategory.cat_name}</span>
+                            {console.log("modalShow", modalShow)}
+                          <Modal
+                                    show={modalShow}
+                                    onHide={() => { setModalShow(false); console.log("modalshow", modalShow); }}
+                                    size="lg"
+                                    aria-labelledby="contained-modal-title-vcenter"
+                                    centered>
+                                    <Modal.Body>
+                                        <form className='add-form'>
+                                            <div class="form-group">
+                                                <label>Category Name</label>
+                                                <input type="text"
+                                                    class="form-control"
+                                                    name="cat_name"
+                                                    value={Category.cat_name}
+                                                    onChange={handleInput} />
                                             </div>
-                                            <hr></hr>
-                                            <div className='d-flex'>
-                                                <span className='px-3'>Discription :</span><span> {viewCategory.cat_description}</span>
+                                            <div class="form-group">
+                                                <label>Discription</label>
+                                                <input type="text"
+                                                    class="form-control"
+                                                    name="cat_description"
+                                                    value={Category.cat_description}
+                                                    onChange={handleInput} />
                                             </div>
-                                        </Modal.Body>
+                                            <button type="submit" class="btn add-btn" onClick={handleUpdate}>Update</button>
+                                        </form>
+                                    </Modal.Body>
+                                </Modal>
 
-                                    </Modal>} </> : ""}
+                            <Modal
+                                show={modalShow2}
+                                onHide={() => setModalShow2(false)}
+                                size="lg"
+                                aria-labelledby="contained-modal-title-vcenter"
+                                centered
+                            >
+                                <Modal.Header>
+                                    <Modal.Title id="contained-modal-title-vcenter">
+                                        Category
+                                    </Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <div className='d-flex'>
+                                        <span className='px-3'>Category Name :</span><span> {viewCategory.cat_name}</span>
+                                    </div>
+                                    <hr></hr>
+                                    <div className='d-flex'>
+                                        <span className='px-3'>Discription:</span><span> {viewCategory.cat_description}</span>
+                                    </div>
+                                </Modal.Body>
+
+                            </Modal>
                         </div>
                     </div>
                 </div>
@@ -272,7 +249,7 @@ const mapStateToProps = (state) => ({
     res: state.ViewAllCategory,
     resById: state.CategoryViewById,
     resUpdateById: state.CategoryViewByIdForUpadte,
-    update:state.UpdateCategory
+    update: state.UpdateCategory
 });
 
 export default connect(mapStateToProps)(Index);

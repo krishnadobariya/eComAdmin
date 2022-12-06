@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import '../../../css/Product/style.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 
 const Index = ({ dispatch, res }) => {
@@ -69,11 +70,12 @@ const Index = ({ dispatch, res }) => {
     }
   },[res])
   return (
-    <div className="main-header">
+    <div  style={{width:"100%"}}>
       <div className='container-fluid py-5'>
         <div className='row px-0  py-5 d-flex justify-content-center  '>
           <ToastContainer/>
           <div className='col-md-9'>
+          <div className='add-link'><Link to="/departmenttable" >VIEW</Link></div>
             <h1 className='text-center add-title py-4'>ADD DEPARTMENT</h1>
             <form className='add-form'>
               <div className="form-group">

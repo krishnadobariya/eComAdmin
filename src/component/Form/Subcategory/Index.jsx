@@ -4,6 +4,7 @@ import { AllCategoryView } from '../../../store/Action/FetchData'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 
 const Index = ({ dispatch, res,addres }) => {
 
@@ -78,11 +79,12 @@ const Index = ({ dispatch, res,addres }) => {
 
   return (
 
-    <div className="main-header">
+    <div  style={{width:"100%"}}>
       <div className='container-fluid py-5'>
         <div className='row px-0  py-5 d-flex justify-content-center '>
         <ToastContainer />
           <div className='col-md-9'>
+          <div className='add-link'><Link to="/viewsubcategory" >VIEW</Link></div>
             <h1 className='text-center add-title py-4'>PRODUCT SUBCATEGORY</h1>
             <form className='add-form'>
               <div class="form-group">
@@ -106,11 +108,12 @@ const Index = ({ dispatch, res,addres }) => {
                 <select name="select_cat" className="form-control" id="" onChange={handleInput} value={SubCategory.select_cat}  >
                   <option>Choose a Category</option>
                   {
+                    data ?
                     data.map((val, id) => {
                       return (
                         <option value={val.cat_name} key={id}>{val.cat_name}</option>
                       )
-                    })
+                    }) : <option >no data found</option>
                   }
                 </select>
               </div>
@@ -119,7 +122,7 @@ const Index = ({ dispatch, res,addres }) => {
           </div>
         </div>
       </div>
-    </div>
+  </div>
   )
 }
 

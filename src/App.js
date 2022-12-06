@@ -15,43 +15,42 @@ import DepartmentTable from './pages/Tables/Department/Index';
 import Outwardtable from './pages/Tables/Outward/Index';
 import Outward from './pages/Forms/Outward/Index';
 import Prslip from './component/prslip/Index';
+import Sidebar from './component/layout/Sidebar';
+import Cookies from 'js-cookie';
 
 
 function App() {
 
-  
-  // };
+  const token = Cookies.get('jwt')
+  console.log()
 
-  // const jwt = Cookies.get('jwt');
-  // console.log(".....",jwt)
   return (
 
     <>
-      <Routes>
-        <Route path='/' element={<Login/>} />
-          <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/product' element={<Product />} />
-          <Route path='/category' element={<Category />} />
-          <Route path='/subcategory' element={<SubCategory />} />
-          <Route path='/departmemt' element={<Department/>}/>
-          <Route path='/outward' element={<Outward/>}/>
-          <Route path='/categorytype' element={<CategoryType/>}/>
-          <Route path='/viewproduct' element={<ProductTable/>}/>
-          <Route path='/viewtype' element={<TypeTable/>}/>
-          <Route path="/viewcategory" element={<CategoryTable/>}/>
-          <Route path="/viewsubcategory" element={<SubCategoryTable/>}/>
-          <Route path='/departmenttable' element={<DepartmentTable/>}/>
-          <Route path='/outwardtable' element={<Outwardtable/>}/>
-          <Route path='/prslipe' element={<Prslip/>}/>
+      {/* <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}> */}
+      {/* <Sidebar /> */}
+      <div style={{ width: "100%" }}>
+        <Routes>
+          <Route path='/' element={<Login />} />
+          <Route path='/dashboard' element={token ? <Dashboard /> : <Login />} />
+          <Route path='/product' element={token ? <Product /> : <Login />} />
+          <Route path='/category' element={token ? <Category /> : <Login />} />
+          <Route path='/subcategory' element={token ? <SubCategory /> : <Login />} />
+          <Route path='/departmemt' element={token ? <Department /> : <Login />} />
+          <Route path='/outward' element={token ? <Outward /> : <Login />} />
+          <Route path='/categorytype' element={token ? <CategoryType /> : <Login />} />
+          <Route path='/viewproduct' element={token ? <ProductTable /> : <Login />} />
+          <Route path='/viewtype' element={token ? <TypeTable /> : <Login />} />
+          <Route path="/viewcategory" element={token ? <CategoryTable /> : <Login />} />
+          <Route path="/viewsubcategory" element={token ? <SubCategoryTable /> : <Login />} />
+          <Route path='/departmenttable' element={token ? <DepartmentTable /> : <Login />} />
+          <Route path='/outwardtable' element={token ? <Outwardtable /> : <Login />} />
+          <Route path='/prslipe' element={token ? <Prslip /> : <Login />} />
         </Routes>
-
-      <div>
-        
-
-        {/* <Scanner/> */}
-
-
       </div>
+
+      {/* </div> */}
+
 
     </>
 

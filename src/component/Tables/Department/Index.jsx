@@ -31,13 +31,16 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
 
     const data = res.data ? res.data.data ? res.data.data.data : [] : []
     console.log("data.......", data)
-    useEffect(() => {
-        const result = data.filter(val => {
-            return val.name.toLowerCase().match(search.toLowerCase());
-        });
-        setfilter(result);
-    }, [search]);
+  
 
+    useEffect(() => {
+        if (data) {
+          const result = data.filter(val => {
+            return val.name.toLowerCase().match(search.toLowerCase());
+          });
+          setfilter(result);
+        }
+      }, [search]);
 
     // ---------delete---------
     const deleteDepartment = (id) => {
@@ -48,12 +51,13 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
 
     const handleviewOpen = (id) => {
         dispatch(DepartmentViewById(id));
+        setModalShow2(true)
     }
 
     useEffect(() => {
         const data2 = resById.data ? resById.data.data ? resById.data.data.data : [] : []
         SetDepartment(data2)
-        resById.data.status == 200 && setModalShow2(true)
+      
 
     }, [resById])
 
@@ -61,12 +65,12 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
 
     const handleOpen = (id) => {
         dispatch(DepartmentViewByIdUpdate(id));
-
+        setModalShow(true)
     }
     useEffect(() => {
         const data2 = resUpadte.data ? resUpadte.data.data ? resUpadte.data.data.data : [] : []
         SetDepartment(data2)
-        resUpadte.data.status == 200 && setModalShow(true)
+  
     }, [resUpadte])
 
     const handleInput = (e) => {
@@ -77,7 +81,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
     const handleUpdate = (e) => {
         e.preventDefault();
         dispatch(UpdateDepartment(Department, Department._id));
-        // window.location = "/departmenttable";
+        
     };
     useEffect(() => {
         console.log(".......", updateres)
@@ -90,20 +94,27 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
                     timeOut: 1000,
 
                 });
+                setTimeout(()=>{
+                    window.location="/departmenttable"
+                }, 1000);
             }
             else if (data.code == 500) {
                 toast.success(data.message, {
                     position: toast.POSITION.TOP_CENTER,
                     timeOut: 1000,
                 });
-
+                setTimeout(()=>{
+                    window.location="/departmenttable"
+                }, 1000);
             }
             else if (data.code == 403) {
                 toast.success(data.message, {
                     position: toast.POSITION.TOP_CENTER,
                     timeOut: 1000,
                 });
-
+                setTimeout(()=>{
+                    window.location="/departmenttable"
+                }, 1000);
             }
         }
     }, [updateres])
@@ -136,7 +147,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
     return (
 
         <>
-            <div className="main-header">
+            <div  style={{width:"100%"}}>
                 <div className='container-fluid'>
                 <ToastContainer />
                     <div className='row py-3'>

@@ -4,9 +4,8 @@ import Header from '../../../component/layout/Header'
 import Sidebar from '../../../component/layout/Sidebar'
 const  Department= () => {
   return (
-    <div>
-    <Sidebar/>
-    <Header/>
+    <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
+   <Sidebar/>
       <Index/>
     </div>
   )

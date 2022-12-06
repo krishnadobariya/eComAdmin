@@ -30,12 +30,15 @@ const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
 
     const data = res.data ? res.data.data ? res.data.data.data : [] : []
     console.log("data.......", data)
-    // useEffect(() => {
-    //     const result = data.filter(val => {
-    //         return val.subCat_name.toLowerCase().match(search.toLowerCase());
-    //     });
-    //     setfilter(result);
-    // }, [search]);
+    useEffect(() => {
+        if(data)
+        {
+            const result = data.filter(val => {
+                return val.subCat_name.toLowerCase().match(search.toLowerCase());
+            });
+            setfilter(result);
+        }
+    }, [search]);
 
 
     // ---------delete---------
@@ -49,12 +52,12 @@ const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
     const handleOpen = (id) => {
         dispatch(SubCategoryViewByIdForupadte(id));
         dispatch(AllCategoryView());
+        setModalShow(true)
     }
 
     useEffect(() => {
         const data2 = resForupdate.data ? resForupdate.data.data ? resForupdate.data.data.data : [] : []
         SetSubCategory(data2)
-        resForupdate.data.status == 200 && setModalShow(true)
     }, [resForupdate])
 
 
@@ -69,7 +72,7 @@ const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
     const handleUpdate = (e) => {
         e.preventDefault();
         dispatch(UpdateSubCategory(SubCategory, SubCategory._id));
-        // window.location = "/viewsubcategory";
+       
     };
 
     useEffect(() => {
@@ -83,12 +86,18 @@ const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
                     timeOut: 1000,
     
                 });
+                setTimeout(()=>{
+                    window.location="/viewsubcategory"
+                }, 1000);
             }
             else if (data.code == 500) {
                 toast.success(data.message, {
                     position: toast.POSITION.TOP_CENTER,
                     timeOut: 1000,
                 });
+                setTimeout(()=>{
+                    window.location="/viewsubcategory"
+                }, 1000);
     
             }
             else if (data.code == 403) {
@@ -96,14 +105,13 @@ const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
                     position: toast.POSITION.TOP_CENTER,
                     timeOut: 1000,
                 });
+                setTimeout(()=>{
+                    window.location="/viewsubcategory"
+                }, 1000);
     
             }
         }
     }, [updatesub])
-    
-
-
-    
     
 
 
@@ -112,11 +120,12 @@ const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
 
     const handleviewOpen = (id) => {
         dispatch(SubCategoryViewById(id));
+        setModalShow2(true);
     }
     useEffect(() => {
         const data2 = resbyid.data ? resbyid.data.data ? resbyid.data.data.data : [] : []
         setViewSubcategoty(data2)
-        resbyid.data.status == 200 && setModalShow2(true)
+      
     }, [resbyid])
 
 
@@ -152,7 +161,7 @@ const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
     return (
 
         <>
-            <div className="main-header">
+            <div  style={{width:"100%"}}>
                 <div className='container-fluid'>
                     <ToastContainer/>
                     <div className='row py-3'>

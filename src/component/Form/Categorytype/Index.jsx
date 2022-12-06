@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import '../../../css/Product/style.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 
 const Index = ({ dispatch, res, view, viewsub }) => {
@@ -91,11 +92,12 @@ const Index = ({ dispatch, res, view, viewsub }) => {
   },[res])
   return (
 
-    <div className="main-header">
+    <div  style={{width:"100%"}}>
       <div className='container-fluid py-5'>
         <div className='row px-0  py-5 d-flex justify-content-center '>
           <ToastContainer/>
           <div className='col-md-9'>
+          <div className='add-link'><Link to="/viewtype" >VIEW</Link></div>
             <h1 className='text-center add-title py-4'>PRODUCT CATEGORY TYPE</h1>
             <form className='add-form'>
               <div className="form-group">
@@ -120,11 +122,12 @@ const Index = ({ dispatch, res, view, viewsub }) => {
 
                   <option>Choose a Category</option>
                   {
+                    data ?
                     data.map((val, id) => {
                       return (
                         <option value={val.cat_name} key={id}>{val.cat_name}</option>
                       )
-                    })
+                    }) :<option >no data found</option>
                   }
                 </select>
               </div>

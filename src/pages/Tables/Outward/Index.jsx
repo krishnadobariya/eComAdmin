@@ -5,9 +5,8 @@ import Index from '../../../component/Tables/Outward/Index'
 
 const Outwardtable = () => {
   return (
-    <div>
-        <Sidebar/>
-        <Header/>
+    <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
+     <Sidebar/>
         <Index/>
     </div>
   )

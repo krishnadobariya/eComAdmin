@@ -1,10 +1,16 @@
-
-
+.nav-treeview{
+    padding-left: 4rem!important;
+}
+.w-link{
+    margin-left:70px;
+}
 .nav-icon{
     color: white;
+    margin:10px 20px 10px 10px!important;
 }
 .nav-sidebar .nav-link p{
     color: white;
+    margin-left: 10px;
 }
 .nav-pills .menu-open .active{
     background-color: rgba(227, 244, 248, 0.205)!important;
@@ -25,11 +31,7 @@
     color: #fff!important;
 
 } 
-.close-icon{
-    display: none;
-    margin-top: 15px;
-    color: #fff;
-}
+
 .layout-fixed .brand-link{
     width: 200px;
 }
