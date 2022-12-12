@@ -1,22 +1,20 @@
 import { Baseurl } from "../../Baseurl";
 import axios from "axios"
 import Cookies from 'js-cookie'
+import { DataArrayRounded } from "@mui/icons-material";
 
 const token = Cookies.get('jwt');
 
-// add product
+//ADD PRODUCT
 
 export function AddProduct(data) {
-    console.log("dataaaa" , data);
     return async (dispatch) => {
         const response = await axios.post(`${Baseurl}/product/insert`, data,
             {
                 headers: { "jwt": token }
             });
-        console.log("response",response)
         localStorage.removeItem('subcategory');
-        localStorage.removeItem('category');
-        // window.location="/viewproduct"
+
         var return_response = {
             type: "Add_PRODUCT",
             payload: response,
@@ -25,7 +23,7 @@ export function AddProduct(data) {
     };
 }
 
-// add category
+// ADD CATEGORY
 
 export function AddCategory(data) {
     return async (dispatch) => {
@@ -33,8 +31,7 @@ export function AddCategory(data) {
             {
                 headers: { "jwt": token }
             });
-        console.log(".........",response);
-        // window.location="/viewcategory";
+
         var return_response = {
             type: "Add_CATEGORY",
             payload: response,
@@ -43,7 +40,7 @@ export function AddCategory(data) {
     };
 }
 
-// add category
+// ADD SUBCATEGORY
 
 export function AddSubCategory(data) {
     return async (dispatch) => {
@@ -51,8 +48,7 @@ export function AddSubCategory(data) {
             {
                 headers: { "jwt": token }
             });
-        console.log("hello",response)
-        // window.location="/viewsubcategory";
+
         var return_response = {
             type: "Add_SUBCATEGORY",
             payload: response,
@@ -61,14 +57,15 @@ export function AddSubCategory(data) {
     };
 }
 
-// add category
+// ADD CATEGORY TYPE
 export function AddCategoryType(data) {
+    console.log("helo",data)
     return async (dispatch) => {
         const response = await axios.post(`${Baseurl}/cat-type/insert`, data,
             {
                 headers: { "jwt": token }
             });
-        // window.location="/viewtype";
+
         var return_response = {
             type: "Add_CATEGORYTYPE",
             payload: response,
@@ -77,14 +74,17 @@ export function AddCategoryType(data) {
     };
 }
 
-//Add Department
+//Add DEPARTMENT
 export function AddDepartmentType(data) {
-    return async(dispatch) => {
-        const response = await axios.post(`${Baseurl}/department/insert`,data,
-        {
-            headers: { "jwt": token }
-        });
-        
+    return async (dispatch) => {
+        const response = await axios.post(`${Baseurl}/department/insert`, data,
+            {
+                headers: { "jwt": token }
+            });
+
+
+
+            console.log("resonse",response)
         var return_response = {
             type: "ADD_DEPARTMENT",
             payload: response,
@@ -94,14 +94,14 @@ export function AddDepartmentType(data) {
 }
 
 
-//Add outward
-export function AddOutward(data) {
-    return async(dispatch) => {
-        const response = await axios.post(`${Baseurl}/outward/insert`,data,
-        {
-            headers: { "jwt": token }
-        });
-        //  window.location="/outwardtable"
+//Add OUTWARD
+export function AddOutward(id,data) {
+    return async (dispatch) => {
+        const response = await axios.post(`${Baseurl}/outward/insert/${id}`,data,
+            {
+                headers: { "jwt": token }
+            });
+   
         var return_response = {
             type: "ADD_OUTWARD",
             payload: response,
@@ -109,3 +109,22 @@ export function AddOutward(data) {
         dispatch(return_response);
     }
 }
+
+
+//Add OUTWARD
+export function AddfullOutward(data) {
+
+    return async (dispatch) => {
+        const response = await axios.post(`${Baseurl}/outward/insertManyOutward`,data);
+       
+        var return_response = {
+            type: "ADD_OUTALLWARD",
+            payload: response,
+        };
+        dispatch(return_response);
+    }
+}
+
+
+
+

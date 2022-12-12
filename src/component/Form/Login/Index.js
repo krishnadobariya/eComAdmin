@@ -34,21 +34,19 @@ const Index = ({ dispatch, res }) => {
         e.preventDefault();
         dispatch(AdminLogin(login));
         const data2 = res.data ? res.data.data  : []
-        console.log("dataaaaaaaa", data2)
+       
         setmessage(data2)
         res.data.status == 200 && setmessage(data2)
-
-
     };
 
 
     useEffect(() => {
-        console.log(".......", res)
+       
         const data = res.data ? res.data.data : []
     
         if (data) {
             if (data.code == 404) {
-                toast.success(data.message, {
+                toast.error(data.message, {
                     position: toast.POSITION.TOP_CENTER,
     
                 });
@@ -58,7 +56,7 @@ const Index = ({ dispatch, res }) => {
                 }, 1000);
             }
             else if (data.code == 401) {
-                toast.success(data.message, {
+                toast.error(data.message, {
                     position: toast.POSITION.TOP_CENTER,
                
                 });
@@ -121,7 +119,7 @@ const Index = ({ dispatch, res }) => {
 
                         <div className="text-center pt-1 mb-5 pb-1">
                             <button onClick={handleLogin} className="btn btn-block gradient-custom-2 mb-2 text-white ">Sign In</button>
-                            <a className="text-muted" href="#!">Forgot password?</a>
+                          
                         </div>
 
 

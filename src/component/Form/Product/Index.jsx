@@ -28,7 +28,7 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
     SetProduct({ ...Product, [name]: value })
     if (e.target.name === 'Category') {
        const category = e.target.value;
-        console.log(category)
+     
       dispatch(AllSubCategoryView(category))
      
     }
@@ -52,7 +52,7 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
 
   
   useEffect(() => {
-    console.log(res)
+  
     const data = res.data ? res.data.data : []
     if (data) {
       if (data.code == 201){
@@ -68,7 +68,7 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
       }
       else if(data.code==500)
       {
-        toast.success(data.message, {
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
         });
@@ -78,7 +78,7 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
       }
       else if(data.code==403)
       {
-        toast.success(data.message, {
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
         });
@@ -90,12 +90,7 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
   },[res])
 
   const data = view.data ? view.data.data ? view.data.data.data : [] : []
-
-
   const viewSub = viewsub.data ? viewsub.data.data ? viewsub.data.data.data : [] : []
-
-  
-
   const typeview = type.data ? type.data.data ? type.data.data.data : [] : []
 
 
@@ -103,9 +98,9 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
 
     <div  style={{width:"100%"}}>
       <div className='container-fluid'>
-        <div className='row px-0  py-5 d-flex justify-content-center '>
+        <div className='row px-0  py-3 d-flex justify-content-center '>
           <ToastContainer/>
-          <div className='col-md-10'>
+          <div className='col-md-5'>
           <div className='add-link'><Link to="/viewproduct" >VIEW</Link></div>
             <h1 className='text-center add-title'>PRODUCT</h1>
             <form className='add-form'>
@@ -113,8 +108,7 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
                 <label>Product Name</label>
                 <input type="text" className="form-control" name="Name" value={Product.Name} onChange={handleInput} />
               </div>
-              <div className="form-row">
-                <div className="form-group col-md-4">
+              <div className="form-group ">
                   <label>Category</label>
                 
                   <select name="Category" className="form-control" id="" onChange={handleInput} value={Product.Category}  >
@@ -128,8 +122,8 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
                       }) : <option >Loding...</option>
                     }
                   </select>
-                </div>
-                <div className="form-group col-md-4">
+                </div>                
+                <div className="form-group ">
                   <label>Sub Category</label>
                   <select name="Sub_Category" className="form-control" id="" onChange={handleInput} value={Product.Sub_Category}  >
                   <option>choose subcategory</option>
@@ -143,8 +137,9 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
                     }
                   </select>
                 </div>
-                <div className="form-group col-md-4">
-                  <label>Sub Category</label>
+              
+                <div className="form-group ">
+                  <label>Type</label>
                   <select name="Type" className="form-control" id="" onChange={handleInput} value={Product.Type}  >
                   <option>choose type</option>
                     {
@@ -157,19 +152,15 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
                     }
                   </select>
                 </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group col-md-6">
-                  <label>QTY</label>
+            
+                <div className="form-group ">
+                  <label>Quantity</label>
                   <input type="text" className="form-control" name="QTY" value={Product.QTY} onChange={handleInput} />
                 </div>
-                <div className="form-group col-md-6">
+                <div className="form-group ">
                   <label>Price</label>
                   <input type="text" className="form-control" name="Price" value={Product.Price} onChange={handleInput} />
                 </div>
-              </div>
-             
                 <div className="form-group">
                   <label>Unit</label>
                   <input type="text" className="form-control" name="Unit" value={Product.Unit} onChange={handleInput} />

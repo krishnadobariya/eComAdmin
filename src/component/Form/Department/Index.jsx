@@ -23,14 +23,14 @@ const Index = ({ dispatch, res }) => {
   }
   const handleAdd = (e) => {
     e.preventDefault();
-    console.log("data..............", Department)
+   
     dispatch(AddDepartmentType(Department));
    
   };
 
 
   useEffect(() => {
-    console.log(".......",res)
+    
     const data = res.data ? res.data.data : []
     if (data) {
       if (data.code == 201){
@@ -47,7 +47,7 @@ const Index = ({ dispatch, res }) => {
       }
       else if(data.code==500)
       {
-        toast.success(data.message, {
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
         });
@@ -58,7 +58,7 @@ const Index = ({ dispatch, res }) => {
       }
       else if(data.code==403)
       {
-        toast.success(data.message, {
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
         });
@@ -74,12 +74,12 @@ const Index = ({ dispatch, res }) => {
       <div className='container-fluid py-5'>
         <div className='row px-0  py-5 d-flex justify-content-center  '>
           <ToastContainer/>
-          <div className='col-md-9'>
+          <div className='col-md-6'>
           <div className='add-link'><Link to="/departmenttable" >VIEW</Link></div>
             <h1 className='text-center add-title py-4'>ADD DEPARTMENT</h1>
             <form className='add-form'>
               <div className="form-group">
-                <label>Name</label>
+                <label>Department Name</label>
                 <input type="text"
                   className="form-control"
                   name="name"

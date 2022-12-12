@@ -17,87 +17,76 @@ const Index = ({ dispatch, res, view, viewsub }) => {
   })
 
 
-
   useEffect(() => {
     dispatch(AllCategoryView());
   }, [])
   const handleInput = (e) => {
-   
+
     const { name, value } = e.target
     SetCategoryType({ ...CategoryType, [name]: value })
     if (e.target.name === 'category') {
       const category = e.target.value;
-       console.log(category)
-     dispatch(AllSubCategoryView(category))
-    
-   }
+      dispatch(AllSubCategoryView(category))
+
+    }
 
   }
 
   const handleAdd = (e) => {
     e.preventDefault();
-    console.log("data..............", CategoryType)
     dispatch(AddCategoryType(CategoryType));
   };
 
 
-
   const data = view.data ? view.data.data ? view.data.data.data : [] : []
-
-
   const viewSub = viewsub.data ? viewsub.data.data ? viewsub.data.data.data : [] : []
 
 
-
-
   useEffect(() => {
-    console.log(".......",res)
     const data = res.data ? res.data.data : []
     if (data) {
-      if (data.code == 201){
+      if (data.code == 201) {
         toast.success(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
-          
+
         });
-        setTimeout(()=>{
-          window.location="/viewtype"
-      }, 1000);
-        
-       
+        setTimeout(() => {
+          window.location = "/viewtype"
+        }, 1000);
+
+
       }
-      else if(data.code==500)
-      {
-        toast.success(data.message, {
+      else if (data.code == 500) {
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
         });
-        setTimeout(()=>{
-          window.location="/categorytype"
-      }, 1000);
- 
+        setTimeout(() => {
+          window.location = "/categorytype"
+        }, 1000);
+
       }
-      else if(data.code==403)
-      {
-        toast.success(data.message, {
+      else if (data.code == 403) {
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
         });
-        setTimeout(()=>{
-          window.location="/categorytype"
-      }, 1000);
- 
+        setTimeout(() => {
+          window.location = "/categorytype"
+        }, 1000);
+
       }
     }
-  },[res])
+  }, [res])
   return (
 
-    <div  style={{width:"100%"}}>
+    <div style={{ width: "100%" }}>
       <div className='container-fluid py-5'>
         <div className='row px-0  py-5 d-flex justify-content-center '>
-          <ToastContainer/>
-          <div className='col-md-9'>
-          <div className='add-link'><Link to="/viewtype" >VIEW</Link></div>
+          <ToastContainer />
+          <div className='col-md-6'>
+            <div className='add-link'><Link to="/viewtype" >VIEW</Link></div>
             <h1 className='text-center add-title py-4'>PRODUCT CATEGORY TYPE</h1>
             <form className='add-form'>
               <div className="form-group">
@@ -123,11 +112,11 @@ const Index = ({ dispatch, res, view, viewsub }) => {
                   <option>Choose a Category</option>
                   {
                     data ?
-                    data.map((val, id) => {
-                      return (
-                        <option value={val.cat_name} key={id}>{val.cat_name}</option>
-                      )
-                    }) :<option >no data found</option>
+                      data.map((val, id) => {
+                        return (
+                          <option value={val.cat_name} key={id}>{val.cat_name}</option>
+                        )
+                      }) : <option >no data found</option>
                   }
                 </select>
               </div>
@@ -137,11 +126,11 @@ const Index = ({ dispatch, res, view, viewsub }) => {
                   <option>Choose a Subcategory</option>
                   {
                     viewSub ?
-                    viewSub.map((val, id) => {
-                      return (
-                        <option value={val.subCat_name} key={id}>{val.subCat_name}</option>
-                      )
-                    }) : <option>no data found</option>
+                      viewSub.map((val, id) => {
+                        return (
+                          <option value={val.subCat_name} key={id}>{val.subCat_name}</option>
+                        )
+                      }) : <option>no data found</option>
                   }
                 </select>
               </div>

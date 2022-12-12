@@ -22,30 +22,30 @@ const Index = ({ dispatch, res, resById, resUpdateById, update }) => {
     const [modalShow2, setModalShow2] = useState(false);
 
 
-
     useEffect(() => {
         dispatch(ViewAllCategory());
     }, []);
     useEffect(() => {
         if (data) {
-          const result = data.filter(val => {
-            return val.cat_name.toLowerCase().match(search.toLowerCase());
-          });
-          setfilter(result);
+            const result = data.filter(val => {
+                return val.cat_name.toLowerCase().match(search.toLowerCase());
+            });
+            setfilter(result);
         }
-      }, [search]);
-
+    }, [search]);
     const data = res.data ? res.data.data ? res.data.data.data : [] : []
-    console.log("data.......", data)
 
 
-    // ---------delete---------
+    // DELETE-------------
+
     const DelteCategory = (id) => {
         dispatch(DeleteCategory(id));
-        window.location.reload(false);
+        setTimeout(() => {
+            window.location = "/viewcategory"
+        }, 400);
     }
 
-    // -----------update
+    // UPDATE--------------------
 
     const handleOpen = (id) => {
         dispatch(CategoryViewByIdForUpadte(id));
@@ -55,7 +55,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update }) => {
     useEffect(() => {
         const data2 = resUpdateById.data ? resUpdateById.data.data ? resUpdateById.data.data.data : [] : []
         SetCategory(data2)
-     
+
     }, [resUpdateById])
 
 
@@ -67,11 +67,11 @@ const Index = ({ dispatch, res, resById, resUpdateById, update }) => {
     const handleUpdate = (e) => {
         e.preventDefault();
         dispatch(UpdateCategory(Category, Category._id));
-        // window.location = "/viewcategory";
+       
     };
 
     useEffect(() => {
-        console.log(".......", update)
+
         const data = update.data ? update.data.data : []
 
         if (data) {
@@ -86,7 +86,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update }) => {
                 }, 1000);
             }
             else if (data.code == 500) {
-                toast.success(data.message, {
+                toast.error(data.message, {
                     position: toast.POSITION.TOP_CENTER,
                     timeOut: 1000,
                 });
@@ -95,17 +95,18 @@ const Index = ({ dispatch, res, resById, resUpdateById, update }) => {
                 }, 1000);
             }
             else if (data.code == 403) {
-                toast.success(data.message, {
+                toast.error(data.message, {
                     position: toast.POSITION.TOP_CENTER,
                     timeOut: 1000,
                 });
                 setTimeout(() => {
                     window.location = "/viewcategory"
-                }, 1000);
+                }, 800);
             }
         }
     }, [update])
-    // -----------view
+
+    // VIEW------------
 
     const handleviewOpen = (id) => {
         dispatch(CategoryViewById(id));
@@ -132,7 +133,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update }) => {
 
         },
         {
-            name: "action",
+            name: "Action",
             cell: (row) => <>
                 <VisibilityIcon onClick={() => handleviewOpen(row._id)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
                 <DeleteIcon onClick={() => DelteCategory(row._id)} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
@@ -147,7 +148,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update }) => {
     return (
 
         <>
-            <div  style={{width:"100%"}}>
+            <div style={{ width: "100%" }}>
                 <div className='container-fluid'>
                     <div className='row py-3'>
                         <ToastContainer />
@@ -158,7 +159,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update }) => {
                                     <h1>loading....</h1>
                                     :
                                     <DataTable
-                                        title="Category list"
+                                        title="CATEGORY LIST"
                                         columns={columns}
                                         data={filterdata == "" ? data : filterdata}
                                         pagination
@@ -174,6 +175,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update }) => {
                                                 className='w-25 form-control'
                                                 value={search}
                                                 onChange={(event) => setSearch(event.target.value)}
+                                                style={{border:"1px solid gray"}}
                                             />
                                         }
                                     />
@@ -182,35 +184,33 @@ const Index = ({ dispatch, res, resById, resUpdateById, update }) => {
                         </div>
                         <div>
 
-                            {console.log("modalShow", modalShow)}
-                          <Modal
-                                    show={modalShow}
-                                    onHide={() => { setModalShow(false); console.log("modalshow", modalShow); }}
-                                    size="lg"
-                                    aria-labelledby="contained-modal-title-vcenter"
-                                    centered>
-                                    <Modal.Body>
-                                        <form className='add-form'>
-                                            <div class="form-group">
-                                                <label>Category Name</label>
-                                                <input type="text"
-                                                    class="form-control"
-                                                    name="cat_name"
-                                                    value={Category.cat_name}
-                                                    onChange={handleInput} />
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Discription</label>
-                                                <input type="text"
-                                                    class="form-control"
-                                                    name="cat_description"
-                                                    value={Category.cat_description}
-                                                    onChange={handleInput} />
-                                            </div>
-                                            <button type="submit" class="btn add-btn" onClick={handleUpdate}>Update</button>
-                                        </form>
-                                    </Modal.Body>
-                                </Modal>
+                            <Modal
+                                show={modalShow}
+                                size="lg"
+                                aria-labelledby="contained-modal-title-vcenter"
+                                centered>
+                                <Modal.Body>
+                                    <form className='add-form'>
+                                        <div class="form-group">
+                                            <label>Category Name</label>
+                                            <input type="text"
+                                                class="form-control"
+                                                name="cat_name"
+                                                value={Category.cat_name}
+                                                onChange={handleInput} />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Discription</label>
+                                            <input type="text"
+                                                class="form-control"
+                                                name="cat_description"
+                                                value={Category.cat_description}
+                                                onChange={handleInput} />
+                                        </div>
+                                        <button type="submit" class="btn add-btn" onClick={handleUpdate}>Update</button>
+                                    </form>
+                                </Modal.Body>
+                            </Modal>
 
                             <Modal
                                 show={modalShow2}

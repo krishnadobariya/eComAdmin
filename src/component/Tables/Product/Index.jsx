@@ -17,10 +17,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Link } from 'react-router-dom';
-import Barcode from 'react-barcode';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Barcode from 'react-barcode';
+import jsPDF from "jspdf";
 
 
 const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upadtepro }) => {
@@ -33,8 +34,9 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
   const [modalShow, setModalShow] = React.useState(false);
   const [modalShow2, setModalShow2] = useState(false);
   const [qty, setQty] = useState(0);
-  const [SubCategory, setSubCategory] = useState("");
   const [modalShow3, setModalShow3] = useState(false);
+  const [category, setCategory] = useState([])
+  const [typeData, setTypeData] = useState([])
 
 
 
@@ -54,30 +56,46 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
     }
   }, [search]);
 
-  // ---------delete---------
+  // DELETE----------------
 
   const DelteProduct = (id) => {
     dispatch(DeleteProduct(id));
-    window.location.reload(false);
+    setTimeout(() => {
+      window.location = "/viewproduct"
+    }, 400);
   }
 
-  // -----------update
+  // UPDATE---------------
 
   const handleOpen = (id) => {
     dispatch(ProductViewByIdUpadte(id));
+
+
     setModalShow(true)
   }
 
 
   useEffect(() => {
+    const viewSub = viewsub.data ? viewsub.data.data ? viewsub.data.data.data : [] : []
+    setCategory(viewSub)
+
+  }, [viewsub])
+
+  useEffect(() => {
+    const typeview = type.data ? type.data.data ? type.data.data.data : [] : []
+    setTypeData(typeview)
+
+  }, [type])
+
+  useEffect(() => {
     const data2 = resUpadte.data ? resUpadte.data.data ? resUpadte.data.data.data : [] : []
     SetProduct(data2)
-
+    dispatch(AllSubCategoryView(data2.Category))
+    dispatch(TypeView(data2.Sub_Category))
   }, [resUpadte])
 
 
   const handleInput = (e) => {
-    console.log("onchange", e.target.value);
     const { name, value } = e.target
     SetProduct({ ...Product, [name]: value })
     setQty(value)
@@ -93,21 +111,15 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
   const handleUpdate = (e) => {
     e.preventDefault();
     dispatch(UpdateProduct(Product, Product._id));
-    window.location = "/viewproduct";
-
   };
 
   useEffect(() => {
     dispatch(AllCategoryView())
+
   }, [])
 
 
   useEffect(() => {
-    dispatch(TypeView())
-  }, [SubCategory])
-
-  useEffect(() => {
-    console.log(".......", upadtepro)
     const data = upadtepro.data ? upadtepro.data.data : []
 
     if (data) {
@@ -122,7 +134,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
         }, 1000);
       }
       else if (data.code == 500) {
-        toast.success(data.message, {
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
         });
@@ -132,7 +144,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
 
       }
       else if (data.code == 403) {
-        toast.success(data.message, {
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
         });
@@ -145,7 +157,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
   }, [upadtepro])
 
 
-  // -----------------view
+  // VIEW-------------------
 
   const handleviewOpen = (id) => {
 
@@ -174,32 +186,31 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
   }, [Qr])
 
 
-  const barcodedata = {
-    name: ViewProduct.Name,
-    price: ViewProduct.Price
-  }
+
   const qrcode = (
-    <Barcode value={JSON.stringify(barcodedata)} format="CODE128"
-      displayValue="false"
-    />
+    <Barcode value={ViewProduct._id} />
   )
 
   const View = view.data ? view.data.data ? view.data.data.data : [] : []
 
-  const viewSub = viewsub.data ? viewsub.data.data ? viewsub.data.data.data : [] : []
 
-  const typeview = type.data ? type.data.data ? type.data.data.data : [] : []
 
-  const onPrintBarcode = () => {
-    var container = document.getElementById("qrDiv");
-    var width = "100%";
-    var height = "100%";
-    var printWindow = window.open('', 'PrintMap',
-      'width=' + width + ',height=' + height);
-    printWindow.document.writeln(container.innerHTML);
-    printWindow.document.close();
-    printWindow.print();
-    printWindow.close();
+
+  const generatepdf = () => {
+
+    var doc = new jsPDF("p", "pt", "a4");
+    doc.html(document.querySelector("#qrDiv"), {
+      callback: function (pfd) {
+        doc.save('qr.pdf');
+      },
+      x: 100,
+      y: 80,
+      html2canvas: {
+        scale: 0.9,
+        width: 1000
+      },
+    })
+
   }
 
 
@@ -216,7 +227,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
 
     },
     {
-      name: "Sub_Category",
+      name: "SubCategory",
       selector: (row) => row.Sub_Category,
       sortable: true,
     },
@@ -230,8 +241,11 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
       selector: (row) => `${row.Price}.Rs`,
       sortable: true,
     },
-
-
+    {
+      name: "Date",
+      selector: (row) => row.updatedAt.slice(0, 10),
+      sortable: true
+    },
     {
       name: "action",
       cell: (row) => <>
@@ -250,7 +264,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
   return (
 
     <>
-      <div  style={{width:"100%"}}>
+      <div style={{ width: "100%" }}>
         <div className='container-fluid'>
           <ToastContainer />
           <div className='row py-3'>
@@ -261,7 +275,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
                   <h1>loading....</h1>
                   :
                   <DataTable
-                    title="Product list"
+                    title="PRODUCT LIST"
                     columns={columns}
                     data={filterdata == "" ? data : filterdata}
                     pagination
@@ -277,6 +291,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
                         className='w-25 form-control'
                         value={search}
                         onChange={(event) => setSearch(event.target.value)}
+                        style={{border:"1px solid gray"}}
                       />
                     }
                   />
@@ -328,7 +343,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
                                         return (
                                           <option value={val.cat_name} key={id}>{val.cat_name}</option>
                                         )
-                                      }) : <option >Loding...</option>
+                                      }) : <option >Data Not Found</option>
                                   }
                                 </select>
                               </div>
@@ -337,12 +352,12 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
                                 <select name="Sub_Category" className="form-control" id="" onChange={handleInput} value={Product.Sub_Category}  >
                                   <option>choose subcategory</option>
                                   {
-                                    viewSub ?
-                                      viewSub.map((val, id) => {
+                                    category ?
+                                      category.map((val, id) => {
                                         return (
                                           <option value={val.subCat_name} key={id}>{val.subCat_name}</option>
                                         )
-                                      }) : <option >Loding...</option>
+                                      }) : <option >Data Not Found</option>
                                   }
                                 </select>
                               </div>
@@ -351,19 +366,19 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
                                 <select name="Type" className="form-control" id="" onChange={handleInput} value={Product.Type}  >
                                   <option>choose type</option>
                                   {
-                                    typeview ?
-                                      typeview.map((val, id) => {
+                                    typeData ?
+                                      typeData.map((val, id) => {
                                         return (
                                           <option value={val.name} key={id}>{val.name}</option>
                                         )
-                                      }) : <option >Loding...</option>
+                                      }) : <option >Data Not Found</option>
                                   }
                                 </select>
                               </div>
                             </div>
                             <div className="form-row">
                               <div className="form-group col-md-6">
-                                <label>QTY</label>
+                                <label>Quantity</label>
                                 <input type="text" className="form-control"
                                   name="QTY"
                                   value={Product.QTY}
@@ -390,8 +405,8 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
                                 value={Product.Remark}
                                 onChange={handleInput} />
                             </div>
-                            <button type="submit" className="btn add-btn" onClick={handleUpdate}>ADD</button>
-                          </form> : <h1>loadding...</h1>
+                            <button type="submit" className="btn add-btn" onClick={handleUpdate}>UPDATE</button>
+                          </form> : <h1>Data Not Found</h1>
                       }
                     </Modal.Body>
 
@@ -450,7 +465,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
                       </div>
                       <hr></hr>
                       <div className='d-flex'>
-                        <span className='px-3'>QTY :</span><span> {ViewProduct.QTY}</span>
+                        <span className='px-3'>Quantity :</span><span> {ViewProduct.QTY}</span>
                       </div>
 
                       <hr></hr>
@@ -491,10 +506,12 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
                   >
                     <Modal.Body>
                       <h5 className='text-center'>Barcode</h5>
-                      <div className='d-flex justify-content-center' id="qrDiv" onClick={onPrintBarcode}>
+                      <div className='d-flex justify-content-center' id="qrDiv" onClick={generatepdf} >
 
                         {qrcode}
                       </div>
+
+
                     </Modal.Body>
                   </Modal>} </> : ""}
 

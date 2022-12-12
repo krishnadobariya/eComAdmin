@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub,upadteType}) => {
+const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub, upadteType }) => {
 
 
     const [search, setSearch] = useState("");
@@ -22,10 +22,6 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub,upadteType
     const [viewtype, setViewtype] = useState([]);
     const [modalShow, setModalShow] = useState(false);
     const [modalShow2, setModalShow2] = useState(false);
-    const [category, setCategory] = useState("");
-
-
-
 
     useEffect(() => {
         dispatch(AllTypeView());
@@ -33,11 +29,10 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub,upadteType
 
     const View = view.data ? view.data.data ? view.data.data.data : [] : []
     const data = res.data ? res.data.data ? res.data.data.data : [] : []
-   
+
 
     useEffect(() => {
-        if(data)
-        {
+        if (data) {
             const result = data.filter(val => {
                 return val.name.toLowerCase().match(search.toLowerCase());
             });
@@ -45,13 +40,16 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub,upadteType
         }
     }, [search]);
 
-    // ---------delete---------
+    // DELETE-----------
+
     const DelteType = (id) => {
         dispatch(Deletetype(id));
-        window.location.reload(false);
+        setTimeout(() => {
+            window.location = "/viewtype"
+        }, 400);
     }
 
-    // view-----------
+    // VIEW-------------
 
     const handleviewOpen = (id) => {
         dispatch(TypeViewById(id));
@@ -61,11 +59,11 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub,upadteType
     useEffect(() => {
         const data2 = resById.data ? resById.data.data ? resById.data.data.data : [] : []
         setViewtype(data2)
-     
+
     }, [resById])
 
 
-    // -----------update
+    // UPDATE------------
 
 
     const handleOpen = (id) => {
@@ -78,7 +76,7 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub,upadteType
 
         const data2 = resByIdUpdate.data ? resByIdUpdate.data.data ? resByIdUpdate.data.data.data : [] : []
         SetCategoryType(data2)
-    
+
     }, [resByIdUpdate])
 
     const handleInput = (e) => {
@@ -89,41 +87,41 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub,upadteType
     const handleUpdate = (e) => {
         e.preventDefault();
         dispatch(UpdateType(CategoryType, CategoryType._id));
-    
+
     };
     useEffect(() => {
-        console.log(".......", upadteType)
+
         const data = upadteType.data ? upadteType.data.data : []
-    
+
         if (data) {
             if (data.code == 200) {
                 toast.success(data.message, {
                     position: toast.POSITION.TOP_CENTER,
                     timeOut: 1000,
-    
+
                 });
-                setTimeout(()=>{
-                    window.location="/viewtype"
+                setTimeout(() => {
+                    window.location = "/viewtype"
                 }, 1000);
             }
             else if (data.code == 500) {
-                toast.success(data.message, {
+                toast.error(data.message, {
                     position: toast.POSITION.TOP_CENTER,
                     timeOut: 1000,
                 });
-                setTimeout(()=>{
-                    window.location="/viewtype"
+                setTimeout(() => {
+                    window.location = "/viewtype"
                 }, 1000);
             }
             else if (data.code == 403) {
-                toast.success(data.message, {
+                toast.error(data.message, {
                     position: toast.POSITION.TOP_CENTER,
                     timeOut: 1000,
                 });
-                setTimeout(()=>{
-                    window.location="/viewtype"
+                setTimeout(() => {
+                    window.location = "/viewtype"
                 }, 1000);
-    
+
             }
         }
     }, [upadteType])
@@ -133,11 +131,8 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub,upadteType
     }, [])
 
 
-  
+
     const ViewSub = viewsub.data ? viewsub.data.data ? viewsub.data.data.data : [] : []
-
-
-
     const columns = [
         {
             name: "Name",
@@ -145,7 +140,7 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub,upadteType
             sortable: true,
         },
         {
-            name: "sub category",
+            name: "sub Category",
             selector: (row) => row.select_subcat,
             sortable: true,
 
@@ -172,9 +167,9 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub,upadteType
     return (
 
         <>
-            <div  style={{width:"100%"}}>
+            <div style={{ width: "100%" }}>
                 <div className='container-fluid'>
-                    <ToastContainer/>
+                    <ToastContainer />
                     <div className='row py-3'>
                         <div className='col-md-12 px-0'>
                             <div className='add-link'><Link to="/categorytype" >ADD</Link></div>
@@ -183,7 +178,7 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub,upadteType
                                     <h1>loading....</h1>
                                     :
                                     <DataTable
-                                        title="Type list"
+                                        title="TYPE LIST"
                                         columns={columns}
                                         data={filterdata == "" ? data : filterdata}
                                         pagination
@@ -199,6 +194,7 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub,upadteType
                                                 className='w-25 form-control'
                                                 value={search}
                                                 onChange={(event) => setSearch(event.target.value)}
+                                                style={{border:"1px solid gray"}}
                                             />
                                         }
                                     />
@@ -266,9 +262,8 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub,upadteType
                                 </Modal.Body>
 
                             </Modal>
+
                             {/* view model */}
-
-
 
                             {modalShow2 == true ?
                                 <>
@@ -327,7 +322,7 @@ const mapStateToProps = (state) => ({
     resByIdUpdate: state.TypeViewByIdUpdate,
     view: state.AllCategoryView,
     viewsub: state.AllSubCategoryView,
-    upadteType:state.UpdateType
+    upadteType: state.UpdateType
 
 
 });

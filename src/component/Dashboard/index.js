@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Count from './Count.js'
 
 function Index() {

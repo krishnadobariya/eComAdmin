@@ -9,9 +9,13 @@ table {
     text-align: center;
     padding: 8px;
     height: 40px;
+    
   }
   
+  select:focus{
+    outline:none;
 
+  }
   .header{
     display: flex;
     justify-content: space-between;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
-import { ViewAllSubCategory, DeleteSubCategory, SubCategoryViewById, AllCategoryView ,SubCategoryViewByIdForupadte} from "../../../store/Action/FetchData"
+import { ViewAllSubCategory, DeleteSubCategory, SubCategoryViewById, AllCategoryView, SubCategoryViewByIdForupadte } from "../../../store/Action/FetchData"
 import { UpdateSubCategory } from '../../../store/Action/UpdateData'
 import DataTable from 'react-data-table-component'
 import Modal from 'react-bootstrap/Modal';
@@ -12,7 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
+const Index = ({ dispatch, res, resbyid, view, resForupdate, updatesub }) => {
 
 
     const [search, setSearch] = useState("");
@@ -29,10 +29,9 @@ const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
 
 
     const data = res.data ? res.data.data ? res.data.data.data : [] : []
-    console.log("data.......", data)
+
     useEffect(() => {
-        if(data)
-        {
+        if (data) {
             const result = data.filter(val => {
                 return val.subCat_name.toLowerCase().match(search.toLowerCase());
             });
@@ -41,13 +40,15 @@ const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
     }, [search]);
 
 
-    // ---------delete---------
+    // DELETE----------------
     const DelteSubCategory = (id) => {
         dispatch(DeleteSubCategory(id));
-        window.location.reload(false);
+        setTimeout(() => {
+            window.location = "/viewsubcategory"
+        }, 400);
     }
 
-    // -----------update
+    // UPDATE------------
 
     const handleOpen = (id) => {
         dispatch(SubCategoryViewByIdForupadte(id));
@@ -72,51 +73,51 @@ const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
     const handleUpdate = (e) => {
         e.preventDefault();
         dispatch(UpdateSubCategory(SubCategory, SubCategory._id));
-       
+
     };
 
     useEffect(() => {
-        console.log(".......", updatesub)
+
         const data = updatesub.data ? updatesub.data.data : []
-    
+
         if (data) {
             if (data.code == 200) {
                 toast.success(data.message, {
                     position: toast.POSITION.TOP_CENTER,
                     timeOut: 1000,
-    
+
                 });
-                setTimeout(()=>{
-                    window.location="/viewsubcategory"
+                setTimeout(() => {
+                    window.location = "/viewsubcategory"
                 }, 1000);
             }
             else if (data.code == 500) {
-                toast.success(data.message, {
+                toast.error(data.message, {
                     position: toast.POSITION.TOP_CENTER,
                     timeOut: 1000,
                 });
-                setTimeout(()=>{
-                    window.location="/viewsubcategory"
+                setTimeout(() => {
+                    window.location = "/viewsubcategory"
                 }, 1000);
-    
+
             }
             else if (data.code == 403) {
-                toast.success(data.message, {
+                toast.error(data.message, {
                     position: toast.POSITION.TOP_CENTER,
                     timeOut: 1000,
                 });
-                setTimeout(()=>{
-                    window.location="/viewsubcategory"
+                setTimeout(() => {
+                    window.location = "/viewsubcategory"
                 }, 1000);
-    
+
             }
         }
     }, [updatesub])
-    
 
 
 
-    // view-----------
+
+    // VIEW-------------------
 
     const handleviewOpen = (id) => {
         dispatch(SubCategoryViewById(id));
@@ -125,7 +126,7 @@ const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
     useEffect(() => {
         const data2 = resbyid.data ? resbyid.data.data ? resbyid.data.data.data : [] : []
         setViewSubcategoty(data2)
-      
+
     }, [resbyid])
 
 
@@ -137,7 +138,7 @@ const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
             sortable: true,
         },
         {
-            name: "category",
+            name: "Category",
             selector: (row) => row.select_cat
         },
         {
@@ -147,11 +148,11 @@ const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
 
         },
         {
-            name: "action",
+            name: "Action",
             cell: (row) => <>
-                <VisibilityIcon onClick={() =>  handleviewOpen(row._id) } className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
+                <VisibilityIcon onClick={() => handleviewOpen(row._id)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
                 <DeleteIcon onClick={() => DelteSubCategory(row._id)} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
-                <EditIcon onClick={() =>handleOpen(row._id) } className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon>
+                <EditIcon onClick={() => handleOpen(row._id)} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon>
             </>
 
         }
@@ -161,18 +162,18 @@ const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
     return (
 
         <>
-            <div  style={{width:"100%"}}>
+            <div style={{ width: "100%" }}>
                 <div className='container-fluid'>
-                    <ToastContainer/>
+                    <ToastContainer />
                     <div className='row py-3'>
                         <div className='col-md-12 px-0'>
-                        <div className='add-link'><Link to="/subcategory" >ADD</Link></div>
+                            <div className='add-link'><Link to="/subcategory" >ADD</Link></div>
                             {
                                 data == "null" ?
                                     <h1>loading....</h1>
                                     :
                                     <DataTable
-                                        title="Subcategory list"
+                                        title="SUBCATEGORY LIST"
                                         columns={columns}
                                         data={filterdata == "" ? data : filterdata}
                                         pagination
@@ -188,6 +189,7 @@ const Index = ({ dispatch, res, resbyid, view ,resForupdate,updatesub}) => {
                                                 className='w-25 form-control'
                                                 value={search}
                                                 onChange={(event) => setSearch(event.target.value)}
+                                                style={{border:"1px solid gray"}}
                                             />
                                         }
                                     />
@@ -321,8 +323,8 @@ const mapStateToProps = (state) => ({
     res: state.ViewAllSubCategory,
     resbyid: state.SubCategoryViewById,
     view: state.AllCategoryView,
-    resForupdate:state.SubCategoryViewByIdForupadte,
-    updatesub:state.UpdateSubCategory
+    resForupdate: state.SubCategoryViewByIdForupadte,
+    updatesub: state.UpdateSubCategory
 });
 
 export default connect(mapStateToProps)(Index);

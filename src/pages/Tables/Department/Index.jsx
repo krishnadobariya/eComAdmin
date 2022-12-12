@@ -1,6 +1,5 @@
 import React from 'react'
 import Sidebar from '../../../component/layout/Sidebar'
-
 import Index from '../../../component/Tables/Department/Index'
 
 const DepartmentTable = () => {

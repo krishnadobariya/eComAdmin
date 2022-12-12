@@ -14,21 +14,23 @@ import Department from './pages/Forms/Department/Index'
 import DepartmentTable from './pages/Tables/Department/Index';
 import Outwardtable from './pages/Tables/Outward/Index';
 import Outward from './pages/Forms/Outward/Index';
-import Prslip from './component/prslip/Index';
-import Sidebar from './component/layout/Sidebar';
+import Prslip from './pages/Prslip/Index';
 import Cookies from 'js-cookie';
+import DateWise from './pages/Report/Datewise/Index';
+import Manager from './pages/Report/Manger/Index';
+import OutwardReport from './pages/Report/Outward/Index';
+import FinishPro from './pages/Report/FinishPro/Index';
 
 
 function App() {
 
   const token = Cookies.get('jwt')
-  console.log()
+  
 
   return (
 
     <>
-      {/* <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}> */}
-      {/* <Sidebar /> */}
+     
       <div style={{ width: "100%" }}>
         <Routes>
           <Route path='/' element={<Login />} />
@@ -45,11 +47,16 @@ function App() {
           <Route path="/viewsubcategory" element={token ? <SubCategoryTable /> : <Login />} />
           <Route path='/departmenttable' element={token ? <DepartmentTable /> : <Login />} />
           <Route path='/outwardtable' element={token ? <Outwardtable /> : <Login />} />
-          <Route path='/prslipe' element={token ? <Prslip /> : <Login />} />
+          <Route path='/prslipe/:id' element={token ? <Prslip /> : <Login />} />
+          <Route path='/datewise' element={token ? <DateWise /> : <Login />} />
+          <Route path='/departmentwise' element={token ? <Manager /> : <Login />} />
+          <Route path='/outward-report' element={token ? <OutwardReport /> : <Login />} />
+          <Route path='/finish-product' element={token ? <FinishPro /> : <Login />} />
+         
         </Routes>
       </div>
 
-      {/* </div> */}
+     
 
 
     </>

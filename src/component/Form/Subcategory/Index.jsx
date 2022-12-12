@@ -14,8 +14,6 @@ const Index = ({ dispatch, res,addres }) => {
     select_cat: ""
   })
 
-
-
   const handleInput = (e) => {
     const { name, value } = e.target
     SetSubCategory({ ...SubCategory, [name]: value })
@@ -23,7 +21,7 @@ const Index = ({ dispatch, res,addres }) => {
   }
   const handleAdd = (e) => {
     e.preventDefault();
-    console.log("data..", SubCategory)
+  
     dispatch(AddSubCategory(SubCategory));
   };
 
@@ -36,7 +34,7 @@ const Index = ({ dispatch, res,addres }) => {
 
 
   useEffect(() => {
-    console.log(addres)
+   
     const data = addres.data ? addres.data.data : []
     if (data) {
       if (data.code == 201){
@@ -45,15 +43,13 @@ const Index = ({ dispatch, res,addres }) => {
           timeOut: 1000,
           
         });
-        
-        
         setTimeout(()=>{
           window.location="/viewsubcategory"
       }, 1000);
       }
       else if(data.code==500)
       {
-        toast.success(data.message, {
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
         });
@@ -64,7 +60,7 @@ const Index = ({ dispatch, res,addres }) => {
       }
       else if(data.code==403)
       {
-        toast.success(data.message, {
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
         });
@@ -83,7 +79,7 @@ const Index = ({ dispatch, res,addres }) => {
       <div className='container-fluid py-5'>
         <div className='row px-0  py-5 d-flex justify-content-center '>
         <ToastContainer />
-          <div className='col-md-9'>
+          <div className='col-md-6'>
           <div className='add-link'><Link to="/viewsubcategory" >VIEW</Link></div>
             <h1 className='text-center add-title py-4'>PRODUCT SUBCATEGORY</h1>
             <form className='add-form'>

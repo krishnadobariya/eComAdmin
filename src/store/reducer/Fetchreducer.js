@@ -5,7 +5,7 @@ export const initialState = {
     loading: true
 }
 
-// count 
+// COUNT API
 
 export function CountReducer(state = initialState, action) {
     switch (action.type) {
@@ -28,7 +28,7 @@ export function AllProductReducer(state = initialState, action) {
 }
 
 
-// view by id
+// PRODUCT VIEW BY ID
 
 export function ProductByIdReducer(state = initialState, action) {
     switch (action.type) {
@@ -38,7 +38,7 @@ export function ProductByIdReducer(state = initialState, action) {
             return state;
     }
 }
-// view by id FOR UPDATE
+// PRODUCT VIEW BY ID FOR UPDATE
 
 export function ProductByIdUpdateReducer(state = initialState, action) {
     switch (action.type) {
@@ -49,7 +49,7 @@ export function ProductByIdUpdateReducer(state = initialState, action) {
     }
 }
 
-// view by id for QR
+// PRODUCT VIEW BY ID FOR  QR
 
 export function ProductByIdQRReducer(state = initialState, action) {
     switch (action.type) {
@@ -75,7 +75,7 @@ export function DeleteProductReducer(state = initialState, action) {
 
 
 
-// category-----
+// ALL CATEGORY-----
 
 export function FetchCategoryReducer(state = initialState, action) {
     switch (action.type) {
@@ -85,7 +85,7 @@ export function FetchCategoryReducer(state = initialState, action) {
             return state;
     }
 }
-// view subcategory
+// ALL SUBCATEGORY
 
 export function FetchSubCategoryReducer(state = initialState, action) {
     switch (action.type) {
@@ -96,7 +96,7 @@ export function FetchSubCategoryReducer(state = initialState, action) {
     }
 }
 
-// FETCH TYPECATEGORY 
+// ALL TYPECATEGORY VIEW BY SUBCATEGORY
 
 export function FetchTypeReducer(state = initialState, action) {
     switch (action.type) {
@@ -107,7 +107,7 @@ export function FetchTypeReducer(state = initialState, action) {
     }
 }
 
-// TYPEVIEW
+//ALL TYPEVIEW
 export function FetchAllTypeReducer(state = initialState, action) {
     switch (action.type) {
         case "GET_ALLTYPE":
@@ -118,7 +118,7 @@ export function FetchAllTypeReducer(state = initialState, action) {
 }
 
 
-// delete type
+//DELETE TYPE
 export function DeleteTypeReducer(state = initialState, action) {
     switch (action.type) {
         case "DEL_TYPE":
@@ -128,7 +128,7 @@ export function DeleteTypeReducer(state = initialState, action) {
     }
 }
 
-// fetch type viewbyid 
+// VIEW BY ID TYPE
 
 export function FetchTypeByIdReducer(state = initialState, action) {
     switch (action.type) {
@@ -139,7 +139,7 @@ export function FetchTypeByIdReducer(state = initialState, action) {
     }
 }
 
-// fetch type viewbyid 
+// VIEW BY ID TYPE FOR UPDATE
 
 export function FetchTypeByIdUpdateReducer(state = initialState, action) {
     switch (action.type) {
@@ -152,18 +152,7 @@ export function FetchTypeByIdUpdateReducer(state = initialState, action) {
 
 
 
-// fetch type viewbyid 
-
-export function FetchAllcategoryReducer(state = initialState, action) {
-    switch (action.type) {
-        case "GET_ALLCATEGORY":
-            return { data: action.payload, loading: false };
-        default:
-            return state;
-    }
-}
-
-// delete category
+// DELETE CATEGORY
 
 export function DeleteCategoryReducer(state = initialState, action) {
     switch (action.type) {
@@ -184,7 +173,7 @@ export function FetchAllCategoryReducer(state = initialState, action) {
     }
 }
 
-// FETCH CATEGORYBYID
+// VIEW BY ID CATEGORY
 export function FetchCategoryByIdReducer(state = initialState, action) {
     switch (action.type) {
         case "GET_CATEGORYBYID":
@@ -195,7 +184,7 @@ export function FetchCategoryByIdReducer(state = initialState, action) {
 }
 
 
-// FETCh CATEGORYBYID for upadte
+// VIEW BY ID CATEGORY FOR UPADTE
 export function FetchCategoryByIdUpdateReducer(state = initialState, action) {
     switch (action.type) {
         case "GET_CATEGORYBYIDFORUPDATE":
@@ -206,7 +195,7 @@ export function FetchCategoryByIdUpdateReducer(state = initialState, action) {
 }
 
 
-// FETCH CATEGORYBYID
+// ALL SUBCATEGORY
 export function FetchAllSubCategoryReducer(state = initialState, action) {
     switch (action.type) {
         case "GET_ALLSUBCATEGORY":
@@ -217,7 +206,7 @@ export function FetchAllSubCategoryReducer(state = initialState, action) {
 }
 
 
-// BY ID SUBCATEGORYBYID
+// VIEW BY ID SUBCATEGORYBYID
 export function FetchSubCategoryByIdReducer(state = initialState, action) {
     switch (action.type) {
         case "GET_SUBCATEGORYBYID":
@@ -227,7 +216,7 @@ export function FetchSubCategoryByIdReducer(state = initialState, action) {
     }
 }
 
-// BY ID SUBCATEGORYBYID FOR UPADTE
+//VIEW  BY ID SUBCATEGORYBYID FOR UPADTE
 export function FetchSubCategoryByIdUpdateReducer(state = initialState, action) {
     switch (action.type) {
         case "GET_SUBCATEGORYBYIDUPDATE":
@@ -270,7 +259,7 @@ export function DeleteDepartmentReducer(state = initialState, action) {
     }
 }
 
-// BT ID DEPARMENT
+//VIEW  BY ID DEPARMENT
 
 export function FetchDepartmentByIdReducer(state = initialState, action) {
     switch (action.type) {
@@ -281,7 +270,7 @@ export function FetchDepartmentByIdReducer(state = initialState, action) {
     }
 }
 
-// BT ID DEPARMENT FOR UPDATE
+//VIEW  BY ID DEPARMENT FOR UPDATE
 
 export function FetchDepartmentByIdUpdateReducer(state = initialState, action) {
     switch (action.type) {
@@ -313,6 +302,7 @@ export function DeleteOutwardReducer(state = initialState, action) {
     }
 }
 
+// VIEW BY ID OUTWARD
 export function FetchOutwardByIdReducer(state = initialState, action) {
     switch (action.type) {
         case "GET_OUTWARDBYID":
@@ -322,7 +312,7 @@ export function FetchOutwardByIdReducer(state = initialState, action) {
     }
 }
 
-// for upadte view by id
+// VIEW BY ID OUTWARD FRO UPADTE
 
 export function FetchOutwardByIdUpdateReducer(state = initialState, action) {
     switch (action.type) {
@@ -332,4 +322,78 @@ export function FetchOutwardByIdUpdateReducer(state = initialState, action) {
             return state;
     }
 }
+
+
+// VIEW DATE WISE 
+
+export function FetchDateWiseReducer(state = initialState, action) {
+    switch (action.type) {
+        case "GET_DATEWISE":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}
+
+
+// VIEW DEPARTMEMT MANAGER
+
+export function FetchManagerReducer(state = initialState, action) {
+    switch (action.type) {
+        case "GET_D_MAGAER":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}
+
+// VIEW OUTWATRD REPORT
+
+export function FetchOutwardReportReducer(state = initialState, action) {
+    switch (action.type) {
+        case "GET_OUTWARDREPORT":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}
+
+
+// VIEW FINISH PRO
+
+export function FetchFinishProReportReducer(state = initialState, action) {
+    switch (action.type) {
+        case "GET_FINISHPRO":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}
+
+
+// GET HISTORY
+
+export function FetchHistoryReducer(state = initialState, action) {
+    switch (action.type) {
+        case "GET_HISTORY":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}
+
+
+
+
+//Add FULLOUTWARD
+
+export function AllOutwardGetReducer(state = initialState, action) {
+    switch (action.type) {
+      case "PR_SLIPDATA":
+        return { data: action.payload, loading: false };
+      default:
+        return state;
+    }
+  }
+
 

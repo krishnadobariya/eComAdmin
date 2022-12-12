@@ -1,26 +1,30 @@
-.gradient-custom-2 ,.klWHUo{
-    /* fallback for old browsers */
-    background: rgb(7,8,12);
-    background: linear-gradient(90deg, rgba(7,8,12,1) 1%, rgba(9,79,121,1) 46%, rgba(60,138,159,1) 98%)!important;
-  }
-  .login-container{
-    position: relative;
-  }
- .login{
+.gradient-custom-2,
+.klWHUo {
+  /* fallback for old browsers */
+  background: rgb(7, 8, 12);
+  background: linear-gradient(90deg, rgba(7, 8, 12, 1) 1%, rgba(9, 79, 121, 1) 46%, rgba(60, 138, 159, 1) 98%) !important;
+}
+
+.login-container {
+  position: relative;
+}
+
+.login {
   height: 52vh;
   margin: auto;
-   position: absolute;
-   top: 25%;
- }
-  
-  @media (min-width: 768px) {
-    .gradient-form {
-      height: 100vh !important;
-    }
+  position: absolute;
+  top: 25%;
+}
+
+@media (min-width: 768px) {
+  .gradient-form {
+    height: 100vh !important;
   }
-  @media (min-width: 769px) {
-    .gradient-custom-2 {
-      border-top-right-radius: .3rem;
-      border-bottom-right-radius: .3rem;
-    }
+}
+
+@media (min-width: 769px) {
+  .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
   }
+}

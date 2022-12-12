@@ -33,7 +33,13 @@ import {
     ProductByIdUpdateReducer,
     FetchDepartmentByIdUpdateReducer,
     FetchOutwardByIdUpdateReducer,
-    ProductByIdQRReducer
+    ProductByIdQRReducer,
+    FetchDateWiseReducer,
+    FetchManagerReducer,
+    FetchOutwardReportReducer,
+    FetchFinishProReportReducer,
+    FetchHistoryReducer,
+    AllOutwardGetReducer
 } from "./reducer/Fetchreducer"
 
 import {
@@ -52,6 +58,7 @@ import {
     AddCategoryTypeReducer,
     AddDepartmentTypeReducer,
     AddOutwardReducer,
+    AddAllOutwardReducer
 } from './reducer/Addreducer'
 
 import { Admin_LoginReducer } from './reducer/Adminreducer'
@@ -69,6 +76,7 @@ const rootReducer = combineReducers({
     AddCategoryType: AddCategoryTypeReducer,
     AddDepartmentType: AddDepartmentTypeReducer,
     AddOutward: AddOutwardReducer,
+    AddfullOutward:AddAllOutwardReducer,
 
     // view
     AllProductView: AllProductReducer,
@@ -93,6 +101,13 @@ const rootReducer = combineReducers({
     DepartmentViewByIdUpdate: FetchDepartmentByIdUpdateReducer,
     OutwardViewByIdUpdate: FetchOutwardByIdUpdateReducer,
     ProductViewByIdForQr: ProductByIdQRReducer,
+    ViewDateWise:FetchDateWiseReducer,
+    ViewDepatmentMager:FetchManagerReducer,
+    ViewOutwardReport:FetchOutwardReportReducer,
+    ViewFinishProduct:FetchFinishProReportReducer,
+    ViewHistory:FetchHistoryReducer,
+    FullGetOutward:AllOutwardGetReducer,
+   
     // delete
     DeleteProduct: DeleteProductReducer,
     Deletetype: DeleteTypeReducer,

@@ -5,7 +5,7 @@ import Cookies from 'js-cookie'
 // redux action
 
 const token = Cookies.get('jwt');
-console.log("token....",token)
+
 // count order
 
 export function CountReport() {
@@ -14,7 +14,6 @@ export function CountReport() {
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "GET_COUNT",
             payload: response,
@@ -26,13 +25,12 @@ export function CountReport() {
 
 // view all product
 
-export function  AllProductView() {
+export function AllProductView() {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/product/view`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "GET_ALLPRODUCT",
             payload: response,
@@ -43,13 +41,12 @@ export function  AllProductView() {
 }
 
 // VIEW BYID 
-export function  ProductViewById(id) {
+export function ProductViewById(id) {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/product/view-by-id/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "GET_PRODUCTBYID",
             payload: response,
@@ -59,13 +56,12 @@ export function  ProductViewById(id) {
     };
 }
 // for Qr
-export function  ProductViewByIdForQr(id) {
+export function ProductViewByIdForQr(id) {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/product/view-by-id/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "GET_PRODUCTBYIDQR",
             payload: response,
@@ -78,13 +74,12 @@ export function  ProductViewByIdForQr(id) {
 
 // for upate view by id
 
-export function  ProductViewByIdUpadte(id) {
+export function ProductViewByIdUpadte(id) {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/product/view-by-id-pro/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "GET_PRODUCTBYIDUPDATE",
             payload: response,
@@ -97,15 +92,12 @@ export function  ProductViewByIdUpadte(id) {
 
 // delete product 
 
-export function  DeleteProduct(id) {
-    console.log("hello",id);
+export function DeleteProduct(id) {
     return async (dispatch) => {
-        console.log("hello")
         const response = await axios.delete(`${Baseurl}/product/delete/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "DEL_PRODUCT",
             payload: response,
@@ -122,14 +114,13 @@ export function  DeleteProduct(id) {
 
 // fetch category
 
-export function  AllCategoryView() {
-   
+export function AllCategoryView() {
+
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/category/view-name`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......AllCategoryView",response);
         const return_response = {
             type: "GET_ALLCATEGORY",
             payload: response,
@@ -141,17 +132,15 @@ export function  AllCategoryView() {
 
 
 // view subcategory
-export function  AllSubCategoryView(category) {
+export function AllSubCategoryView(category) {
 
-    
-     console.log(".......category...........",category)
+
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/sub-category/search-cat/${category}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......AllSubCategoryView",response);
-           
+
         const return_response = {
             type: "GET_ALLSUBCATEGORY",
             payload: response,
@@ -162,21 +151,19 @@ export function  AllSubCategoryView(category) {
 }
 
 
-// serch type subcategory
+// search type subcategory
 
-export function  TypeView(Subcategory) {
-    
-    console.log(".......type",Subcategory)
+export function TypeView(Subcategory) {
+
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/cat-type/view-sub-cat/${Subcategory}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......TypeView",response);
-           
+
         const return_response = {
             type: "GET_TYPECATEGORY",
-            payload: response,  
+            payload: response,
         };
 
         dispatch(return_response);
@@ -186,13 +173,12 @@ export function  TypeView(Subcategory) {
 
 //   fetchtypedata
 
-export function  AllTypeView() {
+export function AllTypeView() {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/cat-type/view`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "GET_ALLTYPE",
             payload: response,
@@ -206,14 +192,13 @@ export function  AllTypeView() {
 // delete type
 
 
-export function  Deletetype(id) {
-  
+export function Deletetype(id) {
+
     return async (dispatch) => {
         const response = await axios.delete(`${Baseurl}/cat-type/delete/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "DEL_TYPE",
             payload: response,
@@ -226,13 +211,12 @@ export function  Deletetype(id) {
 
 // get viewbyid in type
 
-export function  TypeViewById(id) {
+export function TypeViewById(id) {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/cat-type/view-by-id/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "GET_TYPE",
             payload: response,
@@ -245,13 +229,12 @@ export function  TypeViewById(id) {
 
 // get viewbyid in type for updatre
 
-export function  TypeViewByIdUpdate(id) {
+export function TypeViewByIdUpdate(id) {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/cat-type/view-by-id/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "GET_TYPEUPDATE",
             payload: response,
@@ -263,13 +246,13 @@ export function  TypeViewByIdUpdate(id) {
 
 
 // get category
-export function  ViewAllCategory() {
+export function ViewAllCategory() {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/category/view`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
+            
         const return_response = {
             type: "GET_ALLCATEGORY",
             payload: response,
@@ -283,14 +266,13 @@ export function  ViewAllCategory() {
 // deletecategory
 
 
-export function  DeleteCategory(id) {
-  
+export function DeleteCategory(id) {
+
     return async (dispatch) => {
         const response = await axios.delete(`${Baseurl}/category/delete/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "DEL_CATEGORY",
             payload: response,
@@ -302,7 +284,7 @@ export function  DeleteCategory(id) {
 
 // view category byid
 
-export function  CategoryViewById(id) {
+export function CategoryViewById(id) {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/category/view-by-id/${id}`,
             {
@@ -310,7 +292,7 @@ export function  CategoryViewById(id) {
             });
         const return_response = {
             type: "GET_CATEGORYBYID",
-            payload: response,  
+            payload: response,
         };
 
         dispatch(return_response);
@@ -321,20 +303,19 @@ export function  CategoryViewById(id) {
 
 
 
-// for update-----
 
-// view category byid
 
-export function  CategoryViewByIdForUpadte(id) {
+// view category byid for category
+
+export function CategoryViewByIdForUpadte(id) {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/category/view-by-id/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("datacategorybyid",response);
         const return_response = {
             type: "GET_CATEGORYBYIDFORUPDATE",
-            payload: response,  
+            payload: response,
         };
 
         dispatch(return_response);
@@ -343,13 +324,12 @@ export function  CategoryViewByIdForUpadte(id) {
 
 // fetch allsubcategory
 
-export function  ViewAllSubCategory() {
+export function ViewAllSubCategory() {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/sub-category/view-sub-cat`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "GET_ALLSUBCATEGORY",
             payload: response,
@@ -360,13 +340,12 @@ export function  ViewAllSubCategory() {
 }
 
 // view byid
-export function  SubCategoryViewById(id) {
+export function SubCategoryViewById(id) {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/sub-category/view-sub-cat-id/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "GET_SUBCATEGORYBYID",
             payload: response,
@@ -378,13 +357,12 @@ export function  SubCategoryViewById(id) {
 
 
 // view byid for upadte
-export function  SubCategoryViewByIdForupadte(id) {
+export function SubCategoryViewByIdForupadte(id) {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/sub-category/view-sub-cat-id/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "GET_SUBCATEGORYBYIDUPDATE",
             payload: response,
@@ -396,14 +374,13 @@ export function  SubCategoryViewByIdForupadte(id) {
 
 // delte subcategory
 
-export function  DeleteSubCategory(id) {
-  
+export function DeleteSubCategory(id) {
+
     return async (dispatch) => {
         const response = await axios.delete(`${Baseurl}/sub-category/delete/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "DEL_SUBCATEGORY",
             payload: response,
@@ -417,15 +394,12 @@ export function  DeleteSubCategory(id) {
 // department viewall
 
 
-export function  ViewAllDepartment() {
-    console.log("helloodgdfrhdfh")
+export function ViewAllDepartment() {
     return async (dispatch) => {
-        console.log("helooooooooooooooooo")
         const response = await axios.get(`${Baseurl}/department/view`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "GET_ALLDEPARTMENT",
             payload: response,
@@ -436,14 +410,13 @@ export function  ViewAllDepartment() {
 }
 
 // view department data by id 
-export function  DeleteDepartment(id) {
-  
+export function DeleteDepartment(id) {
+
     return async (dispatch) => {
         const response = await axios.delete(`${Baseurl}/department/delete/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "DEL_DEPARTMENT",
             payload: response,
@@ -455,13 +428,12 @@ export function  DeleteDepartment(id) {
 
 
 // departmet view byid 
-export function  DepartmentViewById(id) {
+export function DepartmentViewById(id) {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/department/view-by-id/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "GET_DEPARTMENTBYID",
             payload: response,
@@ -472,13 +444,12 @@ export function  DepartmentViewById(id) {
 }
 
 // departmet view byid for update
-export function  DepartmentViewByIdUpdate(id) {
+export function DepartmentViewByIdUpdate(id) {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/department/view-by-id/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "GET_DEPARTMENTBYIDUPDATE",
             payload: response,
@@ -489,13 +460,12 @@ export function  DepartmentViewByIdUpdate(id) {
 }
 
 // all outward  
-export function  ViewAllOutward(id) {
+export function ViewAllOutward(id) {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/outward/view`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
         const return_response = {
             type: "GET_ALLOUTWARD",
             payload: response,
@@ -507,14 +477,13 @@ export function  ViewAllOutward(id) {
 // delete outward---------------
 
 
-export function  DeleteOutward(id) {
-  
+export function DeleteOutward(id) {
     return async (dispatch) => {
         const response = await axios.delete(`${Baseurl}/outward/delete/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......",response);
+         
         const return_response = {
             type: "DEL_OUTWARD",
             payload: response,
@@ -524,13 +493,12 @@ export function  DeleteOutward(id) {
     };
 }
 //outward view byid----------
-export function  OutwardViewById(id) {
+export function OutwardViewById(id) {
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/outward/view-by-id/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......viewbyid",response);
         const return_response = {
             type: "GET_OUTWARDBYID",
             payload: response,
@@ -541,13 +509,12 @@ export function  OutwardViewById(id) {
 }
 
 //outward view byid for update----------
-export function  OutwardViewByIdUpdate(id) {
+export function OutwardViewByIdUpdate(id) {
     return async (dispatch) => {
-        const response = await axios.get(`${Baseurl}/outward/view-by-id/${id}`,
+        const response = await axios.get(`${Baseurl}/outward/view-by-id-for-update/${id}`,
             {
                 headers: { "jwt": token }
             });
-            console.log("......viewbyid",response);
         const return_response = {
             type: "GET_OUTWARDBYIDUPDATE",
             payload: response,
@@ -556,3 +523,110 @@ export function  OutwardViewByIdUpdate(id) {
         dispatch(return_response);
     };
 }
+
+
+
+// ALL DATE WISE
+export function ViewDateWise(data) {
+    return async (dispatch) => {
+        const response = await axios.post(`${Baseurl}/report/date-wise-product-report`,data,{
+            headers: { "jwt": token }
+        });
+           
+        const return_response = {
+            type: "GET_DATEWISE",
+            payload: response,
+        };
+
+        dispatch(return_response);
+    };
+}
+
+
+// ALL DEPARTMENT MANAGER
+
+export function ViewDepatmentMager(data) {
+
+    return async (dispatch) => {
+        const response = await axios.get(`${Baseurl}/report/view-by-department/${data}`,
+        {
+            headers: { "jwt": token }
+        });
+        const return_response = {
+            type: "GET_D_MAGAER",
+            payload: response,
+        };
+
+        dispatch(return_response);
+    };
+}
+
+
+
+// ALL OUTWARD REPORT
+
+export function ViewOutwardReport() {
+   
+    return async (dispatch) => {
+        const response = await axios.get(`${Baseurl}/report/report-outward`,{
+            headers: { "jwt": token }
+        });
+        const return_response = {
+            type: "GET_OUTWARDREPORT",
+            payload: response,
+        };
+
+        dispatch(return_response);
+    };
+}
+
+
+// ALL OUTWARD REPORT
+
+export function ViewFinishProduct() {
+   
+    return async (dispatch) => {
+        const response = await axios.get(`${Baseurl}/report/product-about-to-finish`,{
+            headers: { "jwt": token }
+        });
+        const return_response = {
+            type: "GET_FINISHPRO",
+            payload: response,
+        };
+
+        dispatch(return_response);
+    };
+}
+
+
+// HISTORY
+
+export function ViewHistory() {
+   
+    return async (dispatch) => {
+        const response = await axios.get(`${Baseurl}/report/product-about-to-finish-history`,{
+            headers: { "jwt": token }
+        });
+        const return_response = {
+            type: "GET_HISTORY",
+            payload: response,
+        };
+
+        dispatch(return_response);
+    };
+}
+
+//fetch outward
+export function FullGetOutward(id) {
+    return async (dispatch) => {
+        const response = await axios.get(`${Baseurl}/outward/gteprslip/${id}`,{
+            headers: { "jwt": token }
+        });
+        var return_response = {
+            type: "PR_SLIPDATA",
+            payload: response,
+        };
+        dispatch(return_response);
+    }
+}
+

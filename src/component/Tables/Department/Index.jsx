@@ -30,24 +30,26 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
 
 
     const data = res.data ? res.data.data ? res.data.data.data : [] : []
-    console.log("data.......", data)
-  
 
     useEffect(() => {
         if (data) {
-          const result = data.filter(val => {
-            return val.name.toLowerCase().match(search.toLowerCase());
-          });
-          setfilter(result);
+            const result = data.filter(val => {
+                return val.name.toLowerCase().match(search.toLowerCase());
+            });
+            setfilter(result);
         }
-      }, [search]);
+    }, [search]);
 
-    // ---------delete---------
+    // DELETE-------------------
+
     const deleteDepartment = (id) => {
         dispatch(DeleteDepartment(id));
-        window.location.reload(false);
+        setTimeout(() => {
+            window.location = "/departmenttable"
+        }, 400);
     }
-    // view-----------
+
+    // VIEW------------------
 
     const handleviewOpen = (id) => {
         dispatch(DepartmentViewById(id));
@@ -57,11 +59,9 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
     useEffect(() => {
         const data2 = resById.data ? resById.data.data ? resById.data.data.data : [] : []
         SetDepartment(data2)
-      
-
     }, [resById])
 
-    // -----------update----------
+    // UPDATE--------------------
 
     const handleOpen = (id) => {
         dispatch(DepartmentViewByIdUpdate(id));
@@ -70,7 +70,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
     useEffect(() => {
         const data2 = resUpadte.data ? resUpadte.data.data ? resUpadte.data.data.data : [] : []
         SetDepartment(data2)
-  
+
     }, [resUpadte])
 
     const handleInput = (e) => {
@@ -81,10 +81,10 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
     const handleUpdate = (e) => {
         e.preventDefault();
         dispatch(UpdateDepartment(Department, Department._id));
-        
+
     };
     useEffect(() => {
-        console.log(".......", updateres)
+
         const data = updateres.data ? updateres.data.data : []
 
         if (data) {
@@ -94,26 +94,26 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
                     timeOut: 1000,
 
                 });
-                setTimeout(()=>{
-                    window.location="/departmenttable"
+                setTimeout(() => {
+                    window.location = "/departmenttable"
                 }, 1000);
             }
             else if (data.code == 500) {
-                toast.success(data.message, {
+                toast.error(data.message, {
                     position: toast.POSITION.TOP_CENTER,
                     timeOut: 1000,
                 });
-                setTimeout(()=>{
-                    window.location="/departmenttable"
+                setTimeout(() => {
+                    window.location = "/departmenttable"
                 }, 1000);
             }
             else if (data.code == 403) {
-                toast.success(data.message, {
+                toast.error(data.message, {
                     position: toast.POSITION.TOP_CENTER,
                     timeOut: 1000,
                 });
-                setTimeout(()=>{
-                    window.location="/departmenttable"
+                setTimeout(() => {
+                    window.location = "/departmenttable"
                 }, 1000);
             }
         }
@@ -122,7 +122,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
 
     const columns = [
         {
-            name: "Name",
+            name: "Department Name",
             selector: (row) => row.name,
             sortable: true,
         },
@@ -133,7 +133,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
 
         },
         {
-            name: "action",
+            name: "Action",
             cell: (row) => <>
                 <VisibilityIcon onClick={() => { setViewId(row._id); handleviewOpen(row._id) }} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
                 <DeleteIcon onClick={() => deleteDepartment(row._id)} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
@@ -147,11 +147,11 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
     return (
 
         <>
-            <div  style={{width:"100%"}}>
+            <div style={{ width: "100%" }}>
                 <div className='container-fluid'>
-                <ToastContainer />
+                    <ToastContainer />
                     <div className='row py-3'>
-                      
+
                         <div className='col-md-12 px-0'>
                             <div className='add-link'><Link to="/departmemt" >ADD</Link></div>
                             {
@@ -159,7 +159,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
                                     <h1>loading....</h1>
                                     :
                                     <DataTable
-                                        title="Department list"
+                                        title="DEPARTMENT LIST"
                                         columns={columns}
                                         data={filterdata == "" ? data : filterdata}
                                         pagination
@@ -175,6 +175,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
                                                 className='w-25 form-control'
                                                 value={search}
                                                 onChange={(event) => setSearch(event.target.value)}
+                                                style={{border:"1px solid gray"}}
                                             />
                                         }
                                     />

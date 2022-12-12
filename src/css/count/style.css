@@ -1,7 +1,8 @@
-.small-box{
-    border-top: 5px solid rgba(9,79,121,1);
-    box-shadow: rgba(60,138,159,0.40) 0px 20px 30px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+.small-box {
+    border-top: 5px solid rgba(9, 79, 121, 1);
+    box-shadow: rgba(60, 138, 159, 0.40) 0px 20px 30px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
-.inner{
-    color: rgba(9,79,121,1);
+
+.inner {
+    color: rgba(9, 79, 121, 1);
 }

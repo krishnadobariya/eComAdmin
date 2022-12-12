@@ -1,18 +1,25 @@
-.add-btn{
-    background: linear-gradient(90deg, rgba(7,8,12,1) 1%, rgba(9,79,121,1) 46%, rgba(60,138,159,1) 98%);
+a{
+    text-decoration: none;
+
+}
+.add-btn {
+    background: linear-gradient(90deg, rgba(7, 8, 12, 1) 1%, rgba(9, 79, 121, 1) 46%, rgba(60, 138, 159, 1) 98%);
     border: none;
     width: 100%;
     margin-top: 2%;
     color: white;
 }
-.add-btn:hover{
-    color: white!important;
+
+.add-btn:hover {
+    color: white !important;
 }
-.add-title{
-    color: rgba(9,79,121,1);
+
+.add-title {
+    color: rgba(9, 79, 121, 1);
     font-family: 'PT Serif', serif;
     font-weight: 600;
 }
+
 .category-select select {
     *background: white;
 }
@@ -21,48 +28,53 @@
 /* product style */
 
 
-.view-btn{
+.view-btn {
     border-radius: 50%;
     padding: 8px 8px;
     color: rgb(19, 3, 3);
-    background-color:rgb(235, 234, 247);
+    background-color: rgb(235, 234, 247);
     margin-right: 5px;
-  
-  
+
+
 }
-.delete-btn{
+
+.delete-btn {
     border-radius: 50%;
     padding: 8px 8px;
-    color:rgb(1, 16, 1);
-    background-color:rgb(240, 215, 214);
+    color: rgb(1, 16, 1);
+    background-color: rgb(240, 215, 214);
     margin-right: 5px;
-  
+
 }
-.update-btn{
+
+.update-btn {
     border-radius: 50%;
     padding: 8px 8px;
-    color:rgb(1, 16, 1);
-    background-color:rgb(214, 240, 220);
+    color: rgb(1, 16, 1);
+    background-color: rgb(214, 240, 220);
     margin-right: 5px;
-  
+
 }
-.pdf-btn{
+
+.pdf-btn {
     border-radius: 50%;
-    color:rgb(1, 16, 1);
+    color: rgb(1, 16, 1);
     padding: 8px 8px;
-    background-color:rgb(204, 150, 150);
+    background-color: rgb(204, 150, 150);
     margin-right: 5px;
-  
+
 }
-.add-link{
-  
+
+.add-link {
+
     display: flex;
     justify-content: end;
     align-items: flex-end;
-  
+
 }
-.add-link a{
-    background: linear-gradient(90deg, rgba(7,8,12,1) 1%, rgba(9,79,121,1) 46%, rgba(60,138,159,1) 98%);
+
+.add-link a {
+    background: linear-gradient(90deg, rgba(7, 8, 12, 1) 1%, rgba(9, 79, 121, 1) 46%, rgba(60, 138, 159, 1) 98%);
     border: none;
     margin-right: 20px;
     padding: 5px 20px;
@@ -70,16 +82,28 @@
     text-decoration: none;
 
 }
-.add-link a:hover{
+
+.add-link a:hover {
     color: white;
 
 }
-input{
-    margin-left: 0!important;
+
+input {
+    margin-left: 0 !important;
 }
-select:focus > option:checked { 
+
+select:focus>option:checked {
     background: rgba(95, 88, 88, 0.137) !important;
- }
-option:hover{ 
+}
+
+option:hover {
     background: rgba(95, 88, 88, 0.137) !important;
- }
+}
+
+.history{
+    margin-top: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.sc-ckEbSK{
+    border-bottom:1px solid gray;
+}
