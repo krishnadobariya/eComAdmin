@@ -1,7 +1,7 @@
 import { Baseurl } from "../../Baseurl";
 import axios from "axios"
 import Cookies from 'js-cookie'
-import { DataArrayRounded } from "@mui/icons-material";
+
 
 const token = Cookies.get('jwt');
 
@@ -81,10 +81,6 @@ export function AddDepartmentType(data) {
             {
                 headers: { "jwt": token }
             });
-
-
-
-            console.log("resonse",response)
         var return_response = {
             type: "ADD_DEPARTMENT",
             payload: response,

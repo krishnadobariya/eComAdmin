@@ -196,21 +196,18 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
 
 
 
-  const generatepdf = () => {
+  
 
-    var doc = new jsPDF("p", "pt", "a4");
-    doc.html(document.querySelector("#qrDiv"), {
-      callback: function (pfd) {
-        doc.save('qr.pdf');
-      },
-      x: 100,
-      y: 80,
-      html2canvas: {
-        scale: 0.9,
-        width: 1000
-      },
-    })
-
+  const onPrintBarcode = () => {
+    var container = document.getElementById("qrDiv");
+    var width = "100%";
+    var height = "100%";
+    var printWindow = window.open('', 'PrintMap',
+      'width=' + width + ',height=' + height);
+    printWindow.document.writeln(container.innerHTML);
+    printWindow.document.close();
+    printWindow.print();
+    printWindow.close();
   }
 
 
@@ -506,7 +503,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
                   >
                     <Modal.Body>
                       <h5 className='text-center'>Barcode</h5>
-                      <div className='d-flex justify-content-center' id="qrDiv" onClick={generatepdf} >
+                      <div className='d-flex justify-content-center' id="qrDiv" onClick={onPrintBarcode} >
 
                         {qrcode}
                       </div>
