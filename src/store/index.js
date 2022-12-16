@@ -39,7 +39,8 @@ import {
     FetchOutwardReportReducer,
     FetchFinishProReportReducer,
     FetchHistoryReducer,
-    AllOutwardGetReducer
+    AllOutwardGetReducer,
+    DeletePrslipReducer
 } from "./reducer/Fetchreducer"
 
 import {
@@ -115,6 +116,7 @@ const rootReducer = combineReducers({
     DeleteSubCategory: DeleteSubCategoryReducer,
     DeleteDepartment: DeleteDepartmentReducer,
     DeleteOutward: DeleteOutwardReducer,
+    DeletePrslip:DeletePrslipReducer,
     // update
     UpdateProduct: UpadteProductReducer,
     UpdateType: UpadteTypeReducer,

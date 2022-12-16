@@ -239,6 +239,11 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
       sortable: true,
     },
     {
+      name: "QTY",
+      selector: (row) => row.QTY,
+      sortable: true,
+    },
+    {
       name: "Date",
       selector: (row) => row.updatedAt.slice(0, 10),
       sortable: true

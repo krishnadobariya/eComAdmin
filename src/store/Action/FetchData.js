@@ -466,6 +466,7 @@ export function ViewAllOutward(id) {
             {
                 headers: { "jwt": token }
             });
+            console.log("responce=====",response)
         const return_response = {
             type: "GET_ALLOUTWARD",
             payload: response,
@@ -483,9 +484,27 @@ export function DeleteOutward(id) {
             {
                 headers: { "jwt": token }
             });
-         
+         console.log("res",response)
         const return_response = {
             type: "DEL_OUTWARD",
+            payload: response,
+        };
+
+        dispatch(return_response);
+    };
+}
+// delete prslip---------------
+
+
+export function DeletePrslip(id) {
+    return async (dispatch) => {
+        const response = await axios.delete(`${Baseurl}/outward/delete/prslip-data/${id}`,
+            {
+                headers: { "jwt": token }
+            });
+         console.log("res",response)
+        const return_response = {
+            type: "DEL_PRSLIP",
             payload: response,
         };
 

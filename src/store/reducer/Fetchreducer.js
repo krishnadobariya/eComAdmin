@@ -302,6 +302,17 @@ export function DeleteOutwardReducer(state = initialState, action) {
     }
 }
 
+// DELETE PRSLIP
+
+export function DeletePrslipReducer(state = initialState, action) {
+    switch (action.type) {
+        case "DEL_PRSLIP":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}
+
 // VIEW BY ID OUTWARD
 export function FetchOutwardByIdReducer(state = initialState, action) {
     switch (action.type) {

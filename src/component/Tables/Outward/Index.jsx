@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
-import { ViewAllOutward, DeleteOutward, OutwardViewById,  ViewAllDepartment, AllProductView } from "../../../store/Action/FetchData"
+import { ViewAllOutward, DeletePrslip, OutwardViewById, ViewAllDepartment, AllProductView } from "../../../store/Action/FetchData"
 import DataTable from 'react-data-table-component'
 import Modal from 'react-bootstrap/Modal';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -8,6 +8,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
 const Index = ({ dispatch, res, resdel, viewById }) => {
 
@@ -16,6 +17,7 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
     const [filterdata, setfilter] = useState([]);
     const [outward, setOutward] = useState([]);
     const [modalShow2, setModalShow2] = useState(false);
+    const [product, setProduct] = useState([])
 
 
 
@@ -24,11 +26,11 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
         dispatch(ViewAllDepartment());
         dispatch(AllProductView());
     }, []);
-   
+
     useEffect(() => {
         if (data) {
             const result = data.filter(val => {
-                return val.product_name.toLowerCase().match(search.toLowerCase());
+                return val.department.toLowerCase().match(search.toLowerCase());
             });
             setfilter(result);
         }
@@ -37,7 +39,8 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
 
 
     const data = res.data ? res.data.data ? res.data.data.data : [] : []
-    
+    console.log("data====", data);
+
 
 
 
@@ -46,10 +49,10 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
 
 
     const deleteOutward = (id) => {
-        dispatch(DeleteOutward(id));
-            setTimeout(() => {
-                window.location = "/outwardtable"
-            }, 700);
+        dispatch(DeletePrslip(id));
+        // setTimeout(() => {
+        //     window.location = "/outwardtable"
+        // }, 700);
     }
 
     // VIEW---------------
@@ -61,6 +64,9 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
     useEffect(() => {
         const data2 = viewById.data ? viewById.data.data ? viewById.data.data.data : [] : []
         setOutward(data2)
+        console.log("data2:::", data2)
+        const productdata = viewById.data ? viewById.data.data ? viewById.data.data.data ? viewById.data.data.data.product : [] : [] : []
+        setProduct(productdata)
 
     }, [viewById])
 
@@ -68,33 +74,39 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
 
 
 
- 
+
 
 
     const columns = [
         {
-            name: "Product Name",
-            selector: (row) => row.product_name,
+            name: "Id",
+            selector: (row) => row._id,
             sortable: true,
 
         },
         {
-            name: "Quantity",
-            selector: (row) => row.QTY,
+            name: "Location",
+            selector: (row) => row.location,
+            sortable: true,
+
+        },
+        {
+            name: "Department",
+            selector: (row) => row.department,
             sortable: true,
         },
         {
-            name:"Date",
-            selector:(row)=>row.updatedAt.slice(0,10),
-            sortable:true
+            name: "Date",
+            selector: (row) => row.date.slice(0, 10),
+            sortable: true
         },
         {
             name: "Action",
             cell: (row) => <>
-             
+              <Link to={`/prslipe/${row._id}`} ><PictureAsPdfIcon className="update-btn" style={{ fontSize: "35px" }}/></Link>
                 <VisibilityIcon onClick={() => handleviewOpen(row._id)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
                 <DeleteIcon onClick={() => deleteOutward(row._id)} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
-                
+
             </>
 
         }
@@ -131,7 +143,7 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
                                                 className='w-25 form-control'
                                                 value={search}
                                                 onChange={(event) => setSearch(event.target.value)}
-                                                style={{border:"1px solid gray"}}
+                                                style={{ border: "1px solid gray" }}
                                             />
                                         }
                                     />
@@ -140,7 +152,7 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
                         <div>
                         </div>
 
-                     
+
 
 
                         {modalShow2 == true ?
@@ -170,15 +182,42 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
                                         </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                       
                                         <div className='d-flex'>
-                                            <span className='px-3'>Product Name :</span><span> {outward.product_name}</span>
+                                            <span className='px-3'>PRN:</span><span> {outward.uniqueKey}</span>
                                         </div>
                                         <hr></hr>
                                         <div className='d-flex'>
-                                            <span className='px-3'>Qaintity :</span><span> {outward.QTY}</span>
+                                            <span className='px-3'>department:</span><span> {outward.department}</span>
                                         </div>
-                                      
+                                        <hr></hr>
+                                        <div className='d-flex'>
+                                            <span className='px-3'>location :</span><span> {outward.location}</span>
+                                        </div>
+                                        <hr></hr>
+                                        <table>
+                                            <tr>
+                                                <th>Product Name</th>
+                                                <th>Price</th>
+                                                <th>Current Stock</th>
+                                                <th>QTY</th>
+
+                                            </tr>
+                                            {
+                                                product ?
+                                                    product.map((val) => {
+                                                        return <>
+                                                            <tr>
+                                                                <td>{val.product_name}</td>
+                                                                <td>{val.price}</td>
+                                                                <td>{val.current_stock}</td>
+                                                                <td>{val.QTY}</td>
+
+                                                            </tr>
+                                                        </>
+                                                    })
+                                                    : null
+                                            }
+                                        </table>
                                     </Modal.Body>
 
                                 </Modal>} </> : ""}
