@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 
 const Index = ({ dispatch, res, view, viewsub, type }) => {
-
+  const unit = ['cm', 'mtr', "kg", "gm", "pic", "box", "liter"]
   const [Product, SetProduct] = useState({
     Name: "",
     Category: "",
@@ -27,16 +27,16 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
     const { name, value } = e.target
     SetProduct({ ...Product, [name]: value })
     if (e.target.name === 'Category') {
-       const category = e.target.value;
-     
+      const category = e.target.value;
+
       dispatch(AllSubCategoryView(category))
-     
+
     }
- 
+
     if (e.target.name === 'Sub_Category') {
       const Subcategory = e.target.value;
       dispatch(TypeView(Subcategory))
-      
+
     }
   }
   const handleAdd = (e) => {
@@ -50,44 +50,43 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
   }, [])
 
 
-  
+
   useEffect(() => {
-  
+
     const data = res.data ? res.data.data : []
+    console.log("data::", data)
     if (data) {
-      if (data.code == 201){
+      if (data.code == 201) {
         toast.success(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
-          
+
         });
-        
-        setTimeout(()=>{
-          window.location="/viewproduct"
-      }, 1000);
+
+        setTimeout(() => {
+          window.location = "/viewproduct"
+        }, 1000);
       }
-      else if(data.code==500)
-      {
+      else if (data.code == 500) {
         toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
         });
-        setTimeout(()=>{
-          window.location="/product"
-      }, 1000);
+        setTimeout(() => {
+          window.location = "/product"
+        }, 1000);
       }
-      else if(data.code==403)
-      {
+      else if (data.code == 403) {
         toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
         });
-        setTimeout(()=>{
-          window.location="/product"
-      }, 1000);
+        setTimeout(() => {
+          window.location = "/product"
+        }, 1000);
       }
     }
-  },[res])
+  }, [res])
 
   const data = view.data ? view.data.data ? view.data.data.data : [] : []
   const viewSub = viewsub.data ? viewsub.data.data ? viewsub.data.data.data : [] : []
@@ -96,12 +95,12 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
 
   return (
 
-    <div  style={{width:"100%"}}>
+    <div style={{ width: "100%" }}>
       <div className='container-fluid'>
         <div className='row px-0  py-3 d-flex justify-content-center '>
-          <ToastContainer/>
+          <ToastContainer />
           <div className='col-md-5'>
-          <div className='add-link'><Link to="/viewproduct" >VIEW</Link></div>
+            <div className='add-link'><Link to="/viewproduct" >VIEW</Link></div>
             <h1 className='text-center add-title'>PRODUCT</h1>
             <form className='add-form'>
               <div className="form-group">
@@ -109,21 +108,21 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
                 <input type="text" className="form-control" name="Name" value={Product.Name} onChange={handleInput} />
               </div>
               <div className="form-group ">
-                  <label>Category</label>
-                
-                  <select name="Category" className="form-control" id="" onChange={handleInput} value={Product.Category}  >
+                <label>Category</label>
+
+                <select name="Category" className="form-control" id="" onChange={handleInput} value={Product.Category}  >
                   <option>choose category</option>
-                    {
-                      data ?
+                  {
+                    data ?
                       data.map((val, id) => {
                         return (
                           <option value={val.cat_name} key={id}>{val.cat_name}</option>
                         )
                       }) : <option >Loding...</option>
-                    }
-                  </select>
-                </div>                
-                <div className="form-group ">
+                  }
+                </select>
+              </div>
+              {/* <div className="form-group ">
                   <label>Sub Category</label>
                   <select name="Sub_Category" className="form-control" id="" onChange={handleInput} value={Product.Sub_Category}  >
                   <option>choose subcategory</option>
@@ -152,20 +151,30 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
                     }
                   </select>
                 </div>
-            
-                <div className="form-group ">
-                  <label>Quantity</label>
-                  <input type="text" className="form-control" name="QTY" value={Product.QTY} onChange={handleInput} />
-                </div>
-                <div className="form-group ">
-                  <label>Price</label>
-                  <input type="text" className="form-control" name="Price" value={Product.Price} onChange={handleInput} />
-                </div>
-                <div className="form-group">
-                  <label>Unit</label>
-                  <input type="text" className="form-control" name="Unit" value={Product.Unit} onChange={handleInput} />
-                </div>
-              
+             */}
+              <div className="form-group ">
+                <label>Quantity</label>
+                <input type="text" className="form-control" name="QTY" value={Product.QTY} onChange={handleInput} />
+              </div>
+              <div className="form-group ">
+                <label>Price</label>
+                <input type="text" className="form-control" name="Price" value={Product.Price} onChange={handleInput} />
+              </div>
+              <div className="form-group">
+                <label>Unit</label>
+                <select name="Unit" className="form-control" id="" onChange={handleInput} value={Product.Unit}  >
+                  <option>choose Unit</option>
+                  {
+                    unit ?
+                      unit.map((val, id) => {
+                        return (
+                          <option value={val} key={id}>{val}</option>
+                        )
+                      }) : <option >Data Not Found</option>
+                  }
+                </select>
+              </div>
+
               <div className="form-group">
                 <label>Remark</label>
                 <textarea type="text" className="form-control" name="Remark" rows="3" value={Product.Remark} onChange={handleInput} />

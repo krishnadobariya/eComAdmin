@@ -20,6 +20,7 @@ import DateWise from './pages/Report/Datewise/Index';
 import Manager from './pages/Report/Manger/Index';
 import OutwardReport from './pages/Report/Outward/Index';
 import FinishPro from './pages/Report/FinishPro/Index';
+import DepartmentPrint from './pages/Departmentprint/Index';
 
 
 function App() {
@@ -37,14 +38,14 @@ function App() {
           <Route path='/dashboard' element={token ? <Dashboard /> : <Login />} />
           <Route path='/product' element={token ? <Product /> : <Login />} />
           <Route path='/category' element={token ? <Category /> : <Login />} />
-          <Route path='/subcategory' element={token ? <SubCategory /> : <Login />} />
+          {/* <Route path='/subcategory' element={token ? <SubCategory /> : <Login />} /> */}
           <Route path='/departmemt' element={token ? <Department /> : <Login />} />
           <Route path='/outward' element={token ? <Outward /> : <Login />} />
-          <Route path='/categorytype' element={token ? <CategoryType /> : <Login />} />
+          {/* <Route path='/categorytype' element={token ? <CategoryType /> : <Login />} /> */}
           <Route path='/viewproduct' element={token ? <ProductTable /> : <Login />} />
-          <Route path='/viewtype' element={token ? <TypeTable /> : <Login />} />
+          {/* <Route path='/viewtype' element={token ? <TypeTable /> : <Login />} /> */}
           <Route path="/viewcategory" element={token ? <CategoryTable /> : <Login />} />
-          <Route path="/viewsubcategory" element={token ? <SubCategoryTable /> : <Login />} />
+          {/* <Route path="/viewsubcategory" element={token ? <SubCategoryTable /> : <Login />} /> */}
           <Route path='/departmenttable' element={token ? <DepartmentTable /> : <Login />} />
           <Route path='/outwardtable' element={token ? <Outwardtable /> : <Login />} />
           <Route path='/prslipe/:id' element={token ? <Prslip /> : <Login />} />
@@ -52,6 +53,7 @@ function App() {
           <Route path='/departmentwise' element={token ? <Manager /> : <Login />} />
           <Route path='/outward-report' element={token ? <OutwardReport /> : <Login />} />
           <Route path='/finish-product' element={token ? <FinishPro /> : <Login />} />
+          <Route path='/print/:name' element={token ? <DepartmentPrint /> : <Login />} />
          
         </Routes>
       </div>

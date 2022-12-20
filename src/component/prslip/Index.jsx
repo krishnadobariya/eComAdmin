@@ -61,10 +61,7 @@ const Prslip = ({dispatch,res}) => {
                 <label>Date :</label>
                 <input type="text" value={data.createdAt ? data.createdAt.slice(0,10) : null} className="text-center"></input>
               </div>
-              <div>
-                <label>material Required Date :</label>
-                <input></input>
-              </div>
+             
             </div>
           </div>
 
@@ -75,10 +72,9 @@ const Prslip = ({dispatch,res}) => {
               <th>Description</th>
               <th>UOM</th>
               <th>Req.Qty.</th>
-              <th>Unit Price Eastimate</th>
               <th>Current Stock</th>
               <th>RemarkS</th>
-              <th>know Suppliears</th>
+             
             </tr>
            
             {
@@ -91,10 +87,10 @@ const Prslip = ({dispatch,res}) => {
               <td></td>
               <td></td>
               <td>{val.QTY}</td>
-              <td>{val.price}</td>
+              
               <td>{val.current_stock}</td>
               <td>{val.remark}</td>
-              <td>1.</td>
+             
             </tr>
                 </>
               }) : <h1>no data found</h1>
@@ -109,8 +105,7 @@ const Prslip = ({dispatch,res}) => {
               <td></td>
               <td></td>
               <td></td>
-              <td></td>
-              <td></td>
+             
 
             </tr>
             <tr>
@@ -121,8 +116,7 @@ const Prslip = ({dispatch,res}) => {
               <td></td>
               <td></td>
               <td></td>
-              <td></td>
-              <td></td>
+              
 
             </tr>
             <tr>
@@ -133,36 +127,14 @@ const Prslip = ({dispatch,res}) => {
               <td></td>
               <td></td>
               <td></td>
-              <td></td>
-              <td></td>
+             
 
             </tr>
 
           </table>
 
           <div className="footer">
-            <div className="left-side">
-              <div >
-                <label>Office Use :</label>
-                <input></input>
-              </div>
-              <div >
-                <label>P.O. No :</label>
-                <input></input>
-              </div>
-              <div >
-                <label>Supplier Name :</label>
-                <input></input>
-              </div>
-              <div >
-                <label>Expected Delivery Name :</label>
-                <input></input>
-              </div>
-              <div >
-                <label>Ordered by:</label>
-                <input></input>
-              </div>
-            </div>
+            
             <div className="right-side">
               <label>Goods Recieved checked by Name:</label>
               <br />
@@ -170,20 +142,7 @@ const Prslip = ({dispatch,res}) => {
             </div>
           </div>
 
-          <div className="second-div">
-            <table className="second-div-tabel">
-              <tr>
-                <th>Prepared by:</th>
-                <th>Dept. Head</th>
-                <th>Authorized Signatory</th>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </table>
-          </div>
+         
         </div>
        
       </div>

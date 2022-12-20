@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import { ViewDateWise } from "../../../store/Action/FetchData"
 import DataTable from 'react-data-table-component'
-import { Link } from 'react-router-dom';
+
 
 const Index = ({ dispatch, res }) => {
 
@@ -28,6 +28,7 @@ const Index = ({ dispatch, res }) => {
 
     useEffect(() => {
         const proName = res.data ? res.data.data ? res.data.data.data : [] : []
+        console.log("proName",proName)
         setDate(proName)
 
 
@@ -45,6 +46,16 @@ const Index = ({ dispatch, res }) => {
         {
             name: "Qauntity",
             selector: (row) => row.QTY,
+            sortable: true
+        },
+        {
+            name: "Unit",
+            selector: (row) => row.Unit,
+            sortable: true
+        },
+        {
+            name: "Price",
+            selector: (row) => row.Price,
             sortable: true
         },
         {

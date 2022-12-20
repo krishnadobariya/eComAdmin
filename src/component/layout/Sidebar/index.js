@@ -59,7 +59,7 @@ function Sidebar() {
                     <p>Category</p>
                   </NavLink>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <NavLink to="/viewsubcategory" className="nav-link text-white">
                     <p>SubCategory</p>
                   </NavLink>
@@ -68,7 +68,7 @@ function Sidebar() {
                   <NavLink to="/viewtype" className="nav-link text-white">
                     <p>Type</p>
                   </NavLink>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <NavLink to="/viewproduct" className="nav-link text-white">
                     <p>Product</p>

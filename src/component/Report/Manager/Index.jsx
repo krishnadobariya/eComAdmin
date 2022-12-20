@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import { ViewDepatmentMager, ViewAllDepartment } from "../../../store/Action/FetchData"
 import DataTable from 'react-data-table-component'
+import { Link } from 'react-router-dom';
 
 
 
 const Index = ({ dispatch, res, department }) => {
 
 
+    const [val,setVal] = useState(false)
     const [data, setDate] = useState([])
     const [departdata, setDepartdata] = useState("")
 
@@ -15,6 +17,7 @@ const Index = ({ dispatch, res, department }) => {
     useEffect(() => {
         const proName = res.data ? res.data.data ? res.data.data.data : [] : []
         setDate(proName)
+        console.log("proName:::",proName)
     }, [res])
 
     const handleInput = (e) => {
@@ -25,6 +28,7 @@ const Index = ({ dispatch, res, department }) => {
     const search = (e) => {
         e.preventDefault()
         dispatch(ViewDepatmentMager(departdata))
+        setVal(true)
     }
     useEffect(() => {
 
@@ -34,7 +38,10 @@ const Index = ({ dispatch, res, department }) => {
 
 
     const columns = [
-
+        {
+          name:"Departmename",
+          selector:(row)=>row.department_name
+        },
         {
             name: "Product  Name",
             selector: (row) => row.product_name,
@@ -49,7 +56,8 @@ const Index = ({ dispatch, res, department }) => {
             name: "Date",
             selector: (row) => row.date,
             sortable: true,
-        }
+        },
+        
 
     ]
 
@@ -81,6 +89,10 @@ const Index = ({ dispatch, res, department }) => {
                                     </select>
                                 </div>
                                 <button type="submit" class="btn gradient-custom-2 text-white m-2" onClick={search}>search</button>
+                                {val ?
+                                <div className='add-link'><Link to={`/print/${departdata}`} >print</Link></div> :
+                                []
+                                }
                             </form>
                             {
                                 data == "null" ?

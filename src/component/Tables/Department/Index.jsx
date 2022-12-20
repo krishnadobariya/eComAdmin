@@ -10,6 +10,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {citylist} from '../../cityname'
 
 
 
@@ -127,8 +128,8 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
             sortable: true,
         },
         {
-            name: "Descripation",
-            selector: (row) => row.dep_description,
+            name: "Location",
+            selector: (row) => row.location,
             sortable: true,
 
         },
@@ -175,7 +176,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
                                                 className='w-25 form-control'
                                                 value={search}
                                                 onChange={(event) => setSearch(event.target.value)}
-                                                style={{border:"1px solid gray"}}
+                                                style={{ border: "1px solid gray" }}
                                             />
                                         }
                                     />
@@ -207,20 +208,26 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
                                                 <Modal.Body>
                                                     <form className='add-form'>
                                                         <div class="form-group">
-                                                            <label>Category Name</label>
+                                                            <label>Item Departmemt Name</label>
                                                             <input type="text"
                                                                 class="form-control"
                                                                 name="name"
                                                                 value={Department.name}
                                                                 onChange={handleInput} />
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label>Discription</label>
-                                                            <input type="text"
-                                                                class="form-control"
-                                                                name="dep_description"
-                                                                value={Department.dep_description}
-                                                                onChange={handleInput} />
+                                                        <div className="">
+                                                            <label>Location</label>
+                                                            <select name="location" className=" form-control" id="" onChange={handleInput} value={Department.location}>
+                                                                <option>choose state</option>
+                                                                {
+                                                                    citylist ?
+                                                                        citylist.map((val, id) => {
+                                                                            return (
+                                                                                <option value={val.city} key={id}>{val.city},{val.state}</option>
+                                                                            )
+                                                                        }) : <option >Loding...</option>
+                                                                }
+                                                            </select>
                                                         </div>
                                                         <button type="submit" class="btn add-btn" onClick={handleUpdate}>Update</button>
                                                     </form>
@@ -260,11 +267,11 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
                                         </Modal.Header>
                                         <Modal.Body>
                                             <div className='d-flex'>
-                                                <span className='px-3'>Department Name :</span><span> {Department.name}</span>
+                                                <span className='px-3'> Item Department Name :</span><span> {Department.name}</span>
                                             </div>
                                             <hr></hr>
                                             <div className='d-flex'>
-                                                <span className='px-3'>Discription :</span><span> {Department.dep_description}</span>
+                                                <span className='px-3'>location :</span><span> {Department.location}</span>
                                             </div>
                                         </Modal.Body>
 

@@ -565,12 +565,15 @@ export function ViewDateWise(data) {
 // ALL DEPARTMENT MANAGER
 
 export function ViewDepatmentMager(data) {
+    console.log("data",data)
 
     return async (dispatch) => {
         const response = await axios.get(`${Baseurl}/report/view-by-department/${data}`,
         {
             headers: { "jwt": token }
         });
+        console.log("dta::",response)
+       
         const return_response = {
             type: "GET_D_MAGAER",
             payload: response,

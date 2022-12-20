@@ -50,9 +50,9 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
 
     const deleteOutward = (id) => {
         dispatch(DeletePrslip(id));
-        // setTimeout(() => {
-        //     window.location = "/outwardtable"
-        // }, 700);
+        setTimeout(() => {
+            window.location = "/outwardtable"
+        }, 700);
     }
 
     // VIEW---------------
@@ -97,7 +97,7 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
         },
         {
             name: "Date",
-            selector: (row) => row.date.slice(0, 10),
+            selector: (row) => row.date,
             sortable: true
         },
         {

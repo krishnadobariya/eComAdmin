@@ -5,13 +5,17 @@ import '../../../css/Product/style.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
+import {citylist} from '../../cityname'
+
+
+
 
 
 const Index = ({ dispatch, res }) => {
 
   const [Department, SetDepartment] = useState({
     name: "",
-    dep_description: ""
+    location: ""
   })
 
 
@@ -23,76 +27,80 @@ const Index = ({ dispatch, res }) => {
   }
   const handleAdd = (e) => {
     e.preventDefault();
-   
+
     dispatch(AddDepartmentType(Department));
-   
+
   };
 
 
   useEffect(() => {
-    
+
     const data = res.data ? res.data.data : []
     if (data) {
-      if (data.code == 201){
+      if (data.code == 201) {
         toast.success(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
-          
+
         });
-        setTimeout(()=>{
-          window.location="/departmenttable"
-      }, 1000);
-        
-       
+        setTimeout(() => {
+          window.location = "/departmenttable"
+        }, 1000);
+
+
       }
-      else if(data.code==500)
-      {
+      else if (data.code == 500) {
         toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
         });
-        setTimeout(()=>{
-          window.location="/departmemt"
-      }, 1000);
- 
+        setTimeout(() => {
+          window.location = "/departmemt"
+        }, 1000);
+
       }
-      else if(data.code==403)
-      {
+      else if (data.code == 403) {
         toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
           timeOut: 1000,
         });
-        setTimeout(()=>{
-          window.location="/departmemt"
-      }, 1000);
- 
+        setTimeout(() => {
+          window.location = "/departmemt"
+        }, 1000);
+
       }
     }
-  },[res])
+  }, [res])
   return (
-    <div  style={{width:"100%"}}>
+    <div style={{ width: "100%" }}>
       <div className='container-fluid py-5'>
         <div className='row px-0  py-5 d-flex justify-content-center  '>
-          <ToastContainer/>
+          <ToastContainer />
           <div className='col-md-6'>
-          <div className='add-link'><Link to="/departmenttable" >VIEW</Link></div>
+            <div className='add-link'><Link to="/departmenttable" >VIEW</Link></div>
             <h1 className='text-center add-title py-4'>ADD DEPARTMENT</h1>
             <form className='add-form'>
               <div className="form-group">
-                <label>Department Name</label>
+                <label>Item Department Name</label>
                 <input type="text"
                   className="form-control"
                   name="name"
                   value={Department.name}
                   onChange={handleInput} />
               </div>
-              <div className="form-group">
-                <label>Department description</label>
-                <input type="text"
-                  className="form-control"
-                  name="dep_description"
-                  value={Department.dep_description}
-                  onChange={handleInput} />
+              <div className="">
+                <label>Location</label>
+                <select name="location" className=" form-control" id="" onChange={handleInput} value={Department.location}>
+                  <option>choose state</option>
+                  {
+                    citylist ?
+                      citylist.map((val, id) => {
+                        return (
+                          <option value={val.city} key={id}>{val.city},{val.state}</option>
+                        )
+                      }) : <option >Loding...</option>
+                  }
+                </select>
               </div>
               <button type="submit" className="btn add-btn" onClick={handleAdd}>ADD</button>
             </form>
@@ -105,7 +113,7 @@ const Index = ({ dispatch, res }) => {
 
 const mapStateToProps = (state) => ({
   res: state.AddDepartmentType,
-  
+
 });
 
 export default connect(mapStateToProps)(Index);

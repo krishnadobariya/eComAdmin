@@ -24,7 +24,7 @@ import Barcode from 'react-barcode';
 import jsPDF from "jspdf";
 
 
-const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upadtepro }) => {
+const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro }) => {
 
 
   const [search, setSearch] = useState("");
@@ -35,9 +35,10 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
   const [modalShow2, setModalShow2] = useState(false);
   const [qty, setQty] = useState(0);
   const [modalShow3, setModalShow3] = useState(false);
-  const [category, setCategory] = useState([])
-  const [typeData, setTypeData] = useState([])
+  const [uniqid,setuniqid] = useState("")
+  
 
+  const unit = ['cm','mtr',"kg","gm","pic","box","liter"]
 
 
   useEffect(() => {
@@ -46,6 +47,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
 
 
   const data = res.data ? res.data.data ? res.data.data.data : [] : []
+  console.log("data::::",data)
 
   useEffect(() => {
     if (data) {
@@ -69,29 +71,15 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
 
   const handleOpen = (id) => {
     dispatch(ProductViewByIdUpadte(id));
-
-
     setModalShow(true)
   }
 
 
-  useEffect(() => {
-    const viewSub = viewsub.data ? viewsub.data.data ? viewsub.data.data.data : [] : []
-    setCategory(viewSub)
-
-  }, [viewsub])
-
-  useEffect(() => {
-    const typeview = type.data ? type.data.data ? type.data.data.data : [] : []
-    setTypeData(typeview)
-
-  }, [type])
-
+  
   useEffect(() => {
     const data2 = resUpadte.data ? resUpadte.data.data ? resUpadte.data.data.data : [] : []
     SetProduct(data2)
-    dispatch(AllSubCategoryView(data2.Category))
-    dispatch(TypeView(data2.Sub_Category))
+
   }, [resUpadte])
 
 
@@ -169,6 +157,8 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
     const data2 = resById.data ? resById.data.data ? resById.data.data.data : [] : []
     SetViewProduct(data2)
 
+    console.log("data2:::",data2)
+
   }, [resById])
 
   // view end---------------
@@ -176,11 +166,17 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
   const handleviewbyqr = (id) => {
 
     dispatch(ProductViewByIdForQr(id));
+    setuniqid(id)
     setModalShow3(true)
+    setTimeout(() => {
+      onPrintBarcode()
+      setModalShow3(false)
+    }, 2000);
   }
 
   useEffect(() => {
     const data2 = Qr.data ? Qr.data.data ? Qr.data.data.data : [] : []
+    console.log("hello::",data2)
     SetViewProduct(data2)
 
   }, [Qr])
@@ -188,7 +184,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
 
 
   const qrcode = (
-    <Barcode value={ViewProduct._id} />
+    <Barcode value={uniqid} />
   )
 
   const View = view.data ? view.data.data ? view.data.data.data : [] : []
@@ -200,8 +196,8 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
 
   const onPrintBarcode = () => {
     var container = document.getElementById("qrDiv");
-    var width = "100%";
-    var height = "100%";
+    var width = "80%";
+    var height = "80%";
     var printWindow = window.open('', 'PrintMap',
       'width=' + width + ',height=' + height);
     printWindow.document.writeln(container.innerHTML);
@@ -224,16 +220,6 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
 
     },
     {
-      name: "SubCategory",
-      selector: (row) => row.Sub_Category,
-      sortable: true,
-    },
-    {
-      name: "Type",
-      selector: (row) => row.Type,
-      sortable: true,
-    },
-    {
       name: "Price",
       selector: (row) => `${row.Price}.Rs`,
       sortable: true,
@@ -245,16 +231,16 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
     },
     {
       name: "Date",
-      selector: (row) => row.updatedAt.slice(0, 10),
+      selector: (row) => row.createdAt,
       sortable: true
     },
     {
       name: "action",
       cell: (row) => <>
-        <QrCodeIcon onClick={() => handleviewbyqr(row._id)} className="view-btn" style={{ fontSize: "35px" }} >View</QrCodeIcon>
-        <VisibilityIcon onClick={() => handleviewOpen(row._id)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
-        <DeleteIcon onClick={() => DelteProduct(row._id)} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
-        <EditIcon onClick={() => handleOpen(row._id)} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon>
+        <QrCodeIcon onClick={() => handleviewbyqr(row.uniqueKeyForProduct)} className="view-btn" style={{ fontSize: "35px" }} >View</QrCodeIcon>
+        <VisibilityIcon onClick={() => handleviewOpen(row.uniqueKeyForProduct)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
+        <DeleteIcon onClick={() => DelteProduct(row.uniqueKeyForProduct)} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
+        <EditIcon onClick={() => handleOpen(row.uniqueKeyForProduct)} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon>
 
 
       </>
@@ -350,6 +336,20 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
                                 </select>
                               </div>
                               <div className="form-group col-md-4">
+                                <label>Quantity</label>
+                                <input type="text" className="form-control"
+                                  name="QTY"
+                                  value={Product.QTY}
+                                  onChange={handleInput} />
+                              </div>
+                              <div className="form-group col-md-4">
+                                <label>Price</label>
+                                <input type="text" className="form-control"
+                                  name="Price"
+                                  value={Product.Price}
+                                  onChange={handleInput} />
+                              </div>
+                              {/* <div className="form-group col-md-4">
                                 <label>SubCategory</label>
                                 <select name="Sub_Category" className="form-control" id="" onChange={handleInput} value={Product.Sub_Category}  >
                                   <option>choose subcategory</option>
@@ -376,30 +376,22 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
                                       }) : <option >Data Not Found</option>
                                   }
                                 </select>
-                              </div>
+                              </div> */}
                             </div>
-                            <div className="form-row">
-                              <div className="form-group col-md-6">
-                                <label>Quantity</label>
-                                <input type="text" className="form-control"
-                                  name="QTY"
-                                  value={Product.QTY}
-                                  onChange={handleInput} />
-                              </div>
-                              <div className="form-group col-md-6">
-                                <label>Price</label>
-                                <input type="text" className="form-control"
-                                  name="Price"
-                                  value={Product.Price}
-                                  onChange={handleInput} />
-                              </div>
-                            </div>
+                           
                             <div className="form-group">
                               <label>Unit</label>
-                              <input type="text" className="form-control"
-                                name="Unit"
-                                value={Product.Unit}
-                                onChange={handleInput} />
+                                <select name="Unit" className="form-control" id="" onChange={handleInput} value={Product.Unit}  >
+                                  <option>choose type</option>
+                                  {
+                                    unit ?
+                                    unit.map((val, id) => {
+                                        return (
+                                          <option value={val} key={id}>{val}</option>
+                                        )
+                                      }) : <option >Data Not Found</option>
+                                  }
+                                </select>
                             </div>
                             <div className="form-group">
                               <label>Remark</label>
@@ -455,14 +447,6 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
                       </div>
                       <hr></hr>
                       <div className='d-flex'>
-                        <span className='px-3'>SubCategory :</span><span> {ViewProduct.Sub_Category}</span>
-                      </div>
-                      <hr></hr>
-                      <div className='d-flex'>
-                        <span className='px-3'>Type :</span><span> {ViewProduct.Type}</span>
-                      </div>
-                      <hr></hr>
-                      <div className='d-flex'>
                         <span className='px-3'>Price :</span><span> {ViewProduct.Price}</span>
                       </div>
                       <hr></hr>
@@ -502,13 +486,13 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type, Qr, upa
                   </Modal> : <Modal
                     show={modalShow3}
                     onHide={() => setModalShow3(false)}
-                    size="md"
+                    size="sm"
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
                   >
                     <Modal.Body>
                       <h5 className='text-center'>Barcode</h5>
-                      <div className='d-flex justify-content-center' id="qrDiv" onClick={onPrintBarcode} >
+                      <div className='d-flex justify-content-center' id="qrDiv" >
 
                         {qrcode}
                       </div>
@@ -533,8 +517,8 @@ const mapStateToProps = (state) => ({
   resById: state.ProductViewById,
   resUpadte: state.ProductViewByIdUpadte,
   view: state.AllCategoryView,
-  viewsub: state.AllSubCategoryView,
-  type: state.TypeView,
+  // viewsub: state.AllSubCategoryView,
+  // type: state.TypeView,
   Qr: state.ProductViewByIdForQr,
   upadtepro: state.UpdateProduct
 
