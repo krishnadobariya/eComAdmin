@@ -196,8 +196,8 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro }) => {
 
   const onPrintBarcode = () => {
     var container = document.getElementById("qrDiv");
-    var width = "80%";
-    var height = "80%";
+    var width = "100%";
+    var height = "100%";
     var printWindow = window.open('', 'PrintMap',
       'width=' + width + ',height=' + height);
     printWindow.document.writeln(container.innerHTML);

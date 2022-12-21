@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ViewAllDepartment, AllProductView, DeleteOutward } from '../../../store/Action/FetchData'
+import { ViewAllDepartment, DeleteOutward ,ViewAllLocation} from '../../../store/Action/FetchData'
 import { AddfullOutward } from '../../../store/Action/AddData'
 import { connect } from "react-redux";
 import '../../../css/Product/style.css'
@@ -11,23 +11,21 @@ import axios from 'axios';
 import { Baseurl } from '../../../Baseurl';
 import Cookies from 'js-cookie';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { citylist } from '../../cityname';
+
 
 const token = Cookies.get('jwt');
 
-const Index = ({ dispatch, res, view, respro }) => {
+const Index = ({ dispatch, res, view,location  }) => {
     const [qrdata, setData] = React.useState();
     const [det, setdel] = useState(false)
     const [err, seterror] = useState("")
+    const [locationdata,setlocation]= useState([])
     const [allRes, setAllRes] = useState({});
-    const [uniq,setUniq] = useState([]);
     const [outward, SetOutward] = useState({
         department: "",
         state: "",
     })
     const [a, setA] = useState([])
-
-
 
     const getdata = (id, data) => {
 
@@ -35,13 +33,24 @@ const Index = ({ dispatch, res, view, respro }) => {
         const res = axios.post(`${Baseurl}/outward/insert/${id}`, data, {
             headers: { "jwt": token }
         }).then((val) => {
-            console.log("calling", val)
-            setAllRes(() => ({ ...val.data }))
-            toast.success(val.data.message, {
-                position: toast.POSITION.TOP_CENTER,
-
-            })
-            setA([...a, val.data.data])
+            console.log("calling", val.data)
+            console.log("allres" , allRes);
+            if(val.data.code == 404){
+                toast.error(val.data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+    
+                });
+            }else{
+                setAllRes(() => ({ ...val.data }))
+                console.log("val.data.message" , val.data.code);
+                toast.success(val.data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+    
+                })
+                setA([...a, val.data.data])
+               
+            }
+          
         })
         if (allRes.code == 404) {
             toast.error(allRes.message, {
@@ -76,15 +85,15 @@ const Index = ({ dispatch, res, view, respro }) => {
         }
     }, [res])
 
+ 
     useEffect(()=>{
-        const data = respro.data ? respro.data.data ? respro.data.data.data : [] : []
-        console.log("data:::::::::::::::",data)
-        setUniq(data)
-    },[respro])
+        const data = location.data ? location.data.data ? location.data.data.data : [] : []
+        setlocation(data)
+    },[location])
 
     useEffect(() => {
         dispatch(ViewAllDepartment());
-        dispatch(AllProductView());
+        dispatch(ViewAllLocation());
     }, []);
 
     const deletedemo = (id, index) => {
@@ -111,10 +120,9 @@ const Index = ({ dispatch, res, view, respro }) => {
                             <div className="form-group">
 
                                 <div className='form-group'>
-                                    <label>scan product</label>
                                     <BarcodeScannerComponent
-                                        width={400}
-                                        height={400}
+                                        width={350}
+                                        height={350}
                                         onUpdate={(err, result) => {
 
                                             if (result) setData(result.text)
@@ -137,10 +145,10 @@ const Index = ({ dispatch, res, view, respro }) => {
                                     <select name="state" className=" form-control" id="" onChange={handleInput} value={outward.state}>
                                         <option>choose state</option>
                                         {
-                                            citylist ?
-                                                citylist.map((val, id) => {
+                                            locationdata ?
+                                            locationdata.map((val, id) => {
                                                     return (
-                                                        <option value={val.city} key={id}>{val.city},{val.state}</option>
+                                                        <option value={val.location} key={id}>{val.location}</option>
                                                     )
                                                 }) : <option >Loding...</option>
                                         }
@@ -199,7 +207,7 @@ const Index = ({ dispatch, res, view, respro }) => {
 const mapStateToProps = (state) => ({
     res: state.AddfullOutward,
     view: state.ViewAllDepartment,
-    respro: state.AllProductView,
+    location:state.ViewAllLocation,
     del: state.DeleteOutward
 
 });
