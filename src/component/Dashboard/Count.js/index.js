@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { connect } from "react-redux";
 import { CountReport } from "../../../store/Action/FetchData"
 import '../../../css/count/style.css'
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import BusinessIcon from '@mui/icons-material/Business';
 import CategoryIcon from '@mui/icons-material/Category';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 function Count({ dispatch, res }) {
 
@@ -37,7 +38,8 @@ function Count({ dispatch, res }) {
       <section className="content">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-lg-4 col-6 ">
+            <div className="col-lg-3 col-6 ">
+              <Link to="/viewcategory ">
               <div className="small-box py-2">
                 <div className="inner">
                   <h3>{Data.category_count}</h3>
@@ -46,11 +48,12 @@ function Count({ dispatch, res }) {
                 <div className="icon">
                   <CategoryIcon  className='mt-2'/>
                 </div>
-
               </div>
+              </Link>
             </div>
-            <div className="col-lg-4 col-6">
-              <div className="small-box py-2">
+            <div className="col-lg-3 col-6">
+             <Link to="/departmenttable">
+             <div className="small-box py-2">
                 <div className="inner">
                   <h3>{Data.department_count}</h3>
                   <p>Total Department</p>
@@ -58,11 +61,12 @@ function Count({ dispatch, res }) {
                 <div className="icon">
               <BusinessIcon className='mt-2'/>
                 </div>
-
               </div>
+             </Link>
             </div>
-            <div className="col-lg-4 col-6">
-              <div className="small-box py-2">
+            <div className="col-lg-3 col-6">
+             <Link to="/viewproduct">
+               <div className="small-box py-2">
                 <div className="inner">
                   <h3>{Data.product_count}</h3>
                   <p>Total Product</p>
@@ -70,8 +74,22 @@ function Count({ dispatch, res }) {
                 <div className="icon">
                 <ProductionQuantityLimitsIcon className='mt-2'/>
                 </div>
+              </div>
+             </Link>
+            </div>
+            <div className="col-lg-3 col-6">
+              <Link to="/finish-product">
+              <div className="small-box danger py-2">
+                <div className="inner">
+                  <h3 className='text-danger'>{Data.product_about_to_finish}</h3>
+                  <p className='text-danger'>Total Product</p>
+                </div>
+                <div className="icon">
+                <ErrorOutlineIcon className='mt-2 text-danger'/>
+                </div>
 
               </div>
+              </Link>
             </div>
             
           </div>

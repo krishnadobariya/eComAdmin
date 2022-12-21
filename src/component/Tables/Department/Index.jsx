@@ -242,20 +242,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte ,del}) => {
                                                                 value={Department.name}
                                                                 onChange={handleInput} />
                                                         </div>
-                                                        <div className="">
-                                                            <label>Location</label>
-                                                            <select name="location" className=" form-control" id="" onChange={handleInput} value={Department.location}>
-                                                                <option>choose state</option>
-                                                                {
-                                                                    citylist ?
-                                                                        citylist.map((val, id) => {
-                                                                            return (
-                                                                                <option value={val.city} key={id}>{val.city},{val.state}</option>
-                                                                            )
-                                                                        }) : <option >Loding...</option>
-                                                                }
-                                                            </select>
-                                                        </div>
+                                                       
                                                         <button type="submit" class="btn add-btn" onClick={handleUpdate}>Update</button>
                                                     </form>
                                                 </Modal.Body>

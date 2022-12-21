@@ -14,6 +14,7 @@ export function CountReport() {
             {
                 headers: { "jwt": token }
             });
+            console.log("res::",response)
         const return_response = {
             type: "GET_COUNT",
             payload: response,
