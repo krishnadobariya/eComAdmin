@@ -652,3 +652,76 @@ export function FullGetOutward(id) {
     }
 }
 
+
+// Location viewall
+
+
+export function ViewAllLocation() {
+    return async (dispatch) => {
+        const response = await axios.get(`${Baseurl}/location/view`,
+            {
+                headers: { "jwt": token }
+            });
+        const return_response = {
+            type: "GET_ALLLOCATION",
+            payload: response,
+        };
+
+        dispatch(return_response);
+    };
+}
+
+
+// delte location by id 
+export function DeleteLocation(id) {
+
+    return async (dispatch) => {
+        const response = await axios.delete(`${Baseurl}/location/delete/${id}`,
+            {
+                headers: { "jwt": token }
+            });
+        const return_response = {
+            type: "DEL_LOCATION",
+            payload: response,
+        };
+
+        dispatch(return_response);
+    };
+}
+
+
+
+// departmet view byid 
+export function LocationViewById(id) {
+    console.log("id::",id)
+    return async (dispatch) => {
+        const response = await axios.get(`${Baseurl}/location/view-by-id/${id}`,
+            {
+                headers: { "jwt": token }
+            });
+            console.log("res::",response)
+        const return_response = {
+            type: "GET_LOCATIONBYID",
+            payload: response,
+        };
+
+        dispatch(return_response);
+    };
+}
+
+
+// departmet view byid  fro upadte
+export function LocationViewByIdUpdate(id) {
+    return async (dispatch) => {
+        const response = await axios.get(`${Baseurl}/location/view-by-id/${id}`,
+            {
+                headers: { "jwt": token }
+            });
+        const return_response = {
+            type: "GET_LOCATIONBYIDFORUPDATE",
+            payload: response,
+        };
+
+        dispatch(return_response);
+    };
+}

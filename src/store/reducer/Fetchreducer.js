@@ -408,3 +408,50 @@ export function AllOutwardGetReducer(state = initialState, action) {
   }
 
 
+
+// FETCH loaction
+
+export function FetchAllLocationReducer(state = initialState, action) {
+    switch (action.type) {
+        case "GET_ALLLOCATION":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}
+
+// DELETE LOCATION
+
+export function DeletLoactionReducer(state = initialState, action) {
+    switch (action.type) {
+        case "DEL_LOCATION":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}
+
+//view by id LOCATION
+
+export function ViewByIdLoactionReducer(state = initialState, action) {
+    switch (action.type) {
+        case "GET_LOCATIONBYID":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}
+
+//view by id location fro update
+
+export function ViewByIdLoactionUpdateReducer(state = initialState, action) {
+    switch (action.type) {
+        case "GET_LOCATIONBYIDFORUPDATE":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}
+
+
+

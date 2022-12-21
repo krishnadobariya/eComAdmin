@@ -64,3 +64,14 @@ export function UpadteDepartmentReducer(state = initialState, action) {
             return state;
     }
 }
+
+// UPDATE LOCATION
+
+export function UpadteLocationReducer(state = initialState, action) {
+    switch (action.type) {
+        case "UPDATE_LOCATION":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}

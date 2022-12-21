@@ -129,17 +129,8 @@ const Index = ({ dispatch, res, view, respro }) => {
                                 </div>
                                 <div className="form-group ">
                                     <label>Product Name</label>
-                                    <select type="text" className="form-control" name="qrdata" value={qrdata} onChange={(e)=>setData(e.target.value)} >
-                                    <option>choose product</option>
-                                        {
-                                            uniq ?
-                                            uniq.map((val, id) => {
-                                                    return (
-                                                        <option value={val.uniqueKeyForProduct} key={id}>{val.uniqueKeyForProduct},{val.Name}</option>
-                                                    )
-                                                }) : <option >Loding...</option>
-                                        }
-                                        </select>
+                                    <input type="text" className="form-control" name="qrdata" value={qrdata} onChange={(e)=>setData(e.target.value)} />
+                                    
                                 </div>
                                 <div className="">
                                     <label>Location</label>

@@ -124,3 +124,20 @@ export function AddfullOutward(data) {
 
 
 
+
+
+//Add location
+export function AddLocationType(data) {
+    return async (dispatch) => {
+        const response = await axios.post(`${Baseurl}/location/insert`, data,
+            {
+                headers: { "jwt": token }
+            });
+            console.log("res::",response)
+        var return_response = {
+            type: "ADD_LOCATION",
+            payload: response,
+        };
+        dispatch(return_response);
+    }
+}

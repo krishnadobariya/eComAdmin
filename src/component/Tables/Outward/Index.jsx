@@ -91,7 +91,7 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
 
         },
         {
-            name: "Department",
+            name: "Item department Name",
             selector: (row) => row.department,
             sortable: true,
         },
@@ -187,7 +187,7 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
                                         </div>
                                         <hr></hr>
                                         <div className='d-flex'>
-                                            <span className='px-3'>department:</span><span> {outward.department}</span>
+                                            <span className='px-3'>Item department:</span><span> {outward.department}</span>
                                         </div>
                                         <hr></hr>
                                         <div className='d-flex'>

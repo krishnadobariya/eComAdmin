@@ -21,6 +21,8 @@ import Manager from './pages/Report/Manger/Index';
 import OutwardReport from './pages/Report/Outward/Index';
 import FinishPro from './pages/Report/FinishPro/Index';
 import DepartmentPrint from './pages/Departmentprint/Index';
+import Location from './pages/Forms/Department/Loaction/Index'
+import LocationTable from './pages/Tables/Location/Index';
 
 
 function App() {
@@ -54,7 +56,8 @@ function App() {
           <Route path='/outward-report' element={token ? <OutwardReport /> : <Login />} />
           <Route path='/finish-product' element={token ? <FinishPro /> : <Login />} />
           <Route path='/print/:name' element={token ? <DepartmentPrint /> : <Login />} />
-         
+          <Route path='/locationform' element={token ? <Location /> : <Login />} />
+          <Route path='/Locationtable' element={token ? <LocationTable/>:<Login/>}/>
         </Routes>
       </div>
 

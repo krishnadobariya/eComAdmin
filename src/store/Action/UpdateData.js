@@ -117,3 +117,23 @@ export function UpdateOutward(data, id) {
         dispatch(return_response);
     };
 }
+
+
+
+// ------UPDATE LOCATION
+
+export function UpdateLoaction(data, id) {
+    return async (dispatch) => {
+
+        const response = await axios.put(`${Baseurl}/LOCATION/update/${id}`, data,
+            {
+                headers: { "jwt": token }
+            });
+        const return_response = {
+            type: "UPDATE_LOCATION",
+            payload: response,
+        };
+
+        dispatch(return_response);
+    };
+}

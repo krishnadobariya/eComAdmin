@@ -78,3 +78,13 @@ export function AddAllOutwardReducer(state = initialState, action) {
 }
 
 
+// add loaction
+
+export function AddLocationTypeReducer(state = initialState, action) {
+  switch (action.type) {
+    case "ADD_LOCATION":
+      return { data: action.payload, loading: false };
+    default:
+      return state;
+  }
+}

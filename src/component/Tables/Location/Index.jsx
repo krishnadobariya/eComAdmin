@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
-import { ViewAllDepartment, DeleteDepartment, DepartmentViewById, DepartmentViewByIdUpdate } from "../../../store/Action/FetchData"
-import { UpdateDepartment } from '../../../store/Action/UpdateData'
+import { ViewAllLocation, DeleteLocation, LocationViewById, LocationViewByIdUpdate } from "../../../store/Action/FetchData"
+import { UpdateLoaction } from '../../../store/Action/UpdateData'
 import DataTable from 'react-data-table-component'
 import Modal from 'react-bootstrap/Modal';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -19,23 +19,24 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
 
     const [search, setSearch] = useState("");
     const [filterdata, setfilter] = useState([]);
-    const [Department, SetDepartment] = useState([])
+    const [Loaction, SetLoaction] = useState([])
     const [modalShow, setModalShow] = React.useState(false);
     const [viewId, setViewId] = useState();
     const [modalShow2, setModalShow2] = useState(false);
 
 
     useEffect(() => {
-        dispatch(ViewAllDepartment());
+        dispatch(ViewAllLocation());
     }, []);
 
 
     const data = res.data ? res.data.data ? res.data.data.data : [] : []
+    console.log("daata:::",data)
 
     useEffect(() => {
         if (data) {
             const result = data.filter(val => {
-                return val.name.toLowerCase().match(search.toLowerCase());
+                return val.location.toLowerCase().match(search.toLowerCase());
             });
             setfilter(result);
         }
@@ -43,45 +44,47 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
 
     // DELETE-------------------
 
-    const deleteDepartment = (id) => {
-        dispatch(DeleteDepartment(id));
+    const deletelocation = (id) => {
+        dispatch(DeleteLocation(id));
         setTimeout(() => {
-            window.location = "/departmenttable"
+            window.location = "/Locationtable"
         }, 400);
     }
 
     // VIEW------------------
 
     const handleviewOpen = (id) => {
-        dispatch(DepartmentViewById(id));
+        dispatch(LocationViewById(id));
         setModalShow2(true)
     }
 
     useEffect(() => {
-        const data2 = resById.data ? resById.data.data ? resById.data.data.data : [] : []
-        SetDepartment(data2)
+        const data2 = resById.data ? resById.data.data ?resById.data.data.data :[] : []
+        SetLoaction(data2)
+        console.log(".............",Loaction)
     }, [resById])
+    
 
     // UPDATE--------------------
 
     const handleOpen = (id) => {
-        dispatch(DepartmentViewByIdUpdate(id));
+        dispatch(LocationViewByIdUpdate(id));
         setModalShow(true)
     }
     useEffect(() => {
         const data2 = resUpadte.data ? resUpadte.data.data ? resUpadte.data.data.data : [] : []
-        SetDepartment(data2)
+        SetLoaction(data2)
 
     }, [resUpadte])
 
     const handleInput = (e) => {
         const { name, value } = e.target
-        SetDepartment({ ...Department, [name]: value })
+        SetLoaction({ ...Loaction, [name]: value })
     }
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        dispatch(UpdateDepartment(Department, Department._id));
+        dispatch(UpdateLoaction(Loaction, Loaction._id));
 
     };
     useEffect(() => {
@@ -96,7 +99,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
 
                 });
                 setTimeout(() => {
-                    window.location = "/departmenttable"
+                    window.location = "/Locationtable"
                 }, 1000);
             }
             else if (data.code == 500) {
@@ -105,7 +108,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
                     timeOut: 1000,
                 });
                 setTimeout(() => {
-                    window.location = "/departmenttable"
+                    window.location = "/Locationtable"
                 }, 1000);
             }
             else if (data.code == 403) {
@@ -114,7 +117,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
                     timeOut: 1000,
                 });
                 setTimeout(() => {
-                    window.location = "/departmenttable"
+                    window.location = "/Locationtable"
                 }, 1000);
             }
         }
@@ -123,15 +126,15 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
 
     const columns = [
         {
-            name: "Item Department Name",
-            selector: (row) => row.name,
+            name: "LOCATION",
+            selector: (row) => row.location,
             sortable: true,
         },
         {
             name: "Action",
             cell: (row) => <>
                 <VisibilityIcon onClick={() => { setViewId(row._id); handleviewOpen(row._id) }} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
-                <DeleteIcon onClick={() => deleteDepartment(row._id)} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
+                <DeleteIcon onClick={() => deletelocation(row._id)} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
                 <EditIcon onClick={() => { setViewId(row._id); handleOpen(row._id) }} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon>
 
             </>
@@ -148,13 +151,13 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
                     <div className='row py-3'>
 
                         <div className='col-md-12 px-0'>
-                            <div className='add-link'><Link to="/departmemt" >ADD</Link></div>
+                            <div className='add-link'><Link to="/locationform" >ADD</Link></div>
                             {
                                 data == "null" ?
                                     <h1>loading....</h1>
                                     :
                                     <DataTable
-                                        title="DEPARTMENT LIST"
+                                        title="LOCATION LIST"
                                         columns={columns}
                                         data={filterdata == "" ? data : filterdata}
                                         pagination
@@ -180,7 +183,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
                             {
                                 modalShow == true ?
                                     <>
-                                        {Department.name == null ?
+                                        {Loaction.location == null ?
                                             <Modal
                                                 show={modalShow}
                                                 onHide={() => setModalShow(false)}
@@ -201,17 +204,10 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
                                                 centered>
                                                 <Modal.Body>
                                                     <form className='add-form'>
-                                                        <div class="form-group">
-                                                            <label>Item Departmemt Name</label>
-                                                            <input type="text"
-                                                                class="form-control"
-                                                                name="name"
-                                                                value={Department.name}
-                                                                onChange={handleInput} />
-                                                        </div>
+                                                    
                                                         <div className="">
                                                             <label>Location</label>
-                                                            <select name="location" className=" form-control" id="" onChange={handleInput} value={Department.location}>
+                                                            <select name="location" className=" form-control" id="" onChange={handleInput} value={Loaction.location}>
                                                                 <option>choose state</option>
                                                                 {
                                                                     citylist ?
@@ -235,7 +231,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
 
                             {modalShow2 == true ?
                                 <>
-                                    {Department.name == null ? <Modal
+                                    {Loaction.location == null ? <Modal
                                         show={modalShow2}
                                         onHide={() => setModalShow2(false)}
                                         size="lg"
@@ -256,12 +252,12 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
                                     >
                                         <Modal.Header>
                                             <Modal.Title id="contained-modal-title-vcenter">
-                                                Department
+                                                Location
                                             </Modal.Title>
                                         </Modal.Header>
                                         <Modal.Body>
                                             <div className='d-flex'>
-                                                <span className='px-3'> Item Department Name :</span><span> {Department.name}</span>
+                                                <span className='px-3'> Location :</span><span> {Loaction.location}</span>
                                             </div>
                                            
                                         </Modal.Body>
@@ -278,10 +274,10 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
 }
 
 const mapStateToProps = (state) => ({
-    res: state.ViewAllDepartment,
-    resById: state.DepartmentViewById,
-    resUpadte: state.DepartmentViewByIdUpdate,
-    updateres: state.UpdateDepartment
+    res: state.ViewAllLocation,
+    resById: state.LocationViewById,
+    resUpadte: state.LocationViewByIdUpdate,
+    updateres: state.UpdateLoaction
 });
 
 export default connect(mapStateToProps)(Index);

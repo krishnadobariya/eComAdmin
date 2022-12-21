@@ -116,7 +116,7 @@ const Index = ({ dispatch, res, view, viewsub }) => {
                         return (
                           <option value={val.cat_name} key={id}>{val.cat_name}</option>
                         )
-                      }) : <option >no data found</option>
+                      }) : <option >No Data Found</option>
                   }
                 </select>
               </div>
@@ -130,7 +130,7 @@ const Index = ({ dispatch, res, view, viewsub }) => {
                         return (
                           <option value={val.subCat_name} key={id}>{val.subCat_name}</option>
                         )
-                      }) : <option>no data found</option>
+                      }) : <option>No Data Found</option>
                   }
                 </select>
               </div>

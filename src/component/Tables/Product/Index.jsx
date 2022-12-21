@@ -201,7 +201,8 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro }) => {
     var printWindow = window.open('', 'PrintMap',
       'width=' + width + ',height=' + height);
     printWindow.document.writeln(container.innerHTML);
-    printWindow.document.close();
+    // printWindow.document.close();
+  
     printWindow.print();
     printWindow.close();
   }

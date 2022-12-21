@@ -40,7 +40,11 @@ import {
     FetchFinishProReportReducer,
     FetchHistoryReducer,
     AllOutwardGetReducer,
-    DeletePrslipReducer
+    DeletePrslipReducer,
+    FetchAllLocationReducer,
+    DeletLoactionReducer,
+    ViewByIdLoactionReducer,
+    ViewByIdLoactionUpdateReducer
 } from "./reducer/Fetchreducer"
 
 import {
@@ -49,7 +53,8 @@ import {
     UpadteSubcategoryReducer,
     UpadtecategoryReducer,
     UpadteOutwardReducer,
-    UpadteDepartmentReducer
+    UpadteDepartmentReducer,
+    UpadteLocationReducer
 } from './reducer/Upadatereducer'
 
 import {
@@ -59,7 +64,9 @@ import {
     AddCategoryTypeReducer,
     AddDepartmentTypeReducer,
     AddOutwardReducer,
-    AddAllOutwardReducer
+    AddAllOutwardReducer,
+    AddLocationTypeReducer
+    
 } from './reducer/Addreducer'
 
 import { Admin_LoginReducer } from './reducer/Adminreducer'
@@ -78,6 +85,7 @@ const rootReducer = combineReducers({
     AddDepartmentType: AddDepartmentTypeReducer,
     AddOutward: AddOutwardReducer,
     AddfullOutward:AddAllOutwardReducer,
+    AddLocationType:AddLocationTypeReducer,
 
     // view
     AllProductView: AllProductReducer,
@@ -108,6 +116,9 @@ const rootReducer = combineReducers({
     ViewFinishProduct:FetchFinishProReportReducer,
     ViewHistory:FetchHistoryReducer,
     FullGetOutward:AllOutwardGetReducer,
+    ViewAllLocation:FetchAllLocationReducer,
+    LocationViewById:ViewByIdLoactionReducer,
+    LocationViewByIdUpdate:ViewByIdLoactionUpdateReducer,
    
     // delete
     DeleteProduct: DeleteProductReducer,
@@ -117,6 +128,7 @@ const rootReducer = combineReducers({
     DeleteDepartment: DeleteDepartmentReducer,
     DeleteOutward: DeleteOutwardReducer,
     DeletePrslip:DeletePrslipReducer,
+    DeleteLocation:DeletLoactionReducer,
     // update
     UpdateProduct: UpadteProductReducer,
     UpdateType: UpadteTypeReducer,
@@ -124,6 +136,7 @@ const rootReducer = combineReducers({
     UpdateCategory: UpadtecategoryReducer,
     UpdateOutward: UpadteOutwardReducer,
     UpdateDepartment: UpadteDepartmentReducer,
+    UpdateLoaction:UpadteLocationReducer,
     // admin
     AdminLogin: Admin_LoginReducer
 })

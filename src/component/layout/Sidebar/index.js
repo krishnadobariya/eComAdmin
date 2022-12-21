@@ -44,7 +44,12 @@ function Sidebar() {
                 <p>  Department</p>
               </NavLink>
             </li>
-
+            <li className="nav-item has-treeview menu-open">
+              <NavLink to="/Locationtable" className="nav-link  text-white ">
+             <BusinessIcon className='nav-icon'/>
+                <p> Location</p>
+              </NavLink>
+            </li>
             <li className="nav-item has-treeview">
               <div className="nav-link text-white">
                 <i className="nav-icon far fa-plus-square" />
