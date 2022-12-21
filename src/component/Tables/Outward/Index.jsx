@@ -6,9 +6,9 @@ import Modal from 'react-bootstrap/Modal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Index = ({ dispatch, res, resdel, viewById }) => {
 
@@ -70,7 +70,43 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
 
     }, [viewById])
 
-
+    useEffect(() => {
+        const data = resdel.data ? resdel.data.data : []
+    
+        if (data) {
+          if (data.code == 200) {
+            toast.success(data.message, {
+              position: toast.POSITION.TOP_CENTER,
+              timeOut: 1000,
+    
+            });
+            setTimeout(() => {
+              window.location = "/outwardtable"
+            }, 1000);
+          }
+          else if (data.code == 500) {
+            toast.error(data.message, {
+              position: toast.POSITION.TOP_CENTER,
+              timeOut: 1000,
+            });
+            setTimeout(() => {
+              window.location = "/outwardtable"
+            }, 1000);
+    
+          }
+          else if (data.code == 403) {
+            toast.error(data.message, {
+              position: toast.POSITION.TOP_CENTER,
+              timeOut: 1000,
+            });
+            setTimeout(() => {
+              window.location = "/outwardtable"
+            }, 1000);
+    
+          }
+        }
+      }, [resdel])
+    
 
 
 
@@ -116,8 +152,8 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
 
         <>
             <div style={{ width: "100%" }}>
-                <ToastContainer />
                 <div className='container-fluid'>
+                <ToastContainer />
                     <div className='row py-3'>
                         <div className='col-md-12 px-0'>
 
@@ -232,7 +268,7 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
 
 const mapStateToProps = (state) => ({
     res: state.ViewAllOutward,
-    resdel: state.DeleteOutward,
+    resdel: state.DeletePrslip,
     viewById: state.OutwardViewById,
     viewUpadte: state.OutwardViewByIdUpdate,
 });

@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Index = ({ dispatch, res, resById, resUpdateById, update }) => {
+const Index = ({ dispatch, res, resById, resUpdateById, update ,del}) => {
 
 
     const [search, setSearch] = useState("");
@@ -40,11 +40,41 @@ const Index = ({ dispatch, res, resById, resUpdateById, update }) => {
 
     const DelteCategory = (id) => {
         dispatch(DeleteCategory(id));
-        setTimeout(() => {
-            window.location = "/viewcategory"
-        }, 400);
+       
     }
+    useEffect(() => {
+        const data = del.data ? del.data.data : []
+        if (data) {
+            if (data.code == 200) {
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
 
+                });
+                setTimeout(() => {
+                    window.location = "/viewcategory"
+                }, 1000);
+            }
+            else if (data.code == 500) {
+                toast.error(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+                });
+                setTimeout(() => {
+                    window.location = "/viewcategory"
+                }, 1000);
+            }
+            else if (data.code == 403) {
+                toast.error(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+                });
+                setTimeout(() => {
+                    window.location = "/viewcategory"
+                }, 800);
+            }
+        }
+    }, [del])
     // UPDATE--------------------
 
     const handleOpen = (id) => {
@@ -71,9 +101,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update }) => {
     };
 
     useEffect(() => {
-
         const data = update.data ? update.data.data : []
-
         if (data) {
             if (data.code == 200) {
                 toast.success(data.message, {
@@ -249,7 +277,9 @@ const mapStateToProps = (state) => ({
     res: state.ViewAllCategory,
     resById: state.CategoryViewById,
     resUpdateById: state.CategoryViewByIdForUpadte,
-    update: state.UpdateCategory
+    update: state.UpdateCategory,
+    del:state.DeleteCategory
+   
 });
 
 export default connect(mapStateToProps)(Index);

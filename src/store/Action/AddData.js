@@ -109,6 +109,7 @@ export function AddOutward(id,data) {
 
 //Add OUTWARD
 export function AddfullOutward(data) {
+    console.log("data=========",data)
 
     return async (dispatch) => {
         const response = await axios.post(`${Baseurl}/outward/insertManyOutward`,data);

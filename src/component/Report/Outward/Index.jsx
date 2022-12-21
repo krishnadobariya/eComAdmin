@@ -84,7 +84,7 @@ const Index = ({ dispatch, res }) => {
                                                 className='w-25 form-control'
                                                 value={search}
                                                 onChange={(event) => setSearch(event.target.value)}
-                                                style={{border:"1px solid gray"}}
+                                                style={{border:"1px solid gray"}}   
                                             />
                                         }
 

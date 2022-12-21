@@ -14,7 +14,7 @@ import {citylist} from '../../cityname'
 
 
 
-const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
+const Index = ({ dispatch, res, resById, updateres, resUpadte ,del}) => {
 
 
     const [search, setSearch] = useState("");
@@ -45,10 +45,43 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
 
     const deleteDepartment = (id) => {
         dispatch(DeleteDepartment(id));
-        setTimeout(() => {
-            window.location = "/departmenttable"
-        }, 400);
+   
     }
+    useEffect(() => {
+
+        const data = del.data ? del.data.data : []
+
+        if (data) {
+            if (data.code == 200) {
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+
+                });
+                setTimeout(() => {
+                    window.location = "/departmenttable"
+                }, 1000);
+            }
+            else if (data.code == 500) {
+                toast.error(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+                });
+                setTimeout(() => {
+                    window.location = "/departmenttable"
+                }, 1000);
+            }
+            else if (data.code == 403) {
+                toast.error(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+                });
+                setTimeout(() => {
+                    window.location = "/departmenttable"
+                }, 1000);
+            }
+        }
+    }, [del])
 
     // VIEW------------------
 
@@ -281,7 +314,8 @@ const mapStateToProps = (state) => ({
     res: state.ViewAllDepartment,
     resById: state.DepartmentViewById,
     resUpadte: state.DepartmentViewByIdUpdate,
-    updateres: state.UpdateDepartment
+    updateres: state.UpdateDepartment,
+    del:state.DeleteDepartment
 });
 
 export default connect(mapStateToProps)(Index);

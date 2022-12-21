@@ -100,7 +100,7 @@ const Index = ({ dispatch, res, view,location  }) => {
 
         if (id) {
             a.splice(index, 1)
-            dispatch(DeleteOutward(id))
+          
         }
     }
     const data = view.data ? view.data.data ? view.data.data.data : [] : []

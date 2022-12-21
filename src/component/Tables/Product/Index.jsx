@@ -24,7 +24,7 @@ import Barcode from 'react-barcode';
 import jsPDF from "jspdf";
 
 
-const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro }) => {
+const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro ,del}) => {
 
 
   const [search, setSearch] = useState("");
@@ -62,14 +62,15 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro }) => {
 
   const DelteProduct = (id) => {
     dispatch(DeleteProduct(id));
-    setTimeout(() => {
-      window.location = "/viewproduct"
-    }, 400);
+    // setTimeout(() => {
+    //   window.location = "/viewproduct"
+    // }, 400);
   }
 
   // UPDATE---------------
 
   const handleOpen = (id) => {
+    console.log("iddd:::",id)
     dispatch(ProductViewByIdUpadte(id));
     setModalShow(true)
   }
@@ -98,7 +99,8 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro }) => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    dispatch(UpdateProduct(Product, Product._id));
+    console.log("Product.uniqueKeyForProduct",Product)
+    dispatch(UpdateProduct(Product, Product.uniqueKeyForProduct));
   };
 
   useEffect(() => {
@@ -145,6 +147,46 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro }) => {
   }, [upadtepro])
 
 
+
+  useEffect(() => {
+    const data = del.data ? del.data.data : []
+
+    if (data) {
+      if (data.code == 200) {
+        toast.success(data.message, {
+          position: toast.POSITION.TOP_CENTER,
+          timeOut: 1000,
+
+        });
+        setTimeout(() => {
+          window.location = "/viewproduct"
+        }, 1000);
+      }
+      else if (data.code == 500) {
+        toast.error(data.message, {
+          position: toast.POSITION.TOP_CENTER,
+          timeOut: 1000,
+        });
+        setTimeout(() => {
+          window.location = "/viewproduct"
+        }, 1000);
+
+      }
+      else if (data.code == 403) {
+        toast.error(data.message, {
+          position: toast.POSITION.TOP_CENTER,
+          timeOut: 1000,
+        });
+        setTimeout(() => {
+          window.location = "/viewproduct"
+        }, 1000);
+
+      }
+    }
+  }, [del])
+
+
+
   // VIEW-------------------
 
   const handleviewOpen = (id) => {
@@ -189,7 +231,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro }) => {
 
   const View = view.data ? view.data.data ? view.data.data.data : [] : []
 
-
+console.log("View" , View);
 
 
   
@@ -234,6 +276,10 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro }) => {
       name: "Date",
       selector: (row) => row.createdAt,
       sortable: true
+    },
+    {
+      name:"unique",
+      selector:(row)=>row.uniqueKeyForProduct,
     },
     {
       name: "action",
@@ -521,7 +567,9 @@ const mapStateToProps = (state) => ({
   // viewsub: state.AllSubCategoryView,
   // type: state.TypeView,
   Qr: state.ProductViewByIdForQr,
-  upadtepro: state.UpdateProduct
+  upadtepro: state.UpdateProduct,
+  del:state.DeleteProduct
+ 
 
 
 });

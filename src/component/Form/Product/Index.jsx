@@ -89,8 +89,8 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
   }, [res])
 
   const data = view.data ? view.data.data ? view.data.data.data : [] : []
-  const viewSub = viewsub.data ? viewsub.data.data ? viewsub.data.data.data : [] : []
-  const typeview = type.data ? type.data.data ? type.data.data.data : [] : []
+  // const viewSub = viewsub.data ? viewsub.data.data ? viewsub.data.data.data : [] : []
+  // const typeview = type.data ? type.data.data ? type.data.data.data : [] : []
 
 
   return (

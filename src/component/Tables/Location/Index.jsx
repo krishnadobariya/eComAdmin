@@ -14,7 +14,7 @@ import {citylist} from '../../cityname'
 
 
 
-const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
+const Index = ({ dispatch, res, resById, updateres, resUpadte ,del}) => {
 
 
     const [search, setSearch] = useState("");
@@ -46,11 +46,44 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
 
     const deletelocation = (id) => {
         dispatch(DeleteLocation(id));
-        setTimeout(() => {
-            window.location = "/Locationtable"
-        }, 400);
+     
     }
 
+    useEffect(() => {
+
+        const data = del.data ? del.data.data : []
+
+        if (data) {
+            if (data.code == 200) {
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+
+                });
+                setTimeout(() => {
+                    window.location = "/Locationtable"
+                }, 1000);
+            }
+            else if (data.code == 500) {
+                toast.error(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+                });
+                setTimeout(() => {
+                    window.location = "/Locationtable"
+                }, 1000);
+            }
+            else if (data.code == 403) {
+                toast.error(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+                });
+                setTimeout(() => {
+                    window.location = "/Locationtable"
+                }, 1000);
+            }
+        }
+    }, [del])
     // VIEW------------------
 
     const handleviewOpen = (id) => {
@@ -123,6 +156,8 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte }) => {
         }
     }, [updateres])
 
+
+   
 
     const columns = [
         {
@@ -277,7 +312,9 @@ const mapStateToProps = (state) => ({
     res: state.ViewAllLocation,
     resById: state.LocationViewById,
     resUpadte: state.LocationViewByIdUpdate,
-    updateres: state.UpdateLoaction
+    updateres: state.UpdateLoaction,
+    del:state.DeleteLocation
+  
 });
 
 export default connect(mapStateToProps)(Index);
