@@ -241,9 +241,9 @@ console.log("View" , View);
 
   const onPrintBarcode = () => {
     var container = document.getElementById("qrDiv");
-    var width = "100%";
-    var height = "100%";
-    var printWindow = window.open('', 'PrintMap',
+    var width = "400";
+    var height = "400";
+    var printWindow = window.open('', '',
       'width=' + width + ',height=' + height);
     printWindow.document.writeln(container.innerHTML);
     // printWindow.document.close();

@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Index = ({ dispatch, res, resById, resUpdateById, update ,del}) => {
+const Index = ({ dispatch, res, resById, resUpdateById, update, del }) => {
 
 
     const [search, setSearch] = useState("");
@@ -20,7 +20,8 @@ const Index = ({ dispatch, res, resById, resUpdateById, update ,del}) => {
     const [viewCategory, SetViewCategory] = useState([]);
     const [modalShow, setModalShow] = React.useState(false);
     const [modalShow2, setModalShow2] = useState(false);
-
+    const [modalShow3, setModalShow3] = useState(false);
+    const [deletId,setDelateId] = useState("")
 
     useEffect(() => {
         dispatch(ViewAllCategory());
@@ -38,10 +39,13 @@ const Index = ({ dispatch, res, resById, resUpdateById, update ,del}) => {
 
     // DELETE-------------
 
-    const DelteCategory = (id) => {
-        dispatch(DeleteCategory(id));
-       
+    const deletcategory = () => {
+        dispatch(DeleteCategory(deletId));
+
     }
+   
+   
+   
     useEffect(() => {
         const data = del.data ? del.data.data : []
         if (data) {
@@ -97,7 +101,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update ,del}) => {
     const handleUpdate = (e) => {
         e.preventDefault();
         dispatch(UpdateCategory(Category, Category._id));
-       
+
     };
 
     useEffect(() => {
@@ -164,7 +168,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update ,del}) => {
             name: "Action",
             cell: (row) => <>
                 <VisibilityIcon onClick={() => handleviewOpen(row._id)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
-                <DeleteIcon onClick={() => DelteCategory(row._id)} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
+                <DeleteIcon onClick={() => { setModalShow3(true);setDelateId(row._id);}}  className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
                 <EditIcon onClick={() => handleOpen(row._id)} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon>
 
             </>
@@ -203,7 +207,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update ,del}) => {
                                                 className='w-25 form-control'
                                                 value={search}
                                                 onChange={(event) => setSearch(event.target.value)}
-                                                style={{border:"1px solid gray"}}
+                                                style={{ border: "1px solid gray" }}
                                             />
                                         }
                                     />
@@ -263,6 +267,23 @@ const Index = ({ dispatch, res, resById, resUpdateById, update ,del}) => {
                                 </Modal.Body>
 
                             </Modal>
+
+                            <Modal
+                                show={modalShow3}
+                                onHide={() => setModalShow3(false)}
+                                size="sm"
+                                aria-labelledby="contained-modal-title-vcenter"
+                                centered
+                            >
+
+                                <Modal.Body>
+                                    <div className='text-center'>ARE YOU SURE FOR DELETE THIS LOCATION ?</div>
+                                    <div className='d-flex justify-content-center delete-model'>
+                                        <button className='text-yes' onClick={deletcategory}>YES</button><button className='text-no' onClick={() => setModalShow3(false)}>NO</button>
+                                    </div>
+                                </Modal.Body>
+
+                            </Modal>
                         </div>
                     </div>
                 </div>
@@ -278,8 +299,8 @@ const mapStateToProps = (state) => ({
     resById: state.CategoryViewById,
     resUpdateById: state.CategoryViewByIdForUpadte,
     update: state.UpdateCategory,
-    del:state.DeleteCategory
-   
+    del: state.DeleteCategory
+
 });
 
 export default connect(mapStateToProps)(Index);

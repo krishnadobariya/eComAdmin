@@ -17,7 +17,9 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
     const [filterdata, setfilter] = useState([]);
     const [outward, setOutward] = useState([]);
     const [modalShow2, setModalShow2] = useState(false);
-    const [product, setProduct] = useState([])
+    const [product, setProduct] = useState([]);
+    const [modalShow3, setModalShow3] = useState(false);
+    const [deletId, setDelateId] = useState("")
 
 
 
@@ -39,20 +41,13 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
 
 
     const data = res.data ? res.data.data ? res.data.data.data : [] : []
-    console.log("data====", data);
-
-
-
-
 
     // DELETE-------------------------
 
 
-    const deleteOutward = (id) => {
-        dispatch(DeletePrslip(id));
-        setTimeout(() => {
-            window.location = "/outwardtable"
-        }, 700);
+    const deletcategory = () => {
+        dispatch(DeletePrslip(deletId));
+
     }
 
     // VIEW---------------
@@ -141,7 +136,7 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
             cell: (row) => <>
               <Link to={`/prslipe/${row._id}`} ><PictureAsPdfIcon className="update-btn" style={{ fontSize: "35px" }}/></Link>
                 <VisibilityIcon onClick={() => handleviewOpen(row._id)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
-                <DeleteIcon onClick={() => deleteOutward(row._id)} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
+                <DeleteIcon onClick={() => { setModalShow3(true); setDelateId(row._id); }}  className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
 
             </>
 
@@ -257,6 +252,23 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
                                     </Modal.Body>
 
                                 </Modal>} </> : ""}
+
+                                <Modal
+                                show={modalShow3}
+                                onHide={() => setModalShow3(false)}
+                                size="sm"
+                                aria-labelledby="contained-modal-title-vcenter"
+                                centered
+                            >
+
+                                <Modal.Body>
+                                    <div className='text-center'>ARE YOU SURE FOR DELETE THIS OUTWARD ?</div>
+                                    <div className='d-flex justify-content-center delete-model'>
+                                        <button className='text-yes' onClick={deletcategory}>YES</button><button className='text-no' onClick={() => setModalShow3(false)}>NO</button>
+                                    </div>
+                                </Modal.Body>
+
+                            </Modal>
                     </div>
                 </div>
             </div>

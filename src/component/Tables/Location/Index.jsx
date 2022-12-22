@@ -10,11 +10,11 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {citylist} from '../../cityname'
+import { citylist } from '../../cityname'
 
 
 
-const Index = ({ dispatch, res, resById, updateres, resUpadte ,del}) => {
+const Index = ({ dispatch, res, resById, updateres, resUpadte, del }) => {
 
 
     const [search, setSearch] = useState("");
@@ -23,6 +23,8 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte ,del}) => {
     const [modalShow, setModalShow] = React.useState(false);
     const [viewId, setViewId] = useState();
     const [modalShow2, setModalShow2] = useState(false);
+    const [modalShow3, setModalShow3] = useState(false);
+    const [deletId, setDelateId] = useState("")
 
 
     useEffect(() => {
@@ -31,7 +33,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte ,del}) => {
 
 
     const data = res.data ? res.data.data ? res.data.data.data : [] : []
-    console.log("daata:::",data)
+    console.log("daata:::", data)
 
     useEffect(() => {
         if (data) {
@@ -44,10 +46,12 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte ,del}) => {
 
     // DELETE-------------------
 
-    const deletelocation = (id) => {
-        dispatch(DeleteLocation(id));
-     
+
+    const deletcategory = () => {
+        dispatch(DeleteLocation(deletId));
+
     }
+
 
     useEffect(() => {
 
@@ -84,6 +88,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte ,del}) => {
             }
         }
     }, [del])
+
     // VIEW------------------
 
     const handleviewOpen = (id) => {
@@ -92,11 +97,11 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte ,del}) => {
     }
 
     useEffect(() => {
-        const data2 = resById.data ? resById.data.data ?resById.data.data.data :[] : []
+        const data2 = resById.data ? resById.data.data ? resById.data.data.data : [] : []
         SetLoaction(data2)
-        console.log(".............",Loaction)
+        console.log(".............", Loaction)
     }, [resById])
-    
+
 
     // UPDATE--------------------
 
@@ -157,7 +162,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte ,del}) => {
     }, [updateres])
 
 
-   
+
 
     const columns = [
         {
@@ -169,7 +174,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte ,del}) => {
             name: "Action",
             cell: (row) => <>
                 <VisibilityIcon onClick={() => { setViewId(row._id); handleviewOpen(row._id) }} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
-                <DeleteIcon onClick={() => deletelocation(row._id)} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
+                <DeleteIcon onClick={() => { setModalShow3(true); setDelateId(row._id); }} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
                 <EditIcon onClick={() => { setViewId(row._id); handleOpen(row._id) }} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon>
 
             </>
@@ -239,7 +244,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte ,del}) => {
                                                 centered>
                                                 <Modal.Body>
                                                     <form className='add-form'>
-                                                    
+
                                                         <div className="">
                                                             <label>Location</label>
                                                             <select name="location" className=" form-control" id="" onChange={handleInput} value={Loaction.location}>
@@ -294,10 +299,27 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte ,del}) => {
                                             <div className='d-flex'>
                                                 <span className='px-3'> Location :</span><span> {Loaction.location}</span>
                                             </div>
-                                           
+
                                         </Modal.Body>
 
                                     </Modal>} </> : ""}
+
+                            <Modal
+                                show={modalShow3}
+                                onHide={() => setModalShow3(false)}
+                                size="sm"
+                                aria-labelledby="contained-modal-title-vcenter"
+                                centered
+                            >
+
+                                <Modal.Body>
+                                    <div className='text-center'>ARE YOU SURE FOR DELETE THIS CATEGORY ?</div>
+                                    <div className='d-flex justify-content-center delete-model'>
+                                        <button className='text-yes' onClick={deletcategory}>YES</button><button className='text-no' onClick={() => setModalShow3(false)}>NO</button>
+                                    </div>
+                                </Modal.Body>
+
+                            </Modal>
                         </div>
                     </div>
                 </div>
@@ -313,8 +335,8 @@ const mapStateToProps = (state) => ({
     resById: state.LocationViewById,
     resUpadte: state.LocationViewByIdUpdate,
     updateres: state.UpdateLoaction,
-    del:state.DeleteLocation
-  
+    del: state.DeleteLocation
+
 });
 
 export default connect(mapStateToProps)(Index);
