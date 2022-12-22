@@ -229,7 +229,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro ,del}) 
 
 
   const qrcode = (
-    <Barcode value={uniqid} />
+    <Barcode value={uniqid}  height={50} />
   )
 
   const View = view.data ? view.data.data ? view.data.data.data : [] : []
@@ -243,7 +243,7 @@ console.log("View" , View);
     var container = document.getElementById("qrDiv");
     var width = "400";
     var height = "400";
-    var printWindow = window.open('', '',
+    var printWindow = window.open('', ' ',
       'width=' + width + ',height=' + height);
     printWindow.document.writeln(container.innerHTML);
     // printWindow.document.close();
