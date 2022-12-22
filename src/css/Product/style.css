@@ -107,3 +107,16 @@ option:hover {
 .sc-ckEbSK{
     border-bottom:1px solid gray;
 }
+.delete-model button{
+   margin: 15px 10px;
+   padding: 5px 15px;
+   border: none;
+   border-radius: 5px;
+   color: white;
+}
+.text-yes{
+    background-color: green;
+}
+.text-no{
+    background-color:red;
+}

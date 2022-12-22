@@ -33,9 +33,11 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro ,del}) 
   const [ViewProduct, SetViewProduct] = useState([]);
   const [modalShow, setModalShow] = React.useState(false);
   const [modalShow2, setModalShow2] = useState(false);
+  const [modalShow4, setModalShow4] = useState(false);
   const [qty, setQty] = useState(0);
   const [modalShow3, setModalShow3] = useState(false);
   const [uniqid,setuniqid] = useState("")
+  const [deletId,setDelateId] = useState("")
   
 
   const unit = ['cm','mtr',"kg","gm","pic","box","liter"]
@@ -60,12 +62,13 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro ,del}) 
 
   // DELETE----------------
 
-  const DelteProduct = (id) => {
-    dispatch(DeleteProduct(id));
-    // setTimeout(() => {
-    //   window.location = "/viewproduct"
-    // }, 400);
+
+
+  const deletepro=()=>{
+     dispatch(DeleteProduct(deletId));
   }
+
+
 
   // UPDATE---------------
 
@@ -286,7 +289,7 @@ console.log("View" , View);
       cell: (row) => <>
         <QrCodeIcon onClick={() => handleviewbyqr(row.uniqueKeyForProduct)} className="view-btn" style={{ fontSize: "35px" }} >View</QrCodeIcon>
         <VisibilityIcon onClick={() => handleviewOpen(row.uniqueKeyForProduct)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
-        <DeleteIcon onClick={() => DelteProduct(row.uniqueKeyForProduct)} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
+        <DeleteIcon onClick={() => { setModalShow4(true);setDelateId(row.uniqueKeyForProduct);}} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
         <EditIcon onClick={() => handleOpen(row.uniqueKeyForProduct)} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon>
 
 
@@ -549,6 +552,24 @@ console.log("View" , View);
                   </Modal>} </> : ""}
 
 
+
+
+                  <Modal
+                    show={modalShow4}
+                    onHide={() => setModalShow4(false)}
+                    size="sm"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                  >
+
+                    <Modal.Body>
+                      <div className='text-center'>ARE YOU SURE FOR DELETE THIS PRODUCT ?</div>
+                      <div className='d-flex justify-content-center delete-model'> 
+                      <button  className='text-yes' onClick={deletepro}>YES</button><button className='text-no'  onClick={()=>setModalShow4(false)}>NO</button>
+                      </div>
+                    </Modal.Body>
+
+                  </Modal> 
             </div>
           </div>
         </div>

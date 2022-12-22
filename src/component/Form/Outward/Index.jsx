@@ -62,12 +62,10 @@ const Index = ({ dispatch, res, view,location  }) => {
     }
 
     useEffect(() => {
-        console.log("qrdata", qrdata)
         getdata(qrdata, outward)
     }, [qrdata])
 
     const handleInput = (e) => {
-        console.log("hello", e.target.value)
         const { name, value } = e.target
         SetOutward({ ...outward, [name]: value })
 
