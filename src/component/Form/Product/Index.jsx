@@ -105,7 +105,7 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
             <form className='add-form'>
               <div className="form-group">
                 <label>Product Name</label>
-                <input type="text" className="form-control" name="Name" value={Product.Name} onChange={handleInput} />
+                <input type="text" className="form-control" name="Name" value={Product.Name} onChange={handleInput} autoComplete="off"/>
               </div>
               <div className="form-group ">
                 <label>Category</label>
@@ -154,11 +154,11 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
              */}
               <div className="form-group ">
                 <label>Quantity</label>
-                <input type="text" className="form-control" name="QTY" value={Product.QTY} onChange={handleInput} />
+                <input type="text" className="form-control" name="QTY" value={Product.QTY} onChange={handleInput} autoComplete="off"/>
               </div>
               <div className="form-group ">
                 <label>Price</label>
-                <input type="text" className="form-control" name="Price" value={Product.Price} onChange={handleInput} />
+                <input type="text" className="form-control" name="Price" value={Product.Price} onChange={handleInput} autoComplete="off" />
               </div>
               <div className="form-group">
                 <label>Unit</label>
@@ -177,7 +177,7 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
 
               <div className="form-group">
                 <label>Remark</label>
-                <textarea type="text" className="form-control" name="Remark" rows="3" value={Product.Remark} onChange={handleInput} />
+                <textarea type="text" className="form-control" name="Remark" rows="3" value={Product.Remark} onChange={handleInput} autoComplete="off" />
               </div>
               <button type="submit" className="btn add-btn" onClick={handleAdd}>ADD</button>
             </form>

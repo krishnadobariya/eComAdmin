@@ -86,7 +86,7 @@ const Index = ({ dispatch, res }) => {
                   className="form-control"
                   name="name"
                   value={Department.name}
-                  onChange={handleInput} />
+                  onChange={handleInput} autoComplete="off"/>
               </div>
             
               <button type="submit" className="btn add-btn" onClick={handleAdd}>ADD</button>

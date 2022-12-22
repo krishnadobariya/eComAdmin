@@ -135,12 +135,12 @@ const Index = ({ dispatch, res, view,location  }) => {
                                 </div>
                                 <div className="form-group ">
                                     <label>Product Name</label>
-                                    <input type="text" className="form-control" name="qrdata" value={qrdata} onChange={(e)=>setData(e.target.value)} />
+                                    <input type="text" className="form-control" name="qrdata" value={qrdata} onChange={(e)=>setData(e.target.value)} autoComplete="off"/>
                                     
                                 </div>
                                 <div className="">
                                     <label>Location</label>
-                                    <select name="state" className=" form-control" id="" onChange={handleInput} value={outward.state}>
+                                    <select name="state" className=" form-control" id="" onChange={handleInput} value={outward.state} >
                                         <option>choose state</option>
                                         {
                                             locationdata ?

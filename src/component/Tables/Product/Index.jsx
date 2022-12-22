@@ -229,7 +229,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro ,del}) 
 
 
   const qrcode = (
-    <Barcode value={uniqid}  height={50} />
+    <Barcode value={uniqid}  height={30} />
   )
 
   const View = view.data ? view.data.data ? view.data.data.data : [] : []
@@ -561,7 +561,6 @@ console.log("View" , View);
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
                   >
-
                     <Modal.Body>
                       <div className='text-center'>ARE YOU SURE FOR DELETE THIS PRODUCT ?</div>
                       <div className='d-flex justify-content-center delete-model'> 

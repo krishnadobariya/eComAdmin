@@ -5,7 +5,7 @@ import '../../../css/Product/style.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
-import { citylist } from '../../cityname';
+
 
 
 
@@ -82,17 +82,8 @@ const Index = ({ dispatch, res }) => {
                             <div className="form-group">
                                 <div className="">
                                     <label>Location</label>
-                                    <select name="location" className=" form-control" id="" onChange={handleInput} value={Location.location}>
-                                        <option>choose state</option>
-                                        {
-                                            citylist ?
-                                                citylist.map((val, id) => {
-                                                    return (
-                                                        <option value={val.city} key={id}>{val.city},{val.state}</option>
-                                                    )
-                                                }) : <option >Loding...</option>
-                                        }
-                                    </select>
+                                    <input name="location" className=" form-control" id="" onChange={handleInput} value={Location.location} autoComplete="off"/>
+                                        
                                 </div>
                                 </div>
 

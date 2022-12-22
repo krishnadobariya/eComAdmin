@@ -10,7 +10,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { citylist } from '../../cityname'
+
 
 
 
@@ -247,17 +247,8 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte, del }) => {
 
                                                         <div className="">
                                                             <label>Location</label>
-                                                            <select name="location" className=" form-control" id="" onChange={handleInput} value={Loaction.location}>
-                                                                <option>choose state</option>
-                                                                {
-                                                                    citylist ?
-                                                                        citylist.map((val, id) => {
-                                                                            return (
-                                                                                <option value={val.city} key={id}>{val.city},{val.state}</option>
-                                                                            )
-                                                                        }) : <option >Loding...</option>
-                                                                }
-                                                            </select>
+                                                            <input  name="location" className=" form-control" id="" onChange={handleInput} value={Loaction.location}></input>
+                                                          
                                                         </div>
                                                         <button type="submit" class="btn add-btn" onClick={handleUpdate}>Update</button>
                                                     </form>
