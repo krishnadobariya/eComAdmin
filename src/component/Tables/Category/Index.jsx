@@ -154,7 +154,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update, del }) => {
 
     const columns = [
         {
-            name: "Category Name",
+            name: "Item Department",
             selector: (row) => row.cat_name,
             sortable: true,
         },
@@ -224,7 +224,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update, del }) => {
                                 <Modal.Body>
                                     <form className='add-form'>
                                         <div class="form-group">
-                                            <label>Category Name</label>
+                                            <label>Item Department</label>
                                             <input type="text"
                                                 class="form-control"
                                                 name="cat_name"
@@ -258,7 +258,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update, del }) => {
                                 </Modal.Header>
                                 <Modal.Body>
                                     <div className='d-flex'>
-                                        <span className='px-3'>Category Name :</span><span> {viewCategory.cat_name}</span>
+                                        <span className='px-3'>Item Department:</span><span> {viewCategory.cat_name}</span>
                                     </div>
                                     <hr></hr>
                                     <div className='d-flex'>

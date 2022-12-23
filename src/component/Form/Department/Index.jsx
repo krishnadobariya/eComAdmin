@@ -81,7 +81,7 @@ const Index = ({ dispatch, res }) => {
             <h1 className='text-center add-title py-4'>ADD DEPARTMENT</h1>
             <form className='add-form'>
               <div className="form-group">
-                <label>Item Department Name</label>
+                <label>Department Name</label>
                 <input type="text"
                   className="form-control"
                   name="name"

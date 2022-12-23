@@ -67,41 +67,41 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
 
     useEffect(() => {
         const data = resdel.data ? resdel.data.data : []
-    
+
         if (data) {
-          if (data.code == 200) {
-            toast.success(data.message, {
-              position: toast.POSITION.TOP_CENTER,
-              timeOut: 1000,
-    
-            });
-            setTimeout(() => {
-              window.location = "/outwardtable"
-            }, 1000);
-          }
-          else if (data.code == 500) {
-            toast.error(data.message, {
-              position: toast.POSITION.TOP_CENTER,
-              timeOut: 1000,
-            });
-            setTimeout(() => {
-              window.location = "/outwardtable"
-            }, 1000);
-    
-          }
-          else if (data.code == 403) {
-            toast.error(data.message, {
-              position: toast.POSITION.TOP_CENTER,
-              timeOut: 1000,
-            });
-            setTimeout(() => {
-              window.location = "/outwardtable"
-            }, 1000);
-    
-          }
+            if (data.code == 200) {
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+
+                });
+                setTimeout(() => {
+                    window.location = "/outwardtable"
+                }, 1000);
+            }
+            else if (data.code == 500) {
+                toast.error(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+                });
+                setTimeout(() => {
+                    window.location = "/outwardtable"
+                }, 1000);
+
+            }
+            else if (data.code == 403) {
+                toast.error(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+                    timeOut: 1000,
+                });
+                setTimeout(() => {
+                    window.location = "/outwardtable"
+                }, 1000);
+
+            }
         }
-      }, [resdel])
-    
+    }, [resdel])
+
 
 
 
@@ -109,7 +109,11 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
 
 
     const columns = [
-     
+        {
+            name: "PRN",
+            selector: (row) => row.uniqueId,
+            sortable: true
+        },
         {
             name: "Location",
             selector: (row) => row.location,
@@ -117,7 +121,7 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
 
         },
         {
-            name: "Item department Name",
+            name: "department Name",
             selector: (row) => row.department,
             sortable: true,
         },
@@ -129,9 +133,9 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
         {
             name: "Action",
             cell: (row) => <>
-              <Link to={`/prslipe/${row._id}`} ><PictureAsPdfIcon className="update-btn" style={{ fontSize: "35px" }}/></Link>
+                <Link to={`/prslipe/${row._id}`} ><PictureAsPdfIcon className="update-btn" style={{ fontSize: "35px" }} /></Link>
                 <VisibilityIcon onClick={() => handleviewOpen(row._id)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
-                <DeleteIcon onClick={() => { setModalShow3(true); setDelateId(row._id); }}  className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
+                <DeleteIcon onClick={() => { setModalShow3(true); setDelateId(row._id); }} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
 
             </>
 
@@ -143,7 +147,7 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
         <>
             <div style={{ width: "100%" }}>
                 <div className='container-fluid'>
-                <ToastContainer />
+                    <ToastContainer />
                     <div className='row py-3'>
                         <div className='col-md-12 px-0'>
 
@@ -209,7 +213,7 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
                                     </Modal.Header>
                                     <Modal.Body>
                                         <div className='d-flex'>
-                                            <span className='px-3'>Item department:</span><span> {outward.department}</span>
+                                            <span className='px-3'> department Name:</span><span> {outward.department}</span>
                                         </div>
                                         <hr></hr>
                                         <div className='d-flex'>
@@ -244,22 +248,22 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
 
                                 </Modal>} </> : ""}
 
-                                <Modal
-                                show={modalShow3}
-                                onHide={() => setModalShow3(false)}
-                                size="sm"
-                                aria-labelledby="contained-modal-title-vcenter"
-                                centered
-                            >
+                        <Modal
+                            show={modalShow3}
+                            onHide={() => setModalShow3(false)}
+                            size="sm"
+                            aria-labelledby="contained-modal-title-vcenter"
+                            centered
+                        >
 
-                                <Modal.Body>
-                                    <div className='text-center'>ARE YOU SURE FOR DELETE THIS OUTWARD ?</div>
-                                    <div className='d-flex justify-content-center delete-model'>
-                                        <button className='text-yes' onClick={deletcategory}>YES</button><button className='text-no' onClick={() => setModalShow3(false)}>NO</button>
-                                    </div>
-                                </Modal.Body>
+                            <Modal.Body>
+                                <div className='text-center'>ARE YOU SURE FOR DELETE THIS OUTWARD ?</div>
+                                <div className='d-flex justify-content-center delete-model'>
+                                    <button className='text-yes' onClick={deletcategory}>YES</button><button className='text-no' onClick={() => setModalShow3(false)}>NO</button>
+                                </div>
+                            </Modal.Body>
 
-                            </Modal>
+                        </Modal>
                     </div>
                 </div>
             </div>

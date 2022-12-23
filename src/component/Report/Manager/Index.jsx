@@ -39,7 +39,7 @@ const Index = ({ dispatch, res, department }) => {
 
     const columns = [
         {
-          name:"Item Departme Name",
+          name:"Item Department",
           selector:(row)=>row.department_name
         },
         {
