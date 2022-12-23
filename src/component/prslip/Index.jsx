@@ -37,7 +37,7 @@ const Prslip = ({dispatch,res}) => {
   }
   return (
     <div style={{width:"100%"}}>
-
+ <button className="pdf" onClick={generatepdf}>PR Slip</button>
       <div id="content" className="main-div">
         <div className="under-main-div">
           <div className="header">
@@ -70,8 +70,8 @@ const Prslip = ({dispatch,res}) => {
               <th>S.No.</th>
               <th>Item Name</th>
               <th>Description</th>
-              <th>UOM</th>
               <th>Req.Qty.</th>
+               <th>UOM</th>
               <th>Current Stock</th>
               <th>RemarkS</th>
              
@@ -85,9 +85,8 @@ const Prslip = ({dispatch,res}) => {
               <td>{id+1}</td>
               <td>{val.product_name}</td>
               <td></td>
-              <td></td>
               <td>{val.QTY}</td>
-              
+              <td>{val.UOM}</td>
               <td>{val.current_stock}</td>
               <td>{val.remark}</td>
              
@@ -146,7 +145,7 @@ const Prslip = ({dispatch,res}) => {
         </div>
        
       </div>
-      <button className="pdf" onClick={generatepdf}>PR Slip</button>
+     
 
 
     </div>

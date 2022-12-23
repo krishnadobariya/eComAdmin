@@ -43,7 +43,7 @@ label{
 }   
 
 .main-div{
-    padding: 100px 100px 0 100px!important;
+    padding: 50px 100px 0 100px!important;
 }
 .under-main-div{
     border: 1px solid black;
@@ -93,8 +93,8 @@ label{
     border: 1px solid red;
     padding: 5px 20px;
     color: aliceblue;
-    margin-top: 20px;
+    margin-top: 40px;
     font-weight: bold;
     margin-left:100px;
-    margin-bottom: 50px;
+   
 }

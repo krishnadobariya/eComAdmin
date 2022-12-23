@@ -645,6 +645,7 @@ export function FullGetOutward(id) {
         const response = await axios.get(`${Baseurl}/outward/gteprslip/${id}`,{
             headers: { "jwt": token }
         });
+        console.log("res::::",response)
         var return_response = {
             type: "PR_SLIPDATA",
             payload: response,

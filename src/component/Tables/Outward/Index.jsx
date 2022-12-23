@@ -109,12 +109,7 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
 
 
     const columns = [
-        {
-            name: "Id",
-            selector: (row) => row._id,
-            sortable: true,
-
-        },
+     
         {
             name: "Location",
             selector: (row) => row.location,
@@ -213,10 +208,6 @@ const Index = ({ dispatch, res, resdel, viewById }) => {
                                         </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                        <div className='d-flex'>
-                                            <span className='px-3'>PRN:</span><span> {outward.uniqueKey}</span>
-                                        </div>
-                                        <hr></hr>
                                         <div className='d-flex'>
                                             <span className='px-3'>Item department:</span><span> {outward.department}</span>
                                         </div>
