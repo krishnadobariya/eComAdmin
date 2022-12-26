@@ -541,9 +541,10 @@ const Index = ({ dispatch, res, resById, resUpadte, view, Qr, upadtepro, del }) 
                     centered
                   >
                     <Modal.Body>
-                      <h5 className='text-center'>Barcode</h5>
+                      <h5 className='text-center'>{ViewProduct.Name}</h5>
                       <div className='d-flex justify-content-center' id="qrDiv" >
 
+                        {qrcode}
                         {qrcode}
                       </div>
 
