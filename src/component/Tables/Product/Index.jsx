@@ -260,7 +260,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, Qr, upadtepro, del }) 
       sortable: true,
     },
     {
-      name: "Category",
+      name: "Item Department",
       selector: (row) => row.Category,
       sortable: true,
 
