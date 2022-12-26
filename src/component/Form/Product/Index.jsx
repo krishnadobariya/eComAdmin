@@ -105,13 +105,13 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
             <form className='add-form'>
               <div className="form-group">
                 <label>Product Name</label>
-                <input type="text" className="form-control" name="Name" value={Product.Name} onChange={handleInput} autoComplete="off"/>
+                <input type="text" className="form-control" name="Name" value={Product.Name} onChange={handleInput} autoComplete="off" />
               </div>
               <div className="form-group ">
-                <label>Category</label>
+                <label>Item Department</label>
 
                 <select name="Category" className="form-control" id="" onChange={handleInput} value={Product.Category}  >
-                  <option>choose category</option>
+                  <option>Choose Item Department</option>
                   {
                     data ?
                       data.map((val, id) => {
@@ -154,7 +154,7 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
              */}
               <div className="form-group ">
                 <label>Quantity</label>
-                <input type="text" className="form-control" name="QTY" value={Product.QTY} onChange={handleInput} autoComplete="off"/>
+                <input type="text" className="form-control" name="QTY" value={Product.QTY} onChange={handleInput} autoComplete="off" />
               </div>
               <div className="form-group ">
                 <label>Price</label>

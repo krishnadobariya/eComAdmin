@@ -24,7 +24,7 @@ import Barcode from 'react-barcode';
 import jsPDF from "jspdf";
 
 
-const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro ,del}) => {
+const Index = ({ dispatch, res, resById, resUpadte, view, Qr, upadtepro, del }) => {
 
 
   const [search, setSearch] = useState("");
@@ -36,11 +36,11 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro ,del}) 
   const [modalShow4, setModalShow4] = useState(false);
   const [qty, setQty] = useState(0);
   const [modalShow3, setModalShow3] = useState(false);
-  const [uniqid,setuniqid] = useState("")
-  const [deletId,setDelateId] = useState("")
-  
+  const [uniqid, setuniqid] = useState("")
+  const [deletId, setDelateId] = useState("")
 
-  const unit = ['cm','mtr',"kg","gm","pic","box","liter"]
+
+  const unit = ['cm', 'mtr', "kg", "gm", "pic", "box", "liter"]
 
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro ,del}) 
 
 
   const data = res.data ? res.data.data ? res.data.data.data : [] : []
-  console.log("data::::",data)
+  console.log("data::::", data)
 
   useEffect(() => {
     if (data) {
@@ -64,8 +64,8 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro ,del}) 
 
 
 
-  const deletepro=()=>{
-     dispatch(DeleteProduct(deletId));
+  const deletepro = () => {
+    dispatch(DeleteProduct(deletId));
   }
 
 
@@ -73,13 +73,13 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro ,del}) 
   // UPDATE---------------
 
   const handleOpen = (id) => {
-    console.log("iddd:::",id)
+    console.log("iddd:::", id)
     dispatch(ProductViewByIdUpadte(id));
     setModalShow(true)
   }
 
 
-  
+
   useEffect(() => {
     const data2 = resUpadte.data ? resUpadte.data.data ? resUpadte.data.data.data : [] : []
     SetProduct(data2)
@@ -102,7 +102,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro ,del}) 
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    console.log("Product.uniqueKeyForProduct",Product)
+    console.log("Product.uniqueKeyForProduct", Product)
     dispatch(UpdateProduct(Product, Product.uniqueKeyForProduct));
   };
 
@@ -202,7 +202,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro ,del}) 
     const data2 = resById.data ? resById.data.data ? resById.data.data.data : [] : []
     SetViewProduct(data2)
 
-    console.log("data2:::",data2)
+    console.log("data2:::", data2)
 
   }, [resById])
 
@@ -221,7 +221,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro ,del}) 
 
   useEffect(() => {
     const data2 = Qr.data ? Qr.data.data ? Qr.data.data.data : [] : []
-    console.log("hello::",data2)
+    console.log("hello::", data2)
     SetViewProduct(data2)
 
   }, [Qr])
@@ -229,15 +229,15 @@ const Index = ({ dispatch, res, resById, resUpadte, view,  Qr, upadtepro ,del}) 
 
 
   const qrcode = (
-    <Barcode value={uniqid}  height={30} />
+    <Barcode value={uniqid} height={30} />
   )
 
   const View = view.data ? view.data.data ? view.data.data.data : [] : []
 
-console.log("View" , View);
+  console.log("View", View);
 
 
-  
+
 
   const onPrintBarcode = () => {
     var container = document.getElementById("qrDiv");
@@ -247,7 +247,7 @@ console.log("View" , View);
       'width=' + width + ',height=' + height);
     printWindow.document.writeln(container.innerHTML);
     // printWindow.document.close();
-  
+
     printWindow.print();
     printWindow.close();
   }
@@ -281,15 +281,15 @@ console.log("View" , View);
       sortable: true
     },
     {
-      name:"unique",
-      selector:(row)=>row.uniqueKeyForProduct,
+      name: "unique",
+      selector: (row) => row.uniqueKeyForProduct,
     },
     {
       name: "action",
       cell: (row) => <>
         <QrCodeIcon onClick={() => handleviewbyqr(row.uniqueKeyForProduct)} className="view-btn" style={{ fontSize: "35px" }} >View</QrCodeIcon>
         <VisibilityIcon onClick={() => handleviewOpen(row.uniqueKeyForProduct)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
-        <DeleteIcon onClick={() => { setModalShow4(true);setDelateId(row.uniqueKeyForProduct);}} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
+        <DeleteIcon onClick={() => { setModalShow4(true); setDelateId(row.uniqueKeyForProduct); }} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
         <EditIcon onClick={() => handleOpen(row.uniqueKeyForProduct)} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon>
 
 
@@ -329,7 +329,7 @@ console.log("View" , View);
                         className='w-25 form-control'
                         value={search}
                         onChange={(event) => setSearch(event.target.value)}
-                        style={{border:"1px solid gray"}}
+                        style={{ border: "1px solid gray" }}
                       />
                     }
                   />
@@ -428,20 +428,20 @@ console.log("View" , View);
                                 </select>
                               </div> */}
                             </div>
-                           
+
                             <div className="form-group">
                               <label>Unit</label>
-                                <select name="Unit" className="form-control" id="" onChange={handleInput} value={Product.Unit}  >
-                                  <option>choose type</option>
-                                  {
-                                    unit ?
+                              <select name="Unit" className="form-control" id="" onChange={handleInput} value={Product.Unit}  >
+                                <option>choose type</option>
+                                {
+                                  unit ?
                                     unit.map((val, id) => {
-                                        return (
-                                          <option value={val} key={id}>{val}</option>
-                                        )
-                                      }) : <option >Data Not Found</option>
-                                  }
-                                </select>
+                                      return (
+                                        <option value={val} key={id}>{val}</option>
+                                      )
+                                    }) : <option >Data Not Found</option>
+                                }
+                              </select>
                             </div>
                             <div className="form-group">
                               <label>Remark</label>
@@ -493,7 +493,7 @@ console.log("View" , View);
                       </div>
                       <hr></hr>
                       <div className='d-flex'>
-                        <span className='px-3'>Category :</span><span> {ViewProduct.Category}</span>
+                        <span className='px-3'>Item Department :</span><span> {ViewProduct.Category}</span>
                       </div>
                       <hr></hr>
                       <div className='d-flex'>
@@ -554,21 +554,21 @@ console.log("View" , View);
 
 
 
-                  <Modal
-                    show={modalShow4}
-                    onHide={() => setModalShow4(false)}
-                    size="sm"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    centered
-                  >
-                    <Modal.Body>
-                      <div className='text-center'>ARE YOU SURE FOR DELETE THIS PRODUCT ?</div>
-                      <div className='d-flex justify-content-center delete-model'> 
-                      <button  className='text-yes' onClick={deletepro}>YES</button><button className='text-no'  onClick={()=>setModalShow4(false)}>NO</button>
-                      </div>
-                    </Modal.Body>
+              <Modal
+                show={modalShow4}
+                onHide={() => setModalShow4(false)}
+                size="sm"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+              >
+                <Modal.Body>
+                  <div className='text-center'>ARE YOU SURE FOR DELETE THIS PRODUCT ?</div>
+                  <div className='d-flex justify-content-center delete-model'>
+                    <button className='text-yes' onClick={deletepro}>YES</button><button className='text-no' onClick={() => setModalShow4(false)}>NO</button>
+                  </div>
+                </Modal.Body>
 
-                  </Modal> 
+              </Modal>
             </div>
           </div>
         </div>
@@ -588,8 +588,8 @@ const mapStateToProps = (state) => ({
   // type: state.TypeView,
   Qr: state.ProductViewByIdForQr,
   upadtepro: state.UpdateProduct,
-  del:state.DeleteProduct
- 
+  del: state.DeleteProduct
+
 
 
 });

@@ -21,7 +21,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update, del }) => {
     const [modalShow, setModalShow] = React.useState(false);
     const [modalShow2, setModalShow2] = useState(false);
     const [modalShow3, setModalShow3] = useState(false);
-    const [deletId,setDelateId] = useState("")
+    const [deletId, setDelateId] = useState("")
 
     useEffect(() => {
         dispatch(ViewAllCategory());
@@ -43,9 +43,9 @@ const Index = ({ dispatch, res, resById, resUpdateById, update, del }) => {
         dispatch(DeleteCategory(deletId));
 
     }
-   
-   
-   
+
+
+
     useEffect(() => {
         const data = del.data ? del.data.data : []
         if (data) {
@@ -159,7 +159,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update, del }) => {
             sortable: true,
         },
         {
-            name: "Category Descripation",
+            name: "Item Department Description",
             selector: (row) => row.cat_description,
             sortable: true,
 
@@ -168,7 +168,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update, del }) => {
             name: "Action",
             cell: (row) => <>
                 <VisibilityIcon onClick={() => handleviewOpen(row._id)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
-                <DeleteIcon onClick={() => { setModalShow3(true);setDelateId(row._id);}}  className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
+                <DeleteIcon onClick={() => { setModalShow3(true); setDelateId(row._id); }} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
                 <EditIcon onClick={() => handleOpen(row._id)} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon>
 
             </>
@@ -191,7 +191,7 @@ const Index = ({ dispatch, res, resById, resUpdateById, update, del }) => {
                                     <h1>loading....</h1>
                                     :
                                     <DataTable
-                                        title="CATEGORY LIST"
+                                        title="Item Department List"
                                         columns={columns}
                                         data={filterdata == "" ? data : filterdata}
                                         pagination

@@ -73,7 +73,7 @@ const Index = ({ dispatch, res }) => {
           <ToastContainer />
           <div className='col-md-6'>
             <div className='add-link'><Link to="/viewcategory" >VIEW</Link></div>
-            <h1 className='text-center add-title py-4'>PRODUCT CATEGORY</h1>
+            <h1 className='text-center add-title py-4'>Item Department</h1>
             <form className='add-form'>
               <div className="form-group">
                 <label>Item Department</label>
@@ -81,7 +81,7 @@ const Index = ({ dispatch, res }) => {
                   className="form-control"
                   name="cat_name"
                   value={Category.cat_name}
-                  onChange={handleInput} autoComplete="off"/>
+                  onChange={handleInput} autoComplete="off" />
               </div>
               <div className="form-group">
                 <label>Discription</label>

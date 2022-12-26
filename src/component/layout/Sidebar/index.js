@@ -40,13 +40,13 @@ function Sidebar() {
             </li>
             <li className="nav-item has-treeview menu-open">
               <NavLink to="/departmenttable" className="nav-link  text-white ">
-             <BusinessIcon className='nav-icon'/>
+                <BusinessIcon className='nav-icon' />
                 <p>  Department</p>
               </NavLink>
             </li>
             <li className="nav-item has-treeview menu-open">
               <NavLink to="/Locationtable" className="nav-link  text-white ">
-             <BusinessIcon className='nav-icon'/>
+                <BusinessIcon className='nav-icon' />
                 <p> Location</p>
               </NavLink>
             </li>
@@ -61,7 +61,7 @@ function Sidebar() {
               <ul className="nav nav-treeview">
                 <li className="nav-item">
                   <NavLink to="/viewcategory" className="nav-link text-white">
-                    <p>Category</p>
+                    <p>Item Department</p>
                   </NavLink>
                 </li>
                 {/* <li className="nav-item">
@@ -82,14 +82,14 @@ function Sidebar() {
               </ul>
             </li>
             <NavLink to="/outwardtable" className="nav-link  text-white ">
-            <ArrowOutwardIcon className='nav-icon'/>
+              <ArrowOutwardIcon className='nav-icon' />
               <p>Outward</p>
             </NavLink>
 
 
             <li className="nav-item has-treeview">
               <div className="nav-link text-white">
-              <ReportIcon className='nav-icon'/>
+                <ReportIcon className='nav-icon' />
                 <p>
                   Report
                   <i className="fas fa-angle-left right" />
