@@ -55,6 +55,7 @@ const Index = ({dispatch,res}) => {
               <th>S.No.</th>
               <th>Item Name</th>
               <th>Qty.</th>
+              <th>Date</th>
             
             
              
@@ -68,7 +69,7 @@ const Index = ({dispatch,res}) => {
               <td>{id+1}</td>
               <td>{val.product_name}</td>
               <td>{val.QTY}</td>
-        
+              <td>{val.date}</td>
              
             </tr>
                 </>
@@ -79,17 +80,20 @@ const Index = ({dispatch,res}) => {
             <tr>
               <td></td>
               <td></td>
+              <td></td> 
               <td></td>     
             </tr>
             <tr>
               <td></td>
               <td></td>
               <td></td>
+              <td></td> 
             </tr>
             <tr>
               <td></td>
               <td></td>
               <td></td>
+              <td></td> 
             
             </tr>
 

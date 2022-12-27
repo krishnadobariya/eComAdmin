@@ -87,29 +87,15 @@ const Index = ({ dispatch, res, view, viewsub }) => {
           <ToastContainer />
           <div className='col-md-6'>
             <div className='add-link'><Link to="/viewtype" >VIEW</Link></div>
-            <h1 className='text-center add-title py-4'>PRODUCT CATEGORY TYPE</h1>
+            <h1 className='text-center add-title py-4'>BRAND</h1>
             <form className='add-form'>
-              <div className="form-group">
-                <label>CategoryType</label>
-                <input type="text"
-                  className="form-control"
-                  name="name"
-                  value={CategoryType.name}
-                  onChange={handleInput} />
-              </div>
-              <div className="form-group">
-                <label>Type Description</label>
-                <input type="text"
-                  className="form-control"
-                  name="catType_description"
-                  value={CategoryType.catType_description}
-                  onChange={handleInput} />
-              </div>
+              
+              
               <div className="form-group category-select">
-                <label>Category</label>
+                <label>Item Department</label>
                 <select name="category" className="form-control" id="" onChange={handleInput}  >
 
-                  <option>Choose a Category</option>
+                  <option>Choose a Item Department</option>
                   {
                     data ?
                       data.map((val, id) => {
@@ -121,9 +107,9 @@ const Index = ({ dispatch, res, view, viewsub }) => {
                 </select>
               </div>
               <div className="form-group">
-                <label>Select Subcategory</label>
+                <label>Select Main Product</label>
                 <select name="select_subcat" className="form-control" id="" onChange={handleInput} value={CategoryType.select_subcat}  >
-                  <option>Choose a Subcategory</option>
+                  <option>Choose a Main Product</option>
                   {
                     viewSub ?
                       viewSub.map((val, id) => {
@@ -133,6 +119,14 @@ const Index = ({ dispatch, res, view, viewsub }) => {
                       }) : <option>No Data Found</option>
                   }
                 </select>
+              </div>
+              <div className="form-group">
+                <label>Brand Name</label>
+                <input type="text"
+                  className="form-control"
+                  name="name"
+                  value={CategoryType.name}
+                  onChange={handleInput} />
               </div>
               <button type="submit" className="btn add-btn" onClick={handleAdd}>ADD</button>
             </form>

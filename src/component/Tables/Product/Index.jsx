@@ -270,7 +270,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
 
   const columns = [ 
     {
-      name: "Name",
+      name: "Product Name",
       selector: (row) => row.Name,
       sortable: true,
     },
@@ -281,10 +281,27 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
 
     },
     {
+      name: "Main Product",
+      selector: (row) => row.Type,
+      sortable: true,
+    },
+    {
+      name: "Brand",
+      selector: (row) => row.Sub_Category,
+      sortable: true,
+    },
+    {
       name: "Price",
       selector: (row) => `${row.Price}.Rs`,
       sortable: true,
     },
+    {
+      name: "Total Price",
+      selector: (row) => `${row.totalprice}.Rs`,
+      sortable: true,
+    },
+    
+    
     {
       name: "QTY",
       selector: (row) => row.QTY,
@@ -296,16 +313,16 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
       sortable: true
     },
     {
-      name: "unique",
+      name: "Barcode Id",
       selector: (row) => row.uniqueKeyForProduct,
     },
     {
       name: "action",
       cell: (row) => <>
         <QrCodeIcon onClick={() => handleviewbyqr(row.uniqueKeyForProduct)} className="view-btn" style={{ fontSize: "35px" }} >View</QrCodeIcon>
-        <VisibilityIcon onClick={() => handleviewOpen(row.uniqueKeyForProduct)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
+        {/* <VisibilityIcon onClick={() => handleviewOpen(row.uniqueKeyForProduct)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon> */}
         <DeleteIcon onClick={() => { setModalShow4(true); setDelateId(row.uniqueKeyForProduct); }} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
-        <EditIcon onClick={() => handleOpen(row.uniqueKeyForProduct)} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon>
+        {/* <EditIcon onClick={() => handleOpen(row.uniqueKeyForProduct)} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon> */}
 
 
       </>
@@ -415,9 +432,9 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
                                   onChange={handleInput} />
                               </div>
                               <div className="form-group col-md-4">
-                                <label>SubCategory</label>
+                                <label>Main Product</label>
                                 <select name="Sub_Category" className="form-control" id="" onChange={handleInput} value={Product.Sub_Category}  >
-                                  <option>choose subcategory</option>
+                                  <option>choose Main Product</option>
                                   {
                                     category ?
                                       category.map((val, id) => {
@@ -429,9 +446,9 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
                                 </select>
                               </div>
                               <div className="form-group col-md-4">
-                                <label>Type</label>
+                                <label>Brand</label>
                                 <select name="Type" className="form-control" id="" onChange={handleInput} value={Product.Type}  >
-                                  <option>choose type</option>
+                                  <option>choose Brand</option>
                                   {
                                     typeData ?
                                       typeData.map((val, id) => {
@@ -505,7 +522,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
                     </Modal.Header>
                     <Modal.Body>
                       <div className='d-flex'>
-                        <span className='px-3'>product Name :</span><span> {ViewProduct.Name}</span>
+                        <span className='px-3'>Product Name :</span><span> {ViewProduct.Name}</span>
                       </div>
                       <hr></hr>
                       <div className='d-flex'>
@@ -526,11 +543,11 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
                       </div>
                       <hr></hr>
                       <div className='d-flex'>
-                        <span className='px-3'>Sub Category :</span><span> {ViewProduct.Sub_Category}</span>
+                        <span className='px-3'>Main Product :</span><span> {ViewProduct.Sub_Category}</span>
                       </div>
                       <hr></hr>
                       <div className='d-flex'>
-                        <span className='px-3'>Category Type :</span><span> {ViewProduct.Type}</span>
+                        <span className='px-3'>Brand :</span><span> {ViewProduct.Type}</span>
                       </div>
                       <hr></hr>
                       <div className='d-flex'>

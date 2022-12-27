@@ -145,9 +145,6 @@ const Prslip = ({dispatch,res}) => {
         </div>
        
       </div>
-     
-
-
     </div>
   );
 };

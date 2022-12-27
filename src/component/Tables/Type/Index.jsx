@@ -134,27 +134,23 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub, upadteTyp
 
     const ViewSub = viewsub.data ? viewsub.data.data ? viewsub.data.data.data : [] : []
     const columns = [
+       
         {
-            name: "Name",
-            selector: (row) => row.name,
-            sortable: true,
-        },
-        {
-            name: "sub Category",
+            name: "Main Product",
             selector: (row) => row.select_subcat,
             sortable: true,
 
         },
         {
-            name: "CategoryType Description",
-            selector: (row) => row.catType_description,
+            name: "Brand Name",
+            selector: (row) => row.name,
             sortable: true,
         },
         {
             name: "action",
             cell: (row) => <>
 
-                <VisibilityIcon onClick={() => handleviewOpen(row._id)} className="view-btn" style={{ fontSize: "35px" }}></VisibilityIcon>
+                {/* <VisibilityIcon onClick={() => handleviewOpen(row._id)} className="view-btn" style={{ fontSize: "35px" }}></VisibilityIcon> */}
                 <DeleteIcon onClick={() => DelteType(row._id)} className="delete-btn" style={{ fontSize: "35px" }}></DeleteIcon>
                 <EditIcon onClick={() => handleOpen(row._id)} className="update-btn" style={{ fontSize: "35px" }}></EditIcon>
 
@@ -178,7 +174,7 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub, upadteTyp
                                     <h1>loading....</h1>
                                     :
                                     <DataTable
-                                        title="TYPE LIST"
+                                        title="BRAND"
                                         columns={columns}
                                         data={filterdata == "" ? data : filterdata}
                                         pagination
@@ -211,27 +207,12 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub, upadteTyp
                             >
                                 <Modal.Body>
                                     <form className='add-form'>
-                                        <div class="form-group">
-                                            <label>CategoryType</label>
-                                            <input type="text"
-                                                class="form-control"
-                                                name="name"
-                                                value={CategoryType.name}
-                                                onChange={handleInput} />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Type Description</label>
-                                            <input type="text"
-                                                class="form-control"
-                                                name="catType_description"
-                                                value={CategoryType.catType_description}
-                                                onChange={handleInput} />
-                                        </div>
+                                       
                                         <div class="form-group category-select">
-                                            <label>Category</label>
+                                            <label>Item Department</label>
                                             <select name="select_cat" class="form-control" id="" onChange={(e) => dispatch(AllSubCategoryView(e.target.value))}  >
 
-                                                <option>Choose a Category</option>
+                                                <option>Choose a Item Department</option>
                                                 {
                                                     View ?
                                                         View.map((val, id) => {
@@ -243,11 +224,11 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub, upadteTyp
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>Select Subcategory</label>
+                                            <label>Select Main Product</label>
 
 
                                             <select name="select_subcat" class="form-control" id="" onChange={handleInput} value={CategoryType.select_subcat}  >
-                                                <option>Choose a Subcategory</option>
+                                                <option>Choose a Main Product</option>
                                                 {
                                                     ViewSub ?
                                                         ViewSub.map((val, id) => {
@@ -257,6 +238,15 @@ const Index = ({ dispatch, res, resById, resByIdUpdate, view, viewsub, upadteTyp
                                                         }) : <option>no data found</option>
                                                 }               </select>
                                         </div>
+                                        <div class="form-group">
+                                            <label>Brand Name</label>
+                                            <input type="text"
+                                                class="form-control"
+                                                name="name"
+                                                value={CategoryType.name}
+                                                onChange={handleInput} />
+                                        </div>
+                                      
                                         <button type="submit" class="btn add-btn" onClick={handleUpdate}>Update</button>
                                     </form>
                                 </Modal.Body>

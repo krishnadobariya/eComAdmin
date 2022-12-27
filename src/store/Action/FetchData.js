@@ -180,6 +180,8 @@ export function AllTypeView() {
             {
                 headers: { "jwt": token }
             });
+
+            console.log("respopnse" , response);
         const return_response = {
             type: "GET_ALLTYPE",
             payload: response,

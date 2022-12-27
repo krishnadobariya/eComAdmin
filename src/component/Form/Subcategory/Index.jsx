@@ -81,28 +81,21 @@ const Index = ({ dispatch, res,addres }) => {
         <ToastContainer />
           <div className='col-md-6'>
           <div className='add-link'><Link to="/viewsubcategory" >VIEW</Link></div>
-            <h1 className='text-center add-title py-4'>PRODUCT SUBCATEGORY</h1>
+            <h1 className='text-center add-title py-4'>MAIN PRODUCT</h1>
             <form className='add-form'>
               <div class="form-group">
-                <label>Product Subcategory </label>
+                <label>Main Product </label>
                 <input type="text"
                   className="form-control"
                   name="subCat_name"
                   value={SubCategory.subCat_name}
                   onChange={handleInput} />
               </div>
+           
               <div className="form-group">
-                <label>Subcategory Description</label>
-                <input type="text"
-                  className="form-control"
-                  name="subCat_description"
-                  value={SubCategory.subCat_description}
-                  onChange={handleInput} />
-              </div>
-              <div className="form-group">
-              <label>Category</label>
+              <label>Item Department</label>
                 <select name="select_cat" className="form-control" id="" onChange={handleInput} value={SubCategory.select_cat}  >
-                  <option>Choose a Category</option>
+                  <option>Choose Item Department</option>
                   {
                     data ?
                     data.map((val, id) => {

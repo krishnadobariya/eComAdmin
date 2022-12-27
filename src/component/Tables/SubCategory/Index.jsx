@@ -133,24 +133,18 @@ const Index = ({ dispatch, res, resbyid, view, resForupdate, updatesub }) => {
 
     const columns = [
         {
-            name: "SubCategory Name",
+            name: "Main Product Name",
             selector: (row) => row.subCat_name,
             sortable: true,
         },
         {
-            name: "Category",
+            name: "Item Department",
             selector: (row) => row.select_cat
-        },
-        {
-            name: "SubCategory Descripation",
-            selector: (row) => row.subCat_description,
-            sortable: true,
-
         },
         {
             name: "Action",
             cell: (row) => <>
-                <VisibilityIcon onClick={() => handleviewOpen(row._id)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon>
+                {/* <VisibilityIcon onClick={() => handleviewOpen(row._id)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon> */}
                 <DeleteIcon onClick={() => DelteSubCategory(row._id)} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
                 <EditIcon onClick={() => handleOpen(row._id)} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon>
             </>
@@ -173,7 +167,7 @@ const Index = ({ dispatch, res, resbyid, view, resForupdate, updatesub }) => {
                                     <h1>loading....</h1>
                                     :
                                     <DataTable
-                                        title="SUBCATEGORY LIST"
+                                        title="MAIN PRODUCT LIST"
                                         columns={columns}
                                         data={filterdata == "" ? data : filterdata}
                                         pagination
@@ -225,25 +219,18 @@ const Index = ({ dispatch, res, resbyid, view, resForupdate, updatesub }) => {
                                                 <Modal.Body>
                                                     <form className='add-form'>
                                                         <div class="form-group">
-                                                            <label>Product Subcategory </label>
+                                                            <label>Main Product </label>
                                                             <input type="text"
                                                                 class="form-control"
                                                                 name="subCat_name"
                                                                 value={SubCategory.subCat_name}
                                                                 onChange={handleInput} />
                                                         </div>
+                                                     
                                                         <div class="form-group">
-                                                            <label>Subcategory Description</label>
-                                                            <input type="text"
-                                                                class="form-control"
-                                                                name="subCat_description"
-                                                                value={SubCategory.subCat_description}
-                                                                onChange={handleInput} />
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Category</label>
+                                                            <label>Item Department</label>
                                                             <select name="select_cat" class="form-control" id="" onChange={handleInput} value={SubCategory.select_cat}  >
-                                                                <option>Choose a Category</option>
+                                                                <option>Choose a Item Department</option>
                                                                 {
                                                                     View ?
                                                                         View.map((val, id) => {
@@ -296,11 +283,11 @@ const Index = ({ dispatch, res, resbyid, view, resForupdate, updatesub }) => {
                                         </Modal.Header>
                                         <Modal.Body>
                                             <div className='d-flex'>
-                                                <span className='px-3'>Subcategory Name :</span><span> {viewSubcategory.subCat_name}</span>
+                                                <span className='px-3'>Main Product Name :</span><span> {viewSubcategory.subCat_name}</span>
                                             </div>
                                             <hr></hr>
                                             <div className='d-flex'>
-                                                <span className='px-3'>category :</span><span> {viewSubcategory.select_cat}</span>
+                                                <span className='px-3'>Item Department :</span><span> {viewSubcategory.select_cat}</span>
                                             </div>
                                             <hr></hr>
                                             <div className='d-flex'>

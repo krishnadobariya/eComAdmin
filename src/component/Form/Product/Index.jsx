@@ -123,9 +123,9 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
                 </select>
               </div>
               <div className="form-group ">
-                  <label>Sub Category</label>
+                  <label>Main Product</label>
                   <select name="Sub_Category" className="form-control" id="" onChange={handleInput} value={Product.Sub_Category}  >
-                  <option>choose subcategory</option>
+                  <option>choose Main Product</option>
                     {
                       viewSub ?
                       viewSub.map((val, id) => {
@@ -138,9 +138,9 @@ const Index = ({ dispatch, res, view, viewsub, type }) => {
                 </div>
               
                 <div className="form-group ">
-                  <label>Type</label>
+                  <label>Brand</label>
                   <select name="Type" className="form-control" id="" onChange={handleInput} value={Product.Type}  >
-                  <option>choose type</option>
+                  <option>choose Brand</option>
                     {
                       typeview ?
                       typeview.map((val, id) => {
