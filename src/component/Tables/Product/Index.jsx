@@ -24,7 +24,7 @@ import Barcode from 'react-barcode';
 import jsPDF from "jspdf";
 
 
-const Index = ({ dispatch, res, resById, resUpadte, view, Qr, upadtepro, del }) => {
+const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, upadtepro, del }) => {
 
 
   const [search, setSearch] = useState("");
@@ -36,6 +36,8 @@ const Index = ({ dispatch, res, resById, resUpadte, view, Qr, upadtepro, del }) 
   const [modalShow4, setModalShow4] = useState(false);
   const [qty, setQty] = useState(0);
   const [modalShow3, setModalShow3] = useState(false);
+  const [category, setCategory] = useState([])
+  const [typeData, setTypeData] = useState([])
   const [uniqid, setuniqid] = useState("")
   const [deletId, setDelateId] = useState("")
 
@@ -68,6 +70,19 @@ const Index = ({ dispatch, res, resById, resUpadte, view, Qr, upadtepro, del }) 
     dispatch(DeleteProduct(deletId));
   }
 
+
+
+  useEffect(() => {
+    const viewSub = viewsub.data ? viewsub.data.data ? viewsub.data.data.data : [] : []
+    setCategory(viewSub)
+
+  }, [viewsub])
+
+  useEffect(() => {
+    const typeview = type.data ? type.data.data ? type.data.data.data : [] : []
+    setTypeData(typeview)
+
+  }, [type])
 
 
   // UPDATE---------------
@@ -253,7 +268,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, Qr, upadtepro, del }) 
   }
 
 
-  const columns = [
+  const columns = [ 
     {
       name: "Name",
       selector: (row) => row.Name,
@@ -399,7 +414,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, Qr, upadtepro, del }) 
                                   value={Product.Price}
                                   onChange={handleInput} />
                               </div>
-                              {/* <div className="form-group col-md-4">
+                              <div className="form-group col-md-4">
                                 <label>SubCategory</label>
                                 <select name="Sub_Category" className="form-control" id="" onChange={handleInput} value={Product.Sub_Category}  >
                                   <option>choose subcategory</option>
@@ -426,10 +441,8 @@ const Index = ({ dispatch, res, resById, resUpadte, view, Qr, upadtepro, del }) 
                                       }) : <option >Data Not Found</option>
                                   }
                                 </select>
-                              </div> */}
-                            </div>
-
-                            <div className="form-group">
+                              </div>
+                              <div className="form-group col-md-4">
                               <label>Unit</label>
                               <select name="Unit" className="form-control" id="" onChange={handleInput} value={Product.Unit}  >
                                 <option>choose type</option>
@@ -443,6 +456,9 @@ const Index = ({ dispatch, res, resById, resUpadte, view, Qr, upadtepro, del }) 
                                 }
                               </select>
                             </div>
+                            </div>
+
+                          
                             <div className="form-group">
                               <label>Remark</label>
                               <input type="text" className="form-control" name="Remark"
@@ -510,6 +526,14 @@ const Index = ({ dispatch, res, resById, resUpadte, view, Qr, upadtepro, del }) 
                       </div>
                       <hr></hr>
                       <div className='d-flex'>
+                        <span className='px-3'>Sub Category :</span><span> {ViewProduct.Sub_Category}</span>
+                      </div>
+                      <hr></hr>
+                      <div className='d-flex'>
+                        <span className='px-3'>Category Type :</span><span> {ViewProduct.Type}</span>
+                      </div>
+                      <hr></hr>
+                      <div className='d-flex'>
                         <span className='px-3'>Remark :</span><span> {ViewProduct.Remark}</span>
                       </div>
                     </Modal.Body>
@@ -544,8 +568,13 @@ const Index = ({ dispatch, res, resById, resUpadte, view, Qr, upadtepro, del }) 
                       <h5 className='text-center'>{ViewProduct.Name}</h5>
                       <div className='d-flex justify-content-center' id="qrDiv" >
 
-                        {qrcode}
-                        {qrcode}
+                        <span className='mr-5'>
+                          {qrcode}
+                        </span>
+
+                        <span className='ml-5 pl-5'>
+                          {qrcode}
+                        </span>
                       </div>
 
 
@@ -585,8 +614,8 @@ const mapStateToProps = (state) => ({
   resById: state.ProductViewById,
   resUpadte: state.ProductViewByIdUpadte,
   view: state.AllCategoryView,
-  // viewsub: state.AllSubCategoryView,
-  // type: state.TypeView,
+  viewsub: state.AllSubCategoryView,
+  type: state.TypeView,
   Qr: state.ProductViewByIdForQr,
   upadtepro: state.UpdateProduct,
   del: state.DeleteProduct
