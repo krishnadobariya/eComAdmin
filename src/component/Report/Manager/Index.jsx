@@ -53,6 +53,11 @@ const Index = ({ dispatch, res, department }) => {
             sortable: true
         },
         {
+            name: "Price",
+            selector: (row) => row.price,
+            sortable: true
+        },
+        {
             name: "Date",
             selector: (row) => row.date,
             sortable: true,

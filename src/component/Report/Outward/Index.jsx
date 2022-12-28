@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import { ViewOutwardReport } from "../../../store/Action/FetchData"
 import DataTable from 'react-data-table-component'
+import { Link } from 'react-router-dom';
 
 
 const Index = ({ dispatch, res }) => {
@@ -60,6 +61,7 @@ const Index = ({ dispatch, res }) => {
             <div style={{ width: "100%" }}>
                 <div className='container-fluid'>
                     <div className='row py-3'>
+                    <div className='add-link'><Link to="/Inoutprint" >print</Link></div> 
                         <div className='col-md-12'>
 
 

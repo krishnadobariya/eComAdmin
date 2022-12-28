@@ -454,4 +454,38 @@ export function ViewByIdLoactionUpdateReducer(state = initialState, action) {
 }
 
 
+//brand wise
+
+export function BrandWiseReducer(state = initialState, action) {
+    switch (action.type) {
+        case "GET_BRAND":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}
+// main wise
+
+export function MainWiseReducer(state = initialState, action) {
+    switch (action.type) {
+        case "GET_MAIN":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}
+
+
+
+// location wise
+
+export function LocationWiseReducer(state = initialState, action) {
+    switch (action.type) {
+        case "GET_LOCATION":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}
+
 

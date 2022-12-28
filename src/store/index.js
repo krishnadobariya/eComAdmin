@@ -44,7 +44,10 @@ import {
     FetchAllLocationReducer,
     DeletLoactionReducer,
     ViewByIdLoactionReducer,
-    ViewByIdLoactionUpdateReducer
+    ViewByIdLoactionUpdateReducer,
+    BrandWiseReducer,
+    MainWiseReducer,
+    LocationWiseReducer
 } from "./reducer/Fetchreducer"
 
 import {
@@ -119,6 +122,9 @@ const rootReducer = combineReducers({
     ViewAllLocation:FetchAllLocationReducer,
     LocationViewById:ViewByIdLoactionReducer,
     LocationViewByIdUpdate:ViewByIdLoactionUpdateReducer,
+    BrandWise:BrandWiseReducer,
+    MainWise:MainWiseReducer,
+    locationWise:LocationWiseReducer,
    
     // delete
     DeleteProduct: DeleteProductReducer,

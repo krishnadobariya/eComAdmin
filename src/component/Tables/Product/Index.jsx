@@ -282,12 +282,12 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
     },
     {
       name: "Main Product",
-      selector: (row) => row.Type,
+      selector: (row) => row.Sub_Category,
       sortable: true,
     },
     {
       name: "Brand",
-      selector: (row) => row.Sub_Category,
+      selector: (row) => row.Type,
       sortable: true,
     },
     {

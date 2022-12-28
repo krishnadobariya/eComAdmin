@@ -1,7 +1,6 @@
 import jsPDF from "jspdf";
-import { ViewDepatmentMager } from "../../store/Action/FetchData"
+import { ViewOutwardReport } from "../../store/Action/FetchData"
 import { connect } from "react-redux";
-import { FullGetOutward } from "../../store/Action/FetchData"
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -13,7 +12,7 @@ const Index = ({ dispatch, res }) => {
   const params = useParams()
 
   useEffect(() => {
-    dispatch(ViewDepatmentMager(params.name))
+    dispatch(ViewOutwardReport())
   }, [])
 
   const data = res.data ? res.data.data ? res.data.data.data : [] : []
@@ -34,28 +33,17 @@ const Index = ({ dispatch, res }) => {
 
   }
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{ width: "100%" }}  className="mx-2">
+  <button className="pdf my-5 mx-2" onClick={generatepdf}>PR Slip</button>
 
       <div id="content" className="main-div">
         <div className="under-main-div">
-          <div className="header">
-            <div className="under-div">
-
-              <div>
-                <label>Department :</label>
-                <input name="department" type="text" value={params.name} className="text-center"></input>
-              </div>
-            </div>
-
-
-          </div>
-
           <table className="table-design">
             <tr>
               <th>S.No.</th>
-              <th>Item Name</th>
-              <th>Qty.</th>
-              <th>Date</th>
+              <th>Name</th>
+              <th>inward.</th>
+              <th>outward</th>
 
 
 
@@ -67,9 +55,9 @@ const Index = ({ dispatch, res }) => {
                   return <>
                     <tr>
                       <td>{id + 1}</td>
-                      <td>{val.product_name}</td>
-                      <td>{val.QTY}</td>
-                      <td>{val.date}</td>
+                      <td>{val.Name}</td>
+                      <td>{val.inward}</td>
+                      <td>{val.outward}</td>
 
                     </tr>
                   </>
@@ -106,16 +94,13 @@ const Index = ({ dispatch, res }) => {
         </div>
 
       </div>
-      <button className="pdf" onClick={generatepdf}>PR Slip</button>
-
-
     </div>
   );
 };
 
 
 const mapStateToProps = (state) => ({
-  res: state.ViewDepatmentMager,
+  res: state.ViewOutwardReport,
 
 });
 

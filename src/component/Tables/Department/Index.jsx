@@ -32,6 +32,7 @@ const Index = ({ dispatch, res, resById, updateres, resUpadte ,del}) => {
 
 
     const data = res.data ? res.data.data ? res.data.data.data : [] : []
+    
 
     useEffect(() => {
         if (data) {

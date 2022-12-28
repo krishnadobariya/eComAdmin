@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import { ViewFinishProduct } from "../../../store/Action/FetchData"
 import DataTable from 'react-data-table-component'
+import { Link } from 'react-router-dom';
 
 
 const Index = ({ dispatch, res }) => {
@@ -13,6 +14,7 @@ const Index = ({ dispatch, res }) => {
 
     useEffect(() => {
         const proName = res.data ? res.data.data ? res.data.data.data : [] : []
+        console.log("Proname",proName)
         setDate(proName)
     }, [res])
 
@@ -52,6 +54,7 @@ const Index = ({ dispatch, res }) => {
             <div style={{ width: "100%" }}>
                 <div className='container-fluid'>
                     <div className='row py-3'>
+                    <div className='add-link'><Link to="/finishproprint" >print</Link></div> 
                         <div className='col-md-12'>
 
 

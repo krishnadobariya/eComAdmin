@@ -108,12 +108,22 @@ function Sidebar() {
                 </li>
                 <li className="nav-item">
                   <NavLink to="/outward-report" className="nav-link text-white">
-                    <p>Outward</p>
+                    <p>In/Outward</p>
                   </NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink to="/finish-product" className="nav-link text-white">
                     <p>Finish Product</p>
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink to="/bradmain-item" className="nav-link text-white">
+                    <p>Brand/Main Item</p>
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink to="/locationwise" className="nav-link text-white">
+                    <p>Location Wise</p>
                   </NavLink>
                 </li>
 

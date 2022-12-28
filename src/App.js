@@ -23,6 +23,13 @@ import FinishPro from './pages/Report/FinishPro/Index';
 import DepartmentPrint from './pages/Departmentprint/Index';
 import Location from './pages/Forms/Department/Loaction/Index'
 import LocationTable from './pages/Tables/Location/Index';
+import Brandaitem from './pages/Report/Brandaitem/Index';
+import Locationwise from './pages/Report/Locatinwise/Index';
+import LocationPrint from './pages/Locationprint/Index';
+import BrandPrint from './pages/BrandPrint/Index';
+import InoutPrint from './pages/InoutPrint/Index';
+import FinishproPrint from './pages/FinishproPrint/Index';
+import DatewisePrint from './pages/DateisePrint/Index';
 
 
 function App() {
@@ -58,6 +65,13 @@ function App() {
           <Route path='/print/:name' element={token ? <DepartmentPrint /> : <Login />} />
           <Route path='/locationform' element={token ? <Location /> : <Login />} />
           <Route path='/Locationtable' element={token ? <LocationTable/>:<Login/>}/>
+          <Route path='/bradmain-item' element={token ? <Brandaitem/>:<Login/>}/>
+          <Route path='/locationwise' element={token ? <Locationwise/>:<Login/>}/>
+          <Route path='/location/:name' element={token ? <LocationPrint /> : <Login />} />
+          <Route path='/brandprint' element={token ? <BrandPrint /> : <Login />} />
+          <Route path='/Inoutprint' element={token ? <InoutPrint /> : <Login />} />
+          <Route path='/finishproprint' element={token ? <FinishproPrint /> : <Login />} />
+          <Route path='/print/:first_date/:last_date' element={token ? <DatewisePrint /> : <Login />} />
         </Routes>
       </div>
 

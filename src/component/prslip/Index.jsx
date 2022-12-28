@@ -36,8 +36,8 @@ const Prslip = ({dispatch,res}) => {
 
   }
   return (
-    <div style={{width:"100%"}}>
- <button className="pdf" onClick={generatepdf}>PR Slip</button>
+    <div style={{width:"100%"}} className="mx-2">
+ <button className="pdf my-5 mx-2" onClick={generatepdf}>PR Slip</button>
       <div id="content" className="main-div">
         <div className="under-main-div">
           <div className="header">

@@ -550,11 +550,12 @@ export function OutwardViewByIdUpdate(id) {
 
 // ALL DATE WISE
 export function ViewDateWise(data) {
+    console.log("date",data)
     return async (dispatch) => {
         const response = await axios.post(`${Baseurl}/report/date-wise-product-report`,data,{
             headers: { "jwt": token }
         });
-           
+           console.log("response::",response)
         const return_response = {
             type: "GET_DATEWISE",
             payload: response,
@@ -614,6 +615,7 @@ export function ViewFinishProduct() {
         const response = await axios.get(`${Baseurl}/report/product-about-to-finish`,{
             headers: { "jwt": token }
         });
+        console.log("responce:::",response)
         const return_response = {
             type: "GET_FINISHPRO",
             payload: response,
@@ -723,6 +725,56 @@ export function LocationViewByIdUpdate(id) {
             });
         const return_response = {
             type: "GET_LOCATIONBYIDFORUPDATE",
+            payload: response,
+        };
+
+        dispatch(return_response);
+    };
+}
+
+
+// BRAD ITEM
+export function BrandWise() {
+    return async (dispatch) => {
+        const response = await axios.get(`${Baseurl}/report/brand-wise`,
+            {
+                headers: { "jwt": token }
+            });
+        const return_response = {
+            type: "GET_BRAND",
+            payload: response,
+        };
+
+        dispatch(return_response);
+    };
+}
+
+// MAIN ITEM
+export function MainWise() {
+    return async (dispatch) => {
+        const response = await axios.get(`${Baseurl}/report/main-item-wise`,
+            {
+                headers: { "jwt": token }
+            });
+        const return_response = {
+            type: "GET_MAIN",
+            payload: response,
+        };
+
+        dispatch(return_response);
+    };
+}
+
+//LOACTION
+export function locationWise(data) {
+    return async (dispatch) => {
+        console.log("data:::",data)
+        const response = await axios.get(`${Baseurl}/report/location-wise/${data}`,
+            {
+                headers: { "jwt": token }
+            });
+        const return_response = {
+            type: "GET_LOCATION",
             payload: response,
         };
 

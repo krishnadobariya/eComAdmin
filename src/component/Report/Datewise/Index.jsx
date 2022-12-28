@@ -2,16 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import { ViewDateWise } from "../../../store/Action/FetchData"
 import DataTable from 'react-data-table-component'
+import { Link } from 'react-router-dom';
 
 
 const Index = ({ dispatch, res }) => {
 
 
     const [data, setDate] = useState([])
+    const [val, setval] = useState(false)
     const [dateWise, setDateWise] = useState({
         first_date: '',
         last_date: '',
     })
+
 
     const handleInput = (e) => {
         const { name, value } = e.target
@@ -23,12 +26,13 @@ const Index = ({ dispatch, res }) => {
     const search = (e) => {
         e.preventDefault()
         dispatch(ViewDateWise(dateWise));
+        setval(true)
     }
 
 
     useEffect(() => {
         const proName = res.data ? res.data.data ? res.data.data.data : [] : []
-        console.log("proName",proName)
+        console.log("proName", proName)
         setDate(proName)
 
 
@@ -90,7 +94,14 @@ const Index = ({ dispatch, res }) => {
                                         value={dateWise.last_date}
                                         onChange={handleInput} />
                                 </div>
-                                <button type="submit" class="btn gradient-custom-2 text-white mb-2" onClick={search}>search</button>
+                             
+                               
+
+                                <button type="submit" class="btn gradient-custom-2 text-white " onClick={search}>search</button>
+                                {val ?
+                                    <div className='add-link'><Link to={`/print/${dateWise.first_date}/${dateWise.last_date}`} >print</Link></div> :
+                                    []
+                                }
                             </form>
 
                             {
