@@ -91,7 +91,19 @@ function Count({ dispatch, res }) {
               </div>
               </Link>
             </div>
-            
+            <div className="col-lg-3 col-6">
+             <Link to="/productlist">
+               <div className="small-box py-2">
+                <div className="inner">
+                  <h3>{Data.product_count}</h3>
+                  <p>Product List</p>
+                </div>
+                <div className="icon">
+                <ProductionQuantityLimitsIcon className='mt-2'/>
+                </div>
+              </div>
+             </Link>
+            </div>
           </div>
         </div>
       </section>

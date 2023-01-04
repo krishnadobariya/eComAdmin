@@ -3,7 +3,7 @@ import axios from "axios"
 import Cookies from 'js-cookie'
 
 
-const token = Cookies.get('jwt');
+    const token = Cookies.get('jwt');
 
 //ADD PRODUCT
 

@@ -35,6 +35,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
   const [modalShow2, setModalShow2] = useState(false);
   const [modalShow4, setModalShow4] = useState(false);
   const [qty, setQty] = useState(0);
+  const [removeqty, removeSetQty] = useState(0);
   const [modalShow3, setModalShow3] = useState(false);
   const [category, setCategory] = useState([])
   const [typeData, setTypeData] = useState([])
@@ -106,6 +107,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
     const { name, value } = e.target
     SetProduct({ ...Product, [name]: value })
     setQty(value)
+    removeSetQty(value)
     if (e.target.name == 'Category') {
       dispatch(AllSubCategoryView(e.target.value))
     }
@@ -270,6 +272,15 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
 
   const columns = [ 
     {
+      name: "Barcode Id",
+      selector: (row) => row.uniqueKeyForProduct,
+    },
+    {
+      name: "Date",
+      selector: (row) => row.createdAt,
+      sortable: true
+    },
+    {
       name: "Product Name",
       selector: (row) => row.Name,
       sortable: true,
@@ -291,6 +302,17 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
       sortable: true,
     },
     {
+      name: "QTY",
+      selector: (row) => row.QTY,
+      sortable: true,
+    },
+    {
+      name: "Unit",
+      selector: (row) => row.Unit,
+      sortable: true,
+    },
+    
+    {
       name: "Price",
       selector: (row) => `${row.Price}.Rs`,
       sortable: true,
@@ -299,30 +321,14 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
       name: "Total Price",
       selector: (row) => `${row.totalprice}.Rs`,
       sortable: true,
-    },
-    
-    
-    {
-      name: "QTY",
-      selector: (row) => row.QTY,
-      sortable: true,
-    },
-    {
-      name: "Date",
-      selector: (row) => row.createdAt,
-      sortable: true
-    },
-    {
-      name: "Barcode Id",
-      selector: (row) => row.uniqueKeyForProduct,
-    },
+    }, 
     {
       name: "action",
       cell: (row) => <>
         <QrCodeIcon onClick={() => handleviewbyqr(row.uniqueKeyForProduct)} className="view-btn" style={{ fontSize: "35px" }} >View</QrCodeIcon>
         {/* <VisibilityIcon onClick={() => handleviewOpen(row.uniqueKeyForProduct)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon> */}
         <DeleteIcon onClick={() => { setModalShow4(true); setDelateId(row.uniqueKeyForProduct); }} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
-        {/* <EditIcon onClick={() => handleOpen(row.uniqueKeyForProduct)} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon> */}
+        <EditIcon onClick={() => handleOpen(row.uniqueKeyForProduct)} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon>
 
 
       </>
@@ -403,7 +409,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
                                 onChange={handleInput} />
                             </div>
                             <div className="form-row">
-                              <div className="form-group col-md-4">
+                              <div className="form-group col-md-3">
                                 <label>Category</label>
                                 <select name="Category" className="form-control" id="" onChange={handleInput} value={Product.Category}  >
                                   <option>choose category</option>
@@ -417,14 +423,21 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
                                   }
                                 </select>
                               </div>
-                              <div className="form-group col-md-4">
-                                <label>Quantity</label>
+                              <div className="form-group col-md-3">
+                                <label>Add Quantity</label>
                                 <input type="text" className="form-control"
                                   name="QTY"
                                   value={Product.QTY}
                                   onChange={handleInput} />
                               </div>
-                              <div className="form-group col-md-4">
+                              <div className="form-group col-md-3">
+                                <label>Remove Quantity</label>
+                                <input type="text" className="form-control"
+                                  name="removeQTY"
+                                  value={Product.removeQTY}
+                                  onChange={handleInput} />
+                              </div>
+                              <div className="form-group col-md-3">
                                 <label>Price</label>
                                 <input type="text" className="form-control"
                                   name="Price"
@@ -536,7 +549,6 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
                       <div className='d-flex'>
                         <span className='px-3'>Quantity :</span><span> {ViewProduct.QTY}</span>
                       </div>
-
                       <hr></hr>
                       <div className='d-flex'>
                         <span className='px-3'>Unit :</span><span> {ViewProduct.Unit}</span>
@@ -569,7 +581,6 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
                   >
-
                     <Modal.Body>
                       <div>Loading......</div>
                     </Modal.Body>
@@ -597,10 +608,6 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
 
                     </Modal.Body>
                   </Modal>} </> : ""}
-
-
-
-
               <Modal
                 show={modalShow4}
                 onHide={() => setModalShow4(false)}

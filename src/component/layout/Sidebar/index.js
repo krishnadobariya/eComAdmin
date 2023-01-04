@@ -7,6 +7,7 @@ import {
   CDBSidebarHeader,
 } from 'cdbreact';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import Cookies from 'js-cookie';
 import BusinessIcon from '@mui/icons-material/Business';
 import ReportIcon from '@mui/icons-material/Report';
@@ -38,55 +39,70 @@ function Sidebar() {
               </NavLink>
 
             </li>
-            <li className="nav-item has-treeview menu-open">
+            <li className="nav-item has-treeview">
+              <div className="nav-link text-white">
+                <i className="nav-icon far fa-plus-square" />
+                <p>
+                  Master
+                  <i className="fas fa-angle-left right" />
+                </p>
+              </div>
+              <ul className="nav nav-treeview">
+              <li className="nav-item has-treeview menu-open">
               <NavLink to="/departmenttable" className="nav-link  text-white ">
-                <BusinessIcon className='nav-icon' />
+               
                 <p>  Department</p>
               </NavLink>
             </li>
             <li className="nav-item has-treeview menu-open">
               <NavLink to="/Locationtable" className="nav-link  text-white ">
-                <BusinessIcon className='nav-icon' />
                 <p> Location</p>
               </NavLink>
             </li>
             <li className="nav-item has-treeview">
               <div className="nav-link text-white">
-                <i className="nav-icon far fa-plus-square" />
+         
                 <p>
                   Inward
                   <i className="fas fa-angle-left right" />
                 </p>
               </div>
-              <ul className="nav nav-treeview">
+              <ul className="nav nav-treeview px-4">
                 <li className="nav-item">
-                  <NavLink to="/viewcategory" className="nav-link text-white">
+                  <NavLink to="/viewcategory" className="nav-link1 text-white">
                     <p>Item Department</p>
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink to="/viewsubcategory" className="nav-link text-white">
+                  <NavLink to="/viewsubcategory" className="nav-link1 text-white">
                     <p>Main Product</p>
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink to="/viewtype" className="nav-link text-white">
+                  <NavLink to="/viewtype" className="nav-link1 text-white">
                     <p>Brand</p>
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink to="/viewproduct" className="nav-link text-white">
+                  <NavLink to="/viewproduct" className="nav-link1 text-white">
                     <p>Product</p>
                   </NavLink>
                 </li>
               </ul>
             </li>
+              </ul>
+            </li>
+            
+         
+            
             <NavLink to="/outwardtable" className="nav-link  text-white ">
               <ArrowOutwardIcon className='nav-icon' />
               <p>Outward</p>
             </NavLink>
-
-
+            <NavLink to="/productlist" className="nav-link  text-white ">
+              <ProductionQuantityLimitsIcon className='nav-icon' />
+              <p>Product List</p>
+            </NavLink>
             <li className="nav-item has-treeview">
               <div className="nav-link text-white">
                 <ReportIcon className='nav-icon' />
