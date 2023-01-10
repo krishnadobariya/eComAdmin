@@ -178,7 +178,6 @@ const Index = ({ dispatch, res, view,location  }) => {
                             <>
                                 <tr>
                                     <th>Product Name</th>
-                                    <th>price</th>
                                     <th>Action</th>
 
                                 </tr>
@@ -186,7 +185,6 @@ const Index = ({ dispatch, res, view,location  }) => {
                                     a.map((val, id) => {
                                         return <tr>
                                             <th>{val.product_name}</th>
-                                            <th>{val.total_price}</th>
                                             <th > <DeleteIcon onClick={() => { setdel(val.outward_id); deletedemo(val.outward_id, id) }} className="delete-btn" style={{ fontSize: "35px" }}></DeleteIcon></th>
                                         </tr>
                                     })

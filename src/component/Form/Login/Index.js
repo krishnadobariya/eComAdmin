@@ -32,6 +32,7 @@ const Index = ({ dispatch, res }) => {
 
     const handleLogin = (e) => {
         e.preventDefault();
+        console.log("dbbjh")
         dispatch(AdminLogin(login));
         const data2 = res.data ? res.data.data  : []
        
