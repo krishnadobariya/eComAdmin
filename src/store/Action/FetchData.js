@@ -75,9 +75,10 @@ export function ProductViewByIdForQr(id) {
 
 // for upate view by id
 
-export function ProductViewByIdUpadte(id) {
+export function ProductViewByIdUpadte(id,proid){
+    console.log("proid",proid)
     return async (dispatch) => {
-        const response = await axios.get(`${Baseurl}/product/view-by-id-pro/${id}`,
+        const response = await axios.get(`${Baseurl}/product/view-by-id-pro/${id}/${proid}`,
             {
                 headers: { "jwt": token }
             });

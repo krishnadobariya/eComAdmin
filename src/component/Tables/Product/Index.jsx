@@ -88,9 +88,9 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
 
   // UPDATE---------------
 
-  const handleOpen = (id) => {
+  const handleOpen = (id,proid) => {
     console.log("iddd:::", id)
-    dispatch(ProductViewByIdUpadte(id));
+    dispatch(ProductViewByIdUpadte(id,proid));
     setModalShow(true)
   }
 
@@ -98,6 +98,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
 
   useEffect(() => {
     const data2 = resUpadte.data ? resUpadte.data.data ? resUpadte.data.data.data : [] : []
+    console.log("data2",data2)
     SetProduct(data2)
 
   }, [resUpadte])
@@ -118,9 +119,10 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
   }
 
   const handleUpdate = (e) => {
+    
     e.preventDefault();
     console.log("Product.uniqueKeyForProduct", Product)
-    dispatch(UpdateProduct(Product, Product.uniqueKeyForProduct));
+    dispatch(UpdateProduct(Product, Product.uniqueKeyForProduct,Product.proHis_id));
   };
 
   useEffect(() => {
@@ -328,7 +330,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
         <QrCodeIcon onClick={() => handleviewbyqr(row.uniqueKeyForProduct)} className="view-btn" style={{ fontSize: "35px" }} >View</QrCodeIcon>
         {/* <VisibilityIcon onClick={() => handleviewOpen(row.uniqueKeyForProduct)} className="view-btn" style={{ fontSize: "35px" }} >View</VisibilityIcon> */}
         <DeleteIcon onClick={() => { setModalShow4(true); setDelateId(row.uniqueKeyForProduct); }} className="delete-btn" style={{ fontSize: "35px" }}>Delete</DeleteIcon>
-        <EditIcon onClick={() => handleOpen(row.uniqueKeyForProduct)} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon>
+        <EditIcon onClick={() => handleOpen(row.uniqueKeyForProduct,row.proHis_id)} className="update-btn" style={{ fontSize: "35px" }}>Update</EditIcon>
 
 
       </>

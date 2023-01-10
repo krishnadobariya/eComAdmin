@@ -8,11 +8,11 @@ const token = Cookies.get('jwt');
 
 
 // UPDATE PRODUCT
-export function UpdateProduct(data, id) {
+export function UpdateProduct(data, id,proid) {
 
     return async (dispatch) => {
 
-        const response = await axios.put(`${Baseurl}/product/update/${id}`, data,
+        const response = await axios.put(`${Baseurl}/product/update/${id}/${proid}`, data,
             {
                 headers: { "jwt": token }
             });
