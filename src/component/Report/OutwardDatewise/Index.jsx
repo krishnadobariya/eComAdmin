@@ -49,6 +49,11 @@ const Index = ({ dispatch, res }) => {
             sortable: true
         },
         {
+            name:"product Name",
+            selector: (row) => row.product_name,
+            sortable: true
+        },
+        {
             name: "Department",
             selector: (row) => row.department,
             sortable: true
@@ -57,6 +62,22 @@ const Index = ({ dispatch, res }) => {
             name: "Location",
             selector: (row) => row.location,
             sortable: true
+        },
+        {
+            name:"QTY",
+            selector: (row) => row.QTY,
+            sortable: true
+        },
+        {
+            name:"price",
+            selector: (row) => row.price,
+            sortable: true
+
+        },
+        {
+            name:"current stock",
+            selector:(row)=>row.current_stock,
+            sortable:true
         },
         {
             name: "CreatedAt",

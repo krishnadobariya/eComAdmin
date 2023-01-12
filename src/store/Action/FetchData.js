@@ -574,7 +574,7 @@ export function ViewOutwardDateWise(data) {
         const response = await axios.post(`${Baseurl}/report/date-wise-outward-report`,data,{
             headers: { "jwt": token }
         });
-           console.log("response::",response)
+           console.log("response:::::",response)
         const return_response = {
             type: "GET_DATEWISEOUTWARD",
             payload: response,
@@ -616,6 +616,7 @@ export function ViewOutwardReport() {
         const response = await axios.get(`${Baseurl}/report/report-outward`,{
             headers: { "jwt": token }
         });
+    
         const return_response = {
             type: "GET_OUTWARDREPORT",
             payload: response,
