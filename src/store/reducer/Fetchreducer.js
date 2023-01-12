@@ -345,6 +345,17 @@ export function FetchDateWiseReducer(state = initialState, action) {
             return state;
     }
 }
+// outward  DATE WISE 
+
+export function FetchDateWiseOutwardReducer(state = initialState, action) {
+    switch (action.type) {
+        case "GET_DATEWISEOUTWARD":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}
+
 
 
 // VIEW DEPARTMEMT MANAGER

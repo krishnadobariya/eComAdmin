@@ -43,41 +43,55 @@ function Sidebar() {
               </NavLink>
 
             </li>
-            <li className="nav-item has-treeview menu-open">
+          
+
+             <li className="nav-item has-treeview">
+              <div className="nav-link text-white">
+                <i className="nav-icon far fa-plus-square" />
+                <p>
+                  Master
+                  <i className="fas fa-angle-left right" />
+                </p>
+              </div>
+              <ul className="nav nav-treeview">
+                <li className="nav-item has-treeview menu-open">
               <NavLink to="/departmenttable" className="nav-link  text-white ">
-               <AccountBalanceIcon className='nav-icon  '/>
+               {/* <AccountBalanceIcon className='nav-icon  '/> */}
                 <p>  Department</p>
               </NavLink>
 
             </li>
             <li className="nav-item has-treeview menu-open">
               <NavLink to="/Locationtable" className="nav-link  text-white ">
-              <LocationOnIcon className='nav-icon  '/>
+              {/* <LocationOnIcon className='nav-icon  '/> */}
                 <p>  Location</p>
               </NavLink>
 
             </li>
             <li className="nav-item has-treeview menu-open">
               <NavLink to="/viewcategory" className="nav-link  text-white ">
-              <BusinessIcon className='nav-icon  '/>
+              {/* <BusinessIcon className='nav-icon  '/> */}
                 <p>  Item Department</p>
               </NavLink>
 
             </li>
             <li className="nav-item has-treeview menu-open">
               <NavLink to="/viewsubcategory" className="nav-link  text-white ">
-                <ProductionQuantityLimitsIcon className='nav-icon  '/>
+                {/* <ProductionQuantityLimitsIcon className='nav-icon  '/> */}
                 <p>  Main Product</p>
               </NavLink>
 
             </li>
             <li className="nav-item has-treeview menu-open">
               <NavLink to="/viewtype" className="nav-link  text-white ">
-                <LibraryAddCheckIcon className='nav-icon  '/>
+                {/* <LibraryAddCheckIcon className='nav-icon  '/> */}
                 <p>  Brand</p>
               </NavLink>
 
             </li>
+              </ul>
+            </li>
+            
           
             <li className="nav-item has-treeview">
               <div className="nav-link text-white">
@@ -117,7 +131,12 @@ function Sidebar() {
               <ul className="nav nav-treeview">
                 <li className="nav-item">
                   <NavLink to="/datewise" className="nav-link text-white">
-                    <p>Date Wise</p>
+                    <p>Inward</p>
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink to="/outwarddatewise" className="nav-link text-white">
+                    <p>Outward</p>
                   </NavLink>
                 </li>
                 <li className="nav-item">

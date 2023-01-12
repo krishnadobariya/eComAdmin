@@ -567,6 +567,24 @@ export function ViewDateWise(data) {
 }
 
 
+// outward  DATE WISE
+export function ViewOutwardDateWise(data) {
+    console.log("date",data)
+    return async (dispatch) => {
+        const response = await axios.post(`${Baseurl}/report/date-wise-outward-report`,data,{
+            headers: { "jwt": token }
+        });
+           console.log("response::",response)
+        const return_response = {
+            type: "GET_DATEWISEOUTWARD",
+            payload: response,
+        };
+
+        dispatch(return_response);
+    };
+}
+
+
 // ALL DEPARTMENT MANAGER
 
 export function ViewDepatmentMager(data) {

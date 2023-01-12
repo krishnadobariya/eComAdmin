@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
-import { ViewDateWise } from "../../../store/Action/FetchData"
+import { ViewOutwardDateWise } from "../../../store/Action/FetchData"
 import DataTable from 'react-data-table-component'
 import { Link } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ const Index = ({ dispatch, res }) => {
 
     const search = (e) => {
         e.preventDefault()
-        dispatch(ViewDateWise(dateWise));
+        dispatch(ViewOutwardDateWise(dateWise));
         setval(true)
     }
 
@@ -42,29 +42,25 @@ const Index = ({ dispatch, res }) => {
 
     const columns = [
 
+       
         {
-            name: "product  Name",
-            selector: (row) => row.product_name,
-            sortable: true,
-        },
-        {
-            name: "Qauntity",
-            selector: (row) => row.QTY,
+            name: "PRN",
+            selector: (row) => row.uniqueKey,
             sortable: true
         },
         {
-            name: "Unit",
-            selector: (row) => row.Unit,
+            name: "Department",
+            selector: (row) => row.department,
             sortable: true
         },
         {
-            name: "Price",
-            selector: (row) => row.Price,
+            name: "Location",
+            selector: (row) => row.location,
             sortable: true
         },
         {
             name: "CreatedAt",
-            selector: (row) => row.createdAt.slice(0, 10),
+            selector: (row) => row.createdAt,
             sortable: true,
         }
 
@@ -109,7 +105,7 @@ const Index = ({ dispatch, res }) => {
                                     <h1>loading....</h1>
                                     :
                                     <DataTable
-                                        title="DATE WISE PRODUCT INWARD REPORT"
+                                        title="DATE WISE PRODUCT OUTWARD REPORT"
                                         columns={columns}
                                         data={data ? data : "loading"}
                                         pagination
@@ -133,7 +129,7 @@ const Index = ({ dispatch, res }) => {
 }
 
 const mapStateToProps = (state) => ({
-    res: state.ViewDateWise,
+    res: state.ViewOutwardDateWise,
 
 });
 

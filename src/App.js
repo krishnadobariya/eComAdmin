@@ -31,6 +31,7 @@ import InoutPrint from './pages/InoutPrint/Index';
 import FinishproPrint from './pages/FinishproPrint/Index';
 import DatewisePrint from './pages/DateisePrint/Index';
 import ProductList from './pages/Tables/Productlist/Index';
+import OutwardDatewise from './pages/Report/OutwardDatewise/Index';
 
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
           <Route path='/finishproprint' element={token ? <FinishproPrint /> : <Login />} />
           <Route path='/print/:first_date/:last_date' element={token ? <DatewisePrint /> : <Login />} />
           <Route path='/productlist' element={token ? <ProductList /> : <Login />} />
+          <Route path='/outwarddatewise' element={token ? <OutwardDatewise /> : <Login />} />
         </Routes>
       </div>
 

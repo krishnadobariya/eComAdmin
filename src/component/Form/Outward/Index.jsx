@@ -114,10 +114,7 @@ const Index = ({ dispatch, res, view,location  }) => {
                     <div className='col-md-4'>
 
                         <h1 className='text-center add-title py-4'>ADD OUTWARD</h1>
-                        <form className='add-form'>
-                            <div className="form-group">
-
-                                <div className='form-group'>
+                        <div className='form-group'>
                                     <BarcodeScannerComponent
                                         width={350}
                                         height={350}
@@ -138,6 +135,10 @@ const Index = ({ dispatch, res, view,location  }) => {
                                     <input type="text" className="form-control" name="qrdata" value={qrdata} onChange={(e)=>setData(e.target.value)} autoComplete="off"/>
                                     
                                 </div>
+                        <form className='add-form'>
+                            <div className="form-group">
+
+                              
                                 <div className="">
                                     <label>Location</label>
                                     <select name="state" className=" form-control" id="" onChange={handleInput} value={outward.state} >
@@ -169,7 +170,7 @@ const Index = ({ dispatch, res, view,location  }) => {
                             </div>
 
 
-                            <button type="submit" className="btn add-btn" onClick={handleAdd}>PRSLIP DOWNLOAD</button>
+                            <button type="" className="btn add-btn" onClick={handleAdd}>PRSLIP DOWNLOAD</button>
                         </form>
 
                     </div>
