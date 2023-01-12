@@ -137,7 +137,7 @@ const Index = ({ dispatch, res ,mainres}) => {
                                     <h1>loading....</h1>
                                     :
                                     <DataTable
-                                        title="MAIN IEM WISE DATA"
+                                        title="MAIN ITEM WISE DATA"
                                         columns={columns2}
                                         data={filterdata2 == "" ? mainItem : filterdata2}
                                         pagination

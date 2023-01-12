@@ -89,19 +89,16 @@ function Sidebar() {
               </NavLink>
 
             </li>
-              </ul>
-            </li>
-            
-          
+
             <li className="nav-item has-treeview">
               <div className="nav-link text-white">
-                <i className="nav-icon far fa-plus-square" />
+                {/* <i className="nav-icon far fa-plus-square" /> */}
                 <p>
                   Inward
                   <i className="fas fa-angle-left right" />
                 </p>
               </div>
-              <ul className="nav nav-treeview">
+              <ul className="nav nav-treeview px-4">
               <li className="nav-item">
                   <NavLink to="/viewproduct" className="nav-link text-white">
                     <p>Product</p>
@@ -109,6 +106,10 @@ function Sidebar() {
                 </li>
               </ul>
             </li>
+              </ul>
+            </li>
+            
+          
             
          
             

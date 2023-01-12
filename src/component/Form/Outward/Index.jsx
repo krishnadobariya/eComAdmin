@@ -35,6 +35,7 @@ const Index = ({ dispatch, res, view,location  }) => {
         }).then((val) => {
             console.log("calling", val.data)
             console.log("allres" , allRes);
+            setData("")
             if(val.data.code == 404){
                 toast.error(val.data.message, {
                     position: toast.POSITION.TOP_CENTER,

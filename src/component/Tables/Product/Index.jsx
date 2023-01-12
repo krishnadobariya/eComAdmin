@@ -248,7 +248,7 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
 
 
   const qrcode = (
-    <Barcode value={uniqid} height={30} />
+    <Barcode value={uniqid} height={20} />
   )
 
   const View = view.data ? view.data.data ? view.data.data.data : [] : []
@@ -598,13 +598,18 @@ const Index = ({ dispatch, res, resById, resUpadte, view, viewsub, type , Qr, up
                       <h5 className='text-center'>{ViewProduct.Name}</h5>
                       <div className='d-flex justify-content-center' id="qrDiv" >
 
-                        <span className='mr-5'>
-                          {qrcode}
-                        </span>
-
-                        <span className='ml-5 pl-5'>
-                          {qrcode}
-                        </span>
+                      <table style={{width:"100%"}}>
+                          <tr>
+                            <th>
+                            <h5 className='text-center'>{ViewProduct.Name}</h5>
+                            {qrcode}
+                            </th>
+                            <th>
+                            <h5 className='text-center'>{ViewProduct.Name}</h5>
+                            {qrcode}
+                            </th>
+                          </tr>
+                        </table>
                       </div>
 
 
